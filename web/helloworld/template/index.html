@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Blog</title>
+</head>
+<body>
+
+{% for article in article_list %}
+<h2> article_id:{{ article.id }} </h2>
+<h2> article_title:{{ article.title }} </h2>
+<h2> article_date:{{article.date}} </h2>
+<h2> article_subject:{{article.subject}} </h2>
+<h2> article_content:{{article.content}} </h2>
+<h3>------------------</h3>
+{% endfor %}
+
+{% for e_article in e_article_list %}
+<h2> e_article_id:{{ e_article.s_id }} </h2>
+<h2> article_id:{{ e_article.a_id }} </h2>
+<h2> e_article_tool:{{ e_article.tool }} </h2>
+<h3>------------------</h3>
+{% endfor %}
+
+{% for t_article in t_article_list %}
+<h2> t_article_id:{{ t_article.s_id }} </h2>
+<h2> article_id:{{ t_article.a_id }} </h2>
+<h3>------------------</h3>
+{% endfor %}
+</body>
+</html>
