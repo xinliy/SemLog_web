@@ -18,13 +18,10 @@ from django.contrib import admin
 from django.urls import path
 import sys
 sys.path.append("..")
-from .people import views
+from .imageViewer import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'',views.addArticle),
-    path(r'add/',views.add),
-    path(r'addok/',views.addok),
-    path(r'index/',views.IndexView),
-    path(r'imprint/',views.imprint)
+    path(r'main/',views.search),
+    path(r'start_search/',views.start_search)
 ]

@@ -41,11 +41,12 @@ class MongoDB():
             pipeline.append({"$match": {"views.images.type": image_type}})
         return self.client.aggregate(pipeline)
 
-    def download(self, image_list):
+    def download(self, image_list,abs_path=''):
         """Download images depending on the given image id list.
 
             Args:
                 image_list: Result from the MongoDB.
+                abs_path: absolute path for saving images.
 
 
         """
@@ -58,7 +59,7 @@ class MongoDB():
             if len(image_id_list) == 0:
                 break
             print(image_type, len(image_id_list))
-            path = image_type
+            path = abs_path+'/'+image_type
             if path not in os.listdir():
                 os.makedirs(path)
             download_db = gridfs.GridFSBucket(
