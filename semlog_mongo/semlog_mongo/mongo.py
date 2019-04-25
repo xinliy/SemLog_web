@@ -1,14 +1,15 @@
 from pymongo import MongoClient
 import os
 import gridfs
+import shutil
 
 
 class MongoDB():
 
-    def __init__(self, database, collection,ip='127.0.0.1',port=27017):
+    def __init__(self, database, collection, ip='127.0.0.1', port=27017):
         self.database = database
         self.collection = collection
-        self.client = MongoClient(ip,port)[database][collection]
+        self.client = MongoClient(ip, port)[database][collection]
 
     def search(self, timestamp=None, object_id=None, view_id=None, image_type=None):
         """Input params to search for specific images.
@@ -41,7 +42,7 @@ class MongoDB():
             pipeline.append({"$match": {"views.images.type": image_type}})
         return self.client.aggregate(pipeline)
 
-    def download(self, image_list,abs_path=''):
+    def download(self, image_list, abs_path=''):
         """Download images depending on the given image id list.
 
             Args:
@@ -53,15 +54,25 @@ class MongoDB():
         image_list = [_ for _ in image_list]
         dic = {'Color': [], 'Depth': [], 'Mask': [], 'Normal': []}
         for images in image_list:
-            for image in images['views']['images']:
-                dic[image['type']].append(image['file_id'])
+            # One type, one instance is a dict, or multi dicts in a list
+            if type(images['views']['images']) == dict:
+                im = images['views']['images']
+                dic[im['type']].append(im['file_id'])
+            else:
+                for image in images['views']['images']:
+                    dic[image['type']].append(image['file_id'])
+
         for image_type, image_id_list in dic.items():
             if len(image_id_list) == 0:
                 break
             print(image_type, len(image_id_list))
-            path = abs_path+'/'+image_type
-            if path not in os.listdir():
-                os.makedirs(path)
+            path = abs_path + '/' + image_type
+
+            # Delete old folder.
+            if os.path.exists(path):
+                shutil.rmtree(path)
+            os.makedirs(path)
+
             download_db = gridfs.GridFSBucket(
                 MongoClient()[self.database], self.collection)
             for i in image_id_list:
@@ -71,6 +82,3 @@ class MongoDB():
         print("Finish downloading.")
 
         # return dic
-
-
-

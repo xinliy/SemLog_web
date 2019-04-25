@@ -124,6 +124,7 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+IMAGE_ROOT=os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.

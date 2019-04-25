@@ -23,5 +23,6 @@ from .imageViewer import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'main/',views.search),
-    path(r'start_search/',views.start_search)
+    path(r'start_search/',views.start_search),
+    path(r'gallery/',views.gallery)
 ]

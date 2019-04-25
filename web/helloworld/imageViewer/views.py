@@ -6,7 +6,7 @@ import os
 
 sys.path.append("..")
 from semlog_mongo.semlog_mongo.mongo import MongoDB
-
+from web.helloworld import settings
 
 # Create your views here.
 
@@ -26,7 +26,7 @@ def search(request):
 
 def start_search(request):
     def convert_none(v):
-        print("is none!")
+        """Blank input cannot be recognized in pymongo. Convert to None."""
         return None if v == '' else v
 
     timestamp = object_id = view_id = image_type = None
@@ -38,14 +38,30 @@ def start_search(request):
         image_type = convert_none(request.GET['image_type'])
 
     m = MongoDB(database='SemLog', collection='20')
+    # Convert string input to be float
     if timestamp is not None:
         timestamp = float(timestamp)
     print(object_id)
-    r = m.search(timestamp=timestamp, object_id=object_id,view_id=view_id,
+    r = m.search(timestamp=timestamp, object_id=object_id, view_id=view_id,
                  image_type=image_type)
-    r = [i for i in r]
-    # # print((r))
-    # c=pymongo.MongoClient()['SemLog']['20'].find_one()
+    # r = [i for i in r]
 
-    html = "<html><body>" + str(r) + "</body></html>"
+    # Get Upper folder address for image saving
+    saving_path = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+    saving_path = saving_path + '/static'
+    m.download(r, abs_path=saving_path)
+
+    html = "<html><body>" + "Download Success!" + "</body></html>"
     return HttpResponse(html)
+
+
+def gallery(request):
+    image_list = []
+    for root, dirs, files in os.walk(settings.IMAGE_ROOT):
+        # print('root',root)
+        basename=os.path.basename(os.path.normpath(root))
+        for file in files:
+            if file.endswith(".png"):
+                image_list.append(basename+'/'+file)
+    print(image_list)
+    return render(request,'gallery.html',{'image_list':image_list})
