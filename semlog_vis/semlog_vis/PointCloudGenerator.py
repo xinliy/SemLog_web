@@ -1,7 +1,7 @@
 from PIL import Image
 import pandas as pd
 import numpy as np
-from open3d import read_point_cloud, draw_geometries
+# from open3d import read_point_cloud, draw_geometries
 import time
 
 
@@ -83,9 +83,29 @@ class PointCloudGenerator():
         t2 = time.time()
         print("Write into .ply file Done.", t2 - t1)
 
-    def show_point_cloud(self):
-        pcd = read_point_cloud(self.pc_file)
-        draw_geometries([pcd])
+    # def show_point_cloud(self):
+    #     pcd = read_point_cloud(self.pc_file)
+    #     draw_geometries([pcd])
 
-    def save_npy(self):
-        np.save('pc.npy', self.df)
+    def save_npy(self,alpha=False):
+        data=self.df.copy()
+        if alpha is False:
+            data=data[:6]
+        np.save('pc.npy',data)
+
+    def save_pcd(self):
+        data=self.df.copy()
+        header = "# .PCD v.7 - Point Cloud Data file format\n\
+        VERSION .7\n\
+        FIELDS x y z rgb\n\
+        SIZE 4 4 4 1\n\
+        TYPE F F F F\n\
+        COUNT 1 1 1 1\n\
+        WIDTH XXXX\n\
+        HEIGHT 1\n\
+        VIEWPOINT 0 0 0 1 0 0 0\n\
+        POINTS XXXX\n\
+        DATA ascii"
+
+
+

@@ -30,6 +30,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'helloworld.point_cloud_viewer',
     'helloworld.imageViewer',
     'helloworld.people',
     'django.contrib.admin',
