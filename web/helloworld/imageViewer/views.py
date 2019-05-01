@@ -42,26 +42,26 @@ def start_search(request):
     # Convert string input to be float
     if timestamp is not None:
         timestamp = float(timestamp)
-    print(object_id)
     r = m.search(timestamp=timestamp, object_id=object_id, view_id=view_id,
                  image_type=image_type)
-    # r = [i for i in r]
 
     # Get Upper folder address for image saving
     saving_path = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
     saving_path = saving_path + '/static'
     m.download(r, abs_path=saving_path)
 
-    html = "<html><body>" + "Download Success!" + "</body></html>"
-    return HttpResponse(html)
+    return render(request,'main.html',{'image_list':get_image_path()})
 
 
 def gallery(request):
+
+    return render(request,'gallery.html',{'image_list':get_image_path()})
+
+def get_image_path():
     image_list = []
     for root, dirs, files in os.walk(settings.IMAGE_ROOT):
         basename=os.path.basename(os.path.normpath(root))
         for file in files:
             if file.endswith(".png"):
                 image_list.append(basename+'/'+file)
-    print(image_list)
-    return render(request,'gallery.html',{'image_list':image_list})
+    return image_list
