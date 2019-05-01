@@ -11,4 +11,3 @@ def showPC(request):
     dic={"point":data}
 
     return render(request,'point_cloud_template.html',dic)
-    # return render(request,'t.html')

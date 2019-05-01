@@ -37,7 +37,8 @@ def start_search(request):
         view_id = convert_none(request.GET['view_id'])
         image_type = convert_none(request.GET['image_type'])
 
-    m = MongoDB(database='SemLog', collection='20')
+    ip="mongodb+srv://admin:admin@semlog-cluster-fucxw.mongodb.net/test?retryWrites=true"
+    m = MongoDB(ip=ip,database='SemLog', collection='20')
     # Convert string input to be float
     if timestamp is not None:
         timestamp = float(timestamp)
@@ -58,7 +59,6 @@ def start_search(request):
 def gallery(request):
     image_list = []
     for root, dirs, files in os.walk(settings.IMAGE_ROOT):
-        # print('root',root)
         basename=os.path.basename(os.path.normpath(root))
         for file in files:
             if file.endswith(".png"):

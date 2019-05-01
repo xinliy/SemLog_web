@@ -32,7 +32,6 @@ DEBUG = True
 INSTALLED_APPS = [
     'helloworld.point_cloud_viewer',
     'helloworld.imageViewer',
-    'helloworld.people',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
