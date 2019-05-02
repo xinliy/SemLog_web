@@ -2,6 +2,8 @@ from pymongo import MongoClient
 import os
 import gridfs
 import shutil
+from bson.json_util import dumps,RELAXED_JSON_OPTIONS
+import json
 
 
 class MongoDB():
@@ -10,6 +12,8 @@ class MongoDB():
         self.database = database
         self.collection = collection
         self.client = MongoClient(ip, port)[database][collection]
+        self.ip=ip
+        self.port=port
 
     def search(self, timestamp=None, object_id=None, view_id=None, image_type=None):
         """Input params to search for specific images.
@@ -40,7 +44,7 @@ class MongoDB():
         if image_type is not None:
             pipeline.append({"$unwind": {"path": "$views.images"}})
             pipeline.append({"$match": {"views.images.type": image_type}})
-        return self.client.aggregate(pipeline)
+        return list(self.client.aggregate(pipeline))
 
     def download(self, image_list, abs_path=''):
         """Download images depending on the given image id list.
@@ -51,8 +55,11 @@ class MongoDB():
 
 
         """
-        image_list = [_ for _ in image_list]
+        print("Start downloading images.")
+        # image_list = [_ for _ in image_list]
+        print("Length of image_list:",len(image_list))
         dic = {'Color': [], 'Depth': [], 'Mask': [], 'Normal': []}
+        img_dir=[]
         for images in image_list:
             # One type, one instance is a dict, or multi dicts in a list
             if type(images['views']['images']) == dict:
@@ -66,19 +73,35 @@ class MongoDB():
             if len(image_id_list) == 0:
                 break
             print(image_type, len(image_id_list))
-            path = abs_path + '/' + image_type
-
+            path=os.path.join(abs_path,image_type)
             # Delete old folder.
             if os.path.exists(path):
                 shutil.rmtree(path)
             os.makedirs(path)
 
             download_db = gridfs.GridFSBucket(
-                MongoClient()[self.database], self.collection)
+                MongoClient(self.ip,self.port)[self.database], self.collection)
             for i in image_id_list:
-                file = open(path + "/" + str(i) + ".png", "wb+")
+                # img_path=path+"\\"+str(i)+".png"
+                img_path=os.path.join(path,str(i)+".png")
+                file = open(img_path, "wb+")
+                img_dir.append(img_path)
                 download_db.download_to_stream(file_id=i, destination=file)
-        print(dic)
+        # print(dic)
         print("Finish downloading.")
+        print("img_dir",img_dir)
+        return img_dir
 
-        # return dic
+    # @staticmethod
+    # def save_json(data, path):
+    #
+    #     for i in data:
+    #         print(i)
+    #
+    #     data = dumps(data,json_options=RELAXED_JSON_OPTIONS)
+    #     # data=data.replace('\"','')
+    #
+    #     print("type",type(data))
+    #     with open(path, 'w') as outfile:
+    #         json.dump(data, outfile)
+    #     print("Saved json data to:", path)

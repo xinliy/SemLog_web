@@ -1,44 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da4f4817-ee53-4274-b501-2d8f29694c29" name="Default Changelist" comment="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields">
+    <list default="true" id="da4f4817-ee53-4274-b501-2d8f29694c29" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pyWeb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyWeb.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/test1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0002_userinfo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0003_book.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0004_auto_20190424_1552.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0005_auto_20190424_1704.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0006_auto_20190424_1729.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0007_auto_20190424_1734.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0008_auto_20190424_1751.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0009_auto_20190424_1804.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0010_auto_20190424_1806.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0011_auto_20190424_1811.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0012_e_article_a_title.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0013_auto_20190424_1820.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/0014_auto_20190424_1843.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/people/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/helloworld/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/helloworld/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/addArticle.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/addok.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/imprint.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/t.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/t2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/helloworld/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/humans.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/template/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/helloworld/template/main.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,15 +17,30 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/helloworld/settings.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="250">
+              <caret line="103" column="20" lean-forward="true" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
               <folding>
-                <element signature="e#328#337#0" expanded="true" />
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test_class.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-177">
-              <caret line="39" column="77" selection-start-line="39" selection-start-column="77" selection-end-line="39" selection-end-column="77" />
+            <state relative-caret-position="234">
+              <caret line="55" column="50" lean-forward="true" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="50" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -72,22 +58,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/helloworld/urls.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/semlog_mongo/test/a.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+            <state>
+              <caret column="43" selection-start-column="43" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py">
+        <entry file="file://$PROJECT_DIR$/web/helloworld/template/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+            <state relative-caret-position="307">
+              <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/helloworld/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#328#337#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,15 +93,19 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>.txt</find>
+      <find>manage.py</find>
     </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -115,8 +114,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/web/helloworld/imageViewer/test1.py" />
-        <option value="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" />
-        <option value="$PROJECT_DIR$/web/helloworld/template/main.html" />
         <option value="$PROJECT_DIR$/web/helloworld/template/gallery.html" />
         <option value="$PROJECT_DIR$/../docker-repo/pyDoc/Dockerfile" />
         <option value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/js/PLYLoader.js" />
@@ -127,17 +124,20 @@
         <option value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/pc.html" />
         <option value="$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py" />
         <option value="$PROJECT_DIR$/web/helloworld/template/point_cloud_template.html" />
-        <option value="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" />
         <option value="$PROJECT_DIR$/web/helloworld/settings.py" />
-        <option value="$PROJECT_DIR$/web/helloworld/urls.py" />
         <option value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py" />
+        <option value="$PROJECT_DIR$/web/helloworld/urls.py" />
+        <option value="$PROJECT_DIR$/web/helloworld/template/main.html" />
+        <option value="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" />
+        <option value="$PROJECT_DIR$/semlog_mongo/test/test_class.py" />
+        <option value="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="950" />
+    <option name="width" value="975" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -147,7 +147,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -159,6 +158,18 @@
               <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
               <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
+              <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
@@ -201,27 +212,21 @@
               <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="helloworld" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="helloworld" type="462c0819:PsiDirectoryNode" />
               <item name="template" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/staticfiles" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/helloworld/settings.py" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -249,7 +254,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.pointCloud_sample">
+  <component name="RunManager" selected="Python.test_class">
+    <configuration name="mongo" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyWeb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/semlog_mongo/semlog_mongo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="pointCloud_sample" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pyWeb" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -272,7 +299,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test_class" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pyWeb" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -280,12 +307,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/web/helloworld/imageViewer" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/semlog_mongo/test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/web/helloworld/imageViewer/test1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/semlog_mongo/test/test_class.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -316,34 +343,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="pytest in test_class.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="pyWeb" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/web/helloworld/imageViewer" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/semlog_mongo" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/semlog_mongo/test/test_class.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_class" />
+        <item itemvalue="Python tests.pytest in test_class.py" />
+        <item itemvalue="Python.mongo" />
         <item itemvalue="Python.pointCloud_sample" />
         <item itemvalue="Python.views (1)" />
-        <item itemvalue="Python.test1" />
-        <item itemvalue="Python.views" />
       </list>
     </recent_temporary>
   </component>
@@ -361,7 +383,13 @@
       <workItem from="1556612885511" duration="10910000" />
       <workItem from="1556626602773" duration="269000" />
       <workItem from="1556628183032" duration="711000" />
-      <workItem from="1556633750410" duration="4657000" />
+      <workItem from="1556633750410" duration="6351000" />
+      <workItem from="1556784031328" duration="1075000" />
+      <workItem from="1556798845512" duration="1068000" />
+      <workItem from="1556800743552" duration="901000" />
+      <workItem from="1556801696559" duration="1586000" />
+      <workItem from="1556803349350" duration="1946000" />
+      <workItem from="1556805480706" duration="6429000" />
     </task>
     <task id="LOCAL-00001" summary="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields">
       <created>1556211767113</created>
@@ -370,36 +398,68 @@
       <option name="project" value="LOCAL" />
       <updated>1556211767113</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Clean useless fiels">
+      <created>1556693123351</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1556693123351</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="pytest_in_test_class_py - 2019.05.02 at 14h 51m 23s.xml">
+      <configuration name="pytest in test_class.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_class_py - 2019.05.02 at 14h 51m 56s.xml">
+      <configuration name="pytest in test_class.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_class_py - 2019.05.02 at 14h 52m 09s.xml">
+      <configuration name="pytest in test_class.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_class_py - 2019.05.02 at 14h 52m 39s.xml">
+      <configuration name="pytest in test_class.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_class_py - 2019.05.02 at 14h 58m 05s.xml">
+      <configuration name="pytest in test_class.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_class_py - 2019.05.02 at 16h 09m 08s.xml">
+      <configuration name="pytest in test_class.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_class_py - 2019.05.02 at 16h 56m 47s.xml">
+      <configuration name="pytest in test_class.py" configurationId="tests" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19832000" />
+    <option name="totallyTimeSpent" value="34531000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15991472" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17225201" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49413645" weight="0.3336945" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49128687" visible="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.32936078" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49307036" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4989339" weight="0.32936078" />
-      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.49626866" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49865952" weight="0.32914925" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49128687" weight="0.32914925" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5093834" side_tool="true" weight="0.33333334" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4966488" weight="0.32914925" />
+      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" weight="0.32914925" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="manage.py@pyWeb" order="13" weight="0.32914925" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="4" />
+      <window_info anchor="right" id="JSON Viewer" order="5" weight="0.3297587" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12526652" />
@@ -430,86 +490,31 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields" />
+    <MESSAGE value="Clean useless fiels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Clean useless fiels" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/pyWeb$mongo.coverage" NAME="mongo Coverage Results" MODIFIED="1556801476043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo/semlog_mongo" />
     <SUITE FILE_PATH="coverage/pyWeb$views__1_.coverage" NAME="views (1) Coverage Results" MODIFIED="1556617002397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/web/helloworld/point_cloud_viewer" />
     <SUITE FILE_PATH="coverage/pyWeb$pointCloud_sample.coverage" NAME="pointCloud_sample Coverage Results" MODIFIED="1556692235831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_vis/sample" />
+    <SUITE FILE_PATH="coverage/pyWeb$test_class.coverage" NAME="test_class Coverage Results" MODIFIED="1556811517894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo/test" />
+    <SUITE FILE_PATH="coverage/pyWeb$pytest_in_test_class_py.coverage" NAME="pytest in test_class.py Coverage Results" MODIFIED="1556809006660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/addArticle.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/test1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="72" selection-start-line="72" selection-end-line="72" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/addok.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../docker-repo/pyDoc/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="55" selection-start-line="1" selection-start-column="55" selection-end-line="1" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../others/pptk_np.ipynb">
-      <provider selected="true" editor-type-id="jupyter-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/template/addArticle.html" />
+    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/test1.py" />
+    <entry file="file://$PROJECT_DIR$/web/helloworld/template/addok.html" />
+    <entry file="file://$PROJECT_DIR$/../docker-repo/pyDoc/Dockerfile" />
+    <entry file="file://$PROJECT_DIR$/../others/pptk_np.ipynb" />
     <entry file="file://$PROJECT_DIR$/semlog_vis/sample/pc.csv" />
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/js/PLYLoader.js" />
     <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/gallery.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/people/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/t.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/people/views.py" />
+    <entry file="file://$PROJECT_DIR$/web/helloworld/template/t.html" />
     <entry file="file://$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
@@ -534,16 +539,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/test.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/t2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/template/test.txt" />
+    <entry file="file://$PROJECT_DIR$/web/helloworld/template/t2.html" />
     <entry file="file://$PROJECT_DIR$/semlog_vis/sample/pointCloud_sample.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -558,38 +555,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/models.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/tests.py" />
+    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/models.py" />
     <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#328#337#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/admin.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/index.html">
+    <entry file="file://$PROJECT_DIR$/web/helloworld/template/index.html" />
+    <entry file="file://$PROJECT_DIR$/web/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="143">
+            <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        <state relative-caret-position="396">
+          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/template/gallery.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
+        <state relative-caret-position="198">
           <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -597,20 +598,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="44" lean-forward="true" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="144" lean-forward="true" selection-start-column="144" selection-end-column="144" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#328#337#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/template/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/test/a.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="43" selection-start-column="43" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-177">
-          <caret line="39" column="77" selection-start-line="39" selection-start-column="77" selection-end-line="39" selection-end-column="77" />
+        <state relative-caret-position="234">
+          <caret line="55" column="50" lean-forward="true" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="50" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/urls.py">
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+        <state relative-caret-position="324">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="103" column="20" lean-forward="true" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
