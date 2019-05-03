@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    ul {
+        white-space: nowrap;
+    }
+
+    ul, li {
+        list-style: none;
+        display: inline;
+    }
+</style>
+
+<body>
+{% load static %}
+
+<h1>Color images:</h1>
+<ul>
+    {% for img_path in Color %}
+
+        <li><a href="/create_pc/?img_path={{ img_path }}"><img src="{% static img_path %}" width="100" height="100"></a>
+        </li>
+    {% endfor %}
+</ul>
+<h1>Depth images:</h1>
+<ul>
+    {% for img_path in Depth %}
+
+        <li><a href="/create_pc/?img_path={{ img_path }}"><img src="{% static img_path %}" width="100" height="100"></a>
+        </li>
+    {% endfor %}
+</ul>
+<h1>Mask images:</h1>
+<ul>
+    {% for img_path in Mask %}
+
+        <li><a href="/create_pc/?img_path={{ img_path }}"><img src="{% static img_path %}" width="100" height="100"></a>
+        </li>
+    {% endfor %}
+</ul>
+<h1>Normal images:</h1>
+<ul>
+    {% for img_path in Normal %}
+
+        <li><a href="/create_pc/?img_path={{ img_path }}"><img src="{% static img_path %}" width="100" height="100"></a>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

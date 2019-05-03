@@ -56,10 +56,9 @@ class MongoDB():
 
         """
         print("Start downloading images.")
-        # image_list = [_ for _ in image_list]
         print("Length of image_list:",len(image_list))
         dic = {'Color': [], 'Depth': [], 'Mask': [], 'Normal': []}
-        img_dir=[]
+        img_dir={'Color': [], 'Depth': [], 'Mask': [], 'Normal': []}
         for images in image_list:
             # One type, one instance is a dict, or multi dicts in a list
             if type(images['views']['images']) == dict:
@@ -85,12 +84,29 @@ class MongoDB():
                 # img_path=path+"\\"+str(i)+".png"
                 img_path=os.path.join(path,str(i)+".png")
                 file = open(img_path, "wb+")
-                img_dir.append(img_path)
+                # img_dir.append(img_path)
+
+                if "Color" in img_path:
+                    img_dir['Color'].append(img_path)
+                elif "Depth" in img_path:
+                    img_dir['Depth'].append(img_path)
+                elif "Mask" in img_path:
+                    img_dir['Mask'].append(img_path)
+                elif "Normal" in img_path:
+                    img_dir['Normal'].append(img_path)
                 download_db.download_to_stream(file_id=i, destination=file)
-        # print(dic)
         print("Finish downloading.")
         print("img_dir",img_dir)
         return img_dir
+
+    def get_object_rgb(self,object_id,collection):
+        client=MongoClient(self.ip,self.port)[self.database][collection]["meta"]
+        pipline=[]
+        pipline.append({"$unwind":{"path":"$env.entities"}})
+        pipline.append({"$match":{"env.entities.id":object_id}})
+        pipline.append({"$project":{"env.entities.mask_hex":1}})
+        h=list(client.aggregate(pipline))[0]['env']['entities']['mask_hex']
+        return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
 
     # @staticmethod
     # def save_json(data, path):

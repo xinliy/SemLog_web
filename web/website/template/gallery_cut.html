@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    ul {
+        white-space: nowrap;
+    }
+
+    ul, li {
+        list-style: none;
+        display: inline;
+    }
+</style>
+
+<body>
+{% load static %}
+
+<h1>Color images:</h1>
+<ul>
+    {% for image in Color_cut %}
+
+        <li><img src="{% static image %}" ></li>
+    {% endfor %}
+</ul>
+
+<h1>Depth images:</h1>
+<ul>
+    {% for image in Depth_cut %}
+
+        <li><img src="{% static image %}" ></li>
+    {% endfor %}
+</ul>
+<h1>Mask images:</h1>
+<ul>
+    {% for image in Mask_cut %}
+
+        <li><img src="{% static image %}" ></li>
+    {% endfor %}
+</ul>
+<h1>Normal images:</h1>
+<ul>
+    {% for image in Normal_cut %}
+
+        <li><img src="{% static image %}" ></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

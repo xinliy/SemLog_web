@@ -21,10 +21,9 @@ class PointCloudGenerator():
         PlaneDepth = PointDepth / (1 + (DistanceFromCenter / f)**2)**(0.5)
         return PlaneDepth
 
-    def __init__(self, rgb_file, depth_file, pc_file, focal_length, scalingfactor):
+    def __init__(self, rgb_file, depth_file, focal_length, scalingfactor):
         self.rgb_file = rgb_file
         self.depth_file = depth_file
-        self.pc_file = pc_file
         self.focal_length = focal_length
         self.scalingfactor = scalingfactor
         self.rgb = Image.open(rgb_file)
@@ -61,7 +60,7 @@ class PointCloudGenerator():
         t2 = time.time()
         print('calcualte 3d point cloud Done.', t2 - t1)
 
-    def write_ply(self):
+    def write_ply(self,path):
         t1 = time.time()
         head = '''ply
         format ascii 1.0
@@ -77,7 +76,7 @@ class PointCloudGenerator():
         ''' % (self.width * self.height)
         # If focal_length is large, keep more decimal point as the x,y,z values
         # are very small.
-        np.savetxt(self.pc_file, self.df.T, fmt=[
+        np.savetxt(path, self.df.T, fmt=[
                    '%3.5f', '%3.5f', '%3.5f', '%d', '%d', '%d', '%d'], header=head, comments='')
 
         t2 = time.time()
@@ -87,11 +86,11 @@ class PointCloudGenerator():
     #     pcd = read_point_cloud(self.pc_file)
     #     draw_geometries([pcd])
 
-    def save_npy(self,alpha=False):
+    def save_npy(self,path,alpha=False):
         data=self.df.copy()
         if alpha is False:
             data=data[:6]
-        np.save('pc.npy',data)
+        np.save(path,data)
 
     def save_pcd(self):
         data=self.df.copy()

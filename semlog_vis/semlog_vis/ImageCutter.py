@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 
-def cut_object(rgb_image, mask_image, object_color):
+def cut_object(rgb_image, mask_image, object_color,saving_path=None):
     """This function is used to cut a specific object from the pair RGB/mask image."""
     rgb_image = cv2.imread(rgb_image)
     mask_image = cv2.imread(mask_image)
@@ -22,5 +22,8 @@ def cut_object(rgb_image, mask_image, object_color):
 
     # Cut the object from the RGB image
     crop_rgb = rgb_image[wmin:wmax, hmin:hmax]
+
+    if saving_path is not None:
+        cv2.imwrite(saving_path,crop_rgb)
 
     return crop_rgb

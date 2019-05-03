@@ -2,7 +2,59 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da4f4817-ee53-4274-b501-2d8f29694c29" name="Default Changelist" comment="Update json">
+      <change afterPath="$PROJECT_DIR$/web/website/imageViewer/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/website/point_cloud_viewer/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/website/template/gallery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pyWeb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyWeb.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semlog_mongo/test/test_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_mongo/test/test_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/set_path.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/point_cloud_viewer/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/pc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/pc.ply" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/point_cloud_viewer/pc.ply" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f0001445.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color/5c92a3c8dd3ffb60f0001445.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f0001449.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color/5c92a3c8dd3ffb60f0001449.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f000144d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f0001476.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color/5c92a540dd3ffb60f0001476.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f000147a.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color/5c92a540dd3ffb60f000147a.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f000147e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f0001446.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth/5c92a3c8dd3ffb60f0001446.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f000144a.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth/5c92a3c8dd3ffb60f000144a.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f000144e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f0001477.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth/5c92a540dd3ffb60f0001477.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f000147b.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth/5c92a540dd3ffb60f000147b.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f000147f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f0001447.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask/5c92a3c8dd3ffb60f0001447.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f000144b.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask/5c92a3c8dd3ffb60f000144b.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f000144f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f0001478.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask/5c92a540dd3ffb60f0001478.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f000147c.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask/5c92a540dd3ffb60f000147c.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f0001480.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f0001448.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal/5c92a3c8dd3ffb60f0001448.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f000144c.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal/5c92a3c8dd3ffb60f000144c.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f0001450.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f0001479.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal/5c92a540dd3ffb60f0001479.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f000147d.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal/5c92a540dd3ffb60f000147d.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f0001481.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/template/gallery.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/template/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/template/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/template/point_cloud_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/template/point_cloud_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/manage.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,66 +68,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
+        <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test_class.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="738">
-              <caret line="55" column="50" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="50" />
+            <state relative-caret-position="484">
+              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semlog_mongo/test/a.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="43" selection-start-column="43" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/helloworld/template/main.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/helloworld/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-              <folding>
-                <element signature="e#328#337#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,6 +93,7 @@
     <findStrings>
       <find>.txt</find>
       <find>manage.py</find>
+      <find>image_dir</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -107,7 +106,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/web/helloworld/imageViewer/test1.py" />
-        <option value="$PROJECT_DIR$/web/helloworld/template/gallery.html" />
         <option value="$PROJECT_DIR$/../docker-repo/pyDoc/Dockerfile" />
         <option value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/js/PLYLoader.js" />
         <option value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/point_cloud_template.html" />
@@ -115,22 +113,32 @@
         <option value="$PROJECT_DIR$/web/helloworld/template/t2.html" />
         <option value="$PROJECT_DIR$/web/helloworld/template/t.html" />
         <option value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/pc.html" />
-        <option value="$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py" />
         <option value="$PROJECT_DIR$/web/helloworld/template/point_cloud_template.html" />
         <option value="$PROJECT_DIR$/web/helloworld/settings.py" />
-        <option value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py" />
-        <option value="$PROJECT_DIR$/web/helloworld/urls.py" />
-        <option value="$PROJECT_DIR$/web/helloworld/template/main.html" />
-        <option value="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/semlog_mongo/test/test_class.py" />
         <option value="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" />
+        <option value="$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py" />
+        <option value="$PROJECT_DIR$/web/helloworld/template/main.html" />
+        <option value="$PROJECT_DIR$/web/helloworld/template/gallery_cut.html" />
+        <option value="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" />
+        <option value="$PROJECT_DIR$/web/helloworld/urls.py" />
+        <option value="$PROJECT_DIR$/web/helloworld/template/gallery.html" />
+        <option value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py" />
+        <option value="$PROJECT_DIR$/web/helloworld/json_loader.py" />
+        <option value="$PROJECT_DIR$/web/website/json_loader.py" />
+        <option value="$PROJECT_DIR$/web/staticfiles/image_dir.json" />
+        <option value="$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py" />
+        <option value="$PROJECT_DIR$/web/website/urls.py" />
+        <option value="$PROJECT_DIR$/web/website/template/gallery.html" />
+        <option value="$PROJECT_DIR$/web/website/point_cloud_viewer/views.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="950" />
-    <option name="width" value="975" />
-    <option name="height" value="1050" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -140,7 +148,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -151,88 +158,54 @@
             <path>
               <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
-              <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="semlog_vis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="semlog_vis" type="462c0819:PsiDirectoryNode" />
-              <item name="semlog_vis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="helloworld" type="462c0819:PsiDirectoryNode" />
+              <item name="staticfiles" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="helloworld" type="462c0819:PsiDirectoryNode" />
-              <item name="imageViewer" type="462c0819:PsiDirectoryNode" />
+              <item name="website" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="helloworld" type="462c0819:PsiDirectoryNode" />
-              <item name="point_cloud_viewer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="helloworld" type="462c0819:PsiDirectoryNode" />
+              <item name="website" type="462c0819:PsiDirectoryNode" />
               <item name="template" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/helloworld/settings.py" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/helloworld/template" />
+    <property name="settings.editor.selected.configurable" value="com.maddyhome.idea.vim.ui.VimEmulationConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\staticfiles" />
-      <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\helloworld\template" />
-      <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\helloworld\point_cloud_viewer" />
-      <recent name="$PROJECT_DIR$/web/helloworld/template" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\staticfiles" />
       <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\helloworld\point_cloud_viewer" />
       <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\helloworld\template" />
       <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\helloworld" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\pyWeb\web\helloworld\template" />
+      <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\staticfiles" />
+      <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\helloworld\template" />
+      <recent name="E:\onedrive\OneDrive - Jacobs University\IAI\Python Query Library\pyWeb\web\helloworld\point_cloud_viewer" />
+      <recent name="$PROJECT_DIR$/web/helloworld/template" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -270,28 +243,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pointCloud_sample" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="pyWeb" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/semlog_vis/sample" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/semlog_vis/sample/pointCloud_sample.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test_class" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pyWeb" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -314,26 +265,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="views (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="pyWeb" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+    <configuration name="Django server" type="docker-deploy" factoryName="docker-image" temporary="true" server-name="Docker">
+      <deployment type="docker-image">
+        <settings>
+          <option name="command" value="" />
+          <option name="containerName" value="django" />
+          <option name="entrypoint" value="" />
+          <option name="imageTag" value="caf4a8cd7106" />
+          <option name="commandLineOptions" value="" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="pytest in test_class.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
@@ -355,10 +305,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.test_class" />
+        <item itemvalue="Docker.Django server" />
+        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Python tests.pytest in test_class.py" />
         <item itemvalue="Python.mongo" />
-        <item itemvalue="Python.pointCloud_sample" />
-        <item itemvalue="Python.views (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -384,6 +334,8 @@
       <workItem from="1556803349350" duration="1946000" />
       <workItem from="1556805480706" duration="6488000" />
       <workItem from="1556822479412" duration="72000" />
+      <workItem from="1556824251172" duration="1449000" />
+      <workItem from="1556869505756" duration="14564000" />
     </task>
     <task id="LOCAL-00001" summary="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields">
       <created>1556211767113</created>
@@ -433,26 +385,26 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34662000" />
+    <option name="totallyTimeSpent" value="50675000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17426273" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17750533" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49128687" weight="0.33333334" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49128687" weight="0.33261105" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49865952" weight="0.32914925" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49128687" weight="0.32914925" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49128687" weight="0.32827735" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5093834" side_tool="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4966488" weight="0.32914925" />
-      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" weight="0.32914925" />
+      <window_info active="true" anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" visible="true" weight="0.32827735" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="manage.py@pyWeb" order="13" weight="0.32914925" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -463,27 +415,29 @@
       <window_info anchor="right" id="JSON Viewer" order="5" weight="0.3297587" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12526652" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17750533" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Docker" order="0" sideWeight="0.49840087" weight="0.329718" />
-      <window_info anchor="bottom" id="Database Changes" order="1" />
-      <window_info anchor="bottom" id="Message" order="2" />
-      <window_info anchor="bottom" id="Find" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" sideWeight="0.4989339" visible="true" weight="0.3340564" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49946696" weight="0.329718" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5010661" side_tool="true" visible="true" weight="0.3340564" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info anchor="right" id="Database" order="0" />
-      <window_info anchor="right" id="SciView" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49128687" weight="0.33261105" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49865952" weight="0.32914925" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49128687" weight="0.32827735" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5093834" side_tool="true" weight="0.33333334" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4966488" weight="0.32914925" />
+      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" weight="0.32827735" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="manage.py@pyWeb" order="13" weight="0.32914925" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="4" />
+      <window_info anchor="right" id="JSON Viewer" order="5" weight="0.3297587" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,7 +453,7 @@
     <SUITE FILE_PATH="coverage/pyWeb$mongo.coverage" NAME="mongo Coverage Results" MODIFIED="1556801476043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo/semlog_mongo" />
     <SUITE FILE_PATH="coverage/pyWeb$views__1_.coverage" NAME="views (1) Coverage Results" MODIFIED="1556617002397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/web/helloworld/point_cloud_viewer" />
     <SUITE FILE_PATH="coverage/pyWeb$pointCloud_sample.coverage" NAME="pointCloud_sample Coverage Results" MODIFIED="1556692235831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_vis/sample" />
-    <SUITE FILE_PATH="coverage/pyWeb$test_class.coverage" NAME="test_class Coverage Results" MODIFIED="1556811517894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo/test" />
+    <SUITE FILE_PATH="coverage/pyWeb$test_class.coverage" NAME="test_class Coverage Results" MODIFIED="1556871934737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo/test" />
     <SUITE FILE_PATH="coverage/pyWeb$pytest_in_test_class_py.coverage" NAME="pytest in test_class.py Coverage Results" MODIFIED="1556809006660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo" />
   </component>
   <component name="editorHistoryManager">
@@ -510,47 +464,16 @@
     <entry file="file://$PROJECT_DIR$/../others/pptk_np.ipynb" />
     <entry file="file://$PROJECT_DIR$/semlog_vis/sample/pc.csv" />
     <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/js/PLYLoader.js" />
-    <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/__init__.py">
+    <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/helloworld/people/views.py" />
     <entry file="file://$PROJECT_DIR$/web/helloworld/template/t.html" />
-    <entry file="file://$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="109" selection-start-line="109" selection-end-line="109" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/pc.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="43" column="41" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#canvas#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#canvas#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#canvas#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#canvas#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/helloworld/template/test.txt" />
     <entry file="file://$PROJECT_DIR$/web/helloworld/template/t2.html" />
-    <entry file="file://$PROJECT_DIR$/semlog_vis/sample/pointCloud_sample.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/point_cloud_template.html">
+    <entry file="file://$PROJECT_DIR$/web/website/template/point_cloud_template.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="85" column="70" selection-start-line="85" selection-start-column="70" selection-end-line="85" selection-end-column="70" />
@@ -559,12 +482,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/tests.py" />
     <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/models.py" />
-    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/helloworld/template/index.html" />
     <entry file="file://$PROJECT_DIR$/web/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -576,71 +493,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/gallery.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="44" lean-forward="true" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/semlog_mongo/setup.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test.json" />
-    <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="55" column="50" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="198">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
@@ -651,19 +511,140 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/template/main.html">
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+        <state relative-caret-position="220">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/helloworld/settings.py">
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="1672">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
           <folding>
-            <element signature="e#328#337#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/point_cloud_viewer/pc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/helloworld/imageViewer/set_path.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/admin.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/template/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/staticfiles/image_dir.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2348" selection-start-column="2348" selection-end-column="2348" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="67" column="24" selection-start-line="67" selection-start-column="24" selection-end-line="67" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_vis/sample/pointCloud_sample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/template/gallery.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="45" column="86" selection-start-line="45" selection-start-column="86" selection-end-line="45" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/template/gallery_cut.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/json_loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="57" column="3" selection-start-line="57" selection-start-column="3" selection-end-line="57" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1892">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
