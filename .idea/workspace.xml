@@ -2,59 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da4f4817-ee53-4274-b501-2d8f29694c29" name="Default Changelist" comment="Update json">
-      <change afterPath="$PROJECT_DIR$/web/website/imageViewer/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/website/point_cloud_viewer/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/website/template/gallery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pyWeb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyWeb.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semlog_mongo/test/test_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_mongo/test/test_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/migrations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/set_path.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/imageViewer/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/point_cloud_viewer/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/pc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/pc.ply" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/point_cloud_viewer/pc.ply" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/point_cloud_viewer/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f0001445.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color/5c92a3c8dd3ffb60f0001445.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f0001449.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color/5c92a3c8dd3ffb60f0001449.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f000144d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f0001476.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color/5c92a540dd3ffb60f0001476.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f000147a.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color/5c92a540dd3ffb60f000147a.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f000147e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f0001446.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth/5c92a3c8dd3ffb60f0001446.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f000144a.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth/5c92a3c8dd3ffb60f000144a.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f000144e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f0001477.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth/5c92a540dd3ffb60f0001477.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f000147b.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth/5c92a540dd3ffb60f000147b.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f000147f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f0001447.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask/5c92a3c8dd3ffb60f0001447.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f000144b.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask/5c92a3c8dd3ffb60f000144b.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f000144f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f0001478.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask/5c92a540dd3ffb60f0001478.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f000147c.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask/5c92a540dd3ffb60f000147c.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f0001480.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f0001448.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal/5c92a3c8dd3ffb60f0001448.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f000144c.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal/5c92a3c8dd3ffb60f000144c.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f0001450.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f0001479.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal/5c92a540dd3ffb60f0001479.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f000147d.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal/5c92a540dd3ffb60f000147d.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f0001481.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/gallery.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/template/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/template/point_cloud_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/template/point_cloud_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f0001445.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f0001449.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c9dd3ffb60f0001451.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c9dd3ffb60f0001455.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f0001476.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f000147a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a541dd3ffb60f0001482.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a541dd3ffb60f0001486.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f0001446.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f000144a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c9dd3ffb60f0001452.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c9dd3ffb60f0001456.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f0001477.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f000147b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a541dd3ffb60f0001483.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a541dd3ffb60f0001487.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f0001447.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f000144b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c9dd3ffb60f0001453.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c9dd3ffb60f0001457.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f0001478.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f000147c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a541dd3ffb60f0001484.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a541dd3ffb60f0001488.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f0001448.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f000144c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c9dd3ffb60f0001454.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c9dd3ffb60f0001458.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f0001479.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f000147d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a541dd3ffb60f0001485.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a541dd3ffb60f0001489.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,13 +46,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="484">
               <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/website/imageViewer/apps.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="492">
+              <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/website/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="e#325#334#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,6 +102,7 @@
       <find>.txt</find>
       <find>manage.py</find>
       <find>image_dir</find>
+      <find>hello</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -177,7 +186,7 @@
               <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="website" type="462c0819:PsiDirectoryNode" />
-              <item name="template" type="462c0819:PsiDirectoryNode" />
+              <item name="imageViewer" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -335,7 +344,7 @@
       <workItem from="1556805480706" duration="6488000" />
       <workItem from="1556822479412" duration="72000" />
       <workItem from="1556824251172" duration="1449000" />
-      <workItem from="1556869505756" duration="14564000" />
+      <workItem from="1556869505756" duration="15096000" />
     </task>
     <task id="LOCAL-00001" summary="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields">
       <created>1556211767113</created>
@@ -385,12 +394,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50675000" />
+    <option name="totallyTimeSpent" value="51207000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17750533" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17750533" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -404,7 +414,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49128687" weight="0.32827735" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5093834" side_tool="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4966488" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" visible="true" weight="0.32827735" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="manage.py@pyWeb" order="13" weight="0.32914925" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -564,9 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/website/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -622,10 +629,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="57" column="3" selection-start-line="57" selection-start-column="3" selection-end-line="57" selection-end-column="3" />
+        <state relative-caret-position="492">
+          <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
@@ -634,17 +654,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/website/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1892">
+        <state relative-caret-position="38">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#325#334#0" expanded="true" />
           </folding>
         </state>
       </provider>
