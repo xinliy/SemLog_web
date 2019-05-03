@@ -125,7 +125,7 @@ ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 IMAGE_ROOT=os.path.join(PROJECT_ROOT, 'static')
-STATIC_URL = '/static/'
+STATIC_URL = os.path.join(PROJECT_ROOT,'style_file')
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [

@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
 <head>
-    <meta charset="UTF-8">
-    <title>Search</title>
-
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Search Engine</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-<h2>Search</h2>
+  <section class="container">
+    <div class="login">
+      <h1>Search the database</h1>
+      <form method="get" action="/start_search">
+        <p><input type="text" name="timestamp" placeholder="Time less than"></p>
+        <p><input type="text" name="object_id" placeholder="Unique object id"></p>
+          <p><input type="text" name="view_id" placeholder="Unique view id"></p>
+          <p><input type="text" name="image_type" placeholder="Type of image"></p>
 
-<form action="/start_search/" method="get" name="search_form">
-    <p><span>timestamp:</span><input type="text" name="timestamp"></p>
-    <p><span>object_id:</span><input type="text" name="object_id"></p>
-    <p><span>view_id:</span><input type="text" name="view_id"></p>
-    <p><span>image_type:</span><input type="text" name="image_type"></p>
-    <input type="submit" value="Search target images!">
-</form>
-{#<p><a href="/gallery/">show Images!</a></p>#}
-<form action="/object_cut/" method="get">
-{# <input type="text" value="8" name="mytextbox" size="1"/>#}
-    <p><span>object_id:</span><input type="text" name="object_id"></p>
- <input type="submit" class="btn" value="Cut!" name="object_cut">
-</form>
+        <p class="submit"><input type="submit" name="commit" value="Search"></p>
+      </form>
+    </div>
 
 
+  </section>
 
 
 </body>

@@ -44,6 +44,8 @@ def start_search(request):
     image_dir = m.download(r, abs_path=settings.IMAGE_ROOT)
     with open(os.path.join(settings.STATIC_ROOT, "image_dir.json"), "w") as outfile:
         json.dump(image_dir, outfile)
+    with open(os.path.join(settings.STATIC_ROOT, "object_id.json"), "w") as outfile:
+        json.dump(object_id, outfile)
 
     return render(request,'gallery.html',image_dir)
 
@@ -54,10 +56,10 @@ def object_cut(request):
     # Type to be cut
     img_type=['Color','Depth','Mask','Normal']
     print("Cut button is clicked")
+    with open(os.path.join(settings.STATIC_ROOT,"object_id.json"),'r') as readfile:
+        object_id=json.load(readfile)
 
-    #Get the object_id from input
-    object_id = request.GET['object_id']
-
+    print("The object_id is:",object_id)
     # Init MongoDB and get the corresponding color
     m = MongoDB(ip=IP, database=DB, collection=COLLECTION)
     rgb = m.get_object_rgb(object_id, collection=COLLECTION)

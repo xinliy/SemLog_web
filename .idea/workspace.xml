@@ -2,38 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da4f4817-ee53-4274-b501-2d8f29694c29" name="Default Changelist" comment="Update json">
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f0001445.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c8dd3ffb60f0001449.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c9dd3ffb60f0001451.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a3c9dd3ffb60f0001455.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f0001476.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a540dd3ffb60f000147a.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a541dd3ffb60f0001482.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Color/5c92a541dd3ffb60f0001486.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f0001446.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c8dd3ffb60f000144a.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c9dd3ffb60f0001452.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a3c9dd3ffb60f0001456.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f0001477.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a540dd3ffb60f000147b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a541dd3ffb60f0001483.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Depth/5c92a541dd3ffb60f0001487.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f0001447.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c8dd3ffb60f000144b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c9dd3ffb60f0001453.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a3c9dd3ffb60f0001457.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f0001478.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a540dd3ffb60f000147c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a541dd3ffb60f0001484.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Mask/5c92a541dd3ffb60f0001488.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f0001448.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c8dd3ffb60f000144c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c9dd3ffb60f0001454.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a3c9dd3ffb60f0001458.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f0001479.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a540dd3ffb60f000147d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a541dd3ffb60f0001485.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/helloworld/static/Normal/5c92a541dd3ffb60f0001489.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/website/imageViewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/website/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/website/template/gallery.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/template/gallery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/website/template/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/template/main.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,11 +35,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
+            <state relative-caret-position="550">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -75,14 +47,41 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/website/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/website/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="404">
+              <caret line="123" column="59" selection-start-line="123" selection-start-column="59" selection-end-line="123" selection-end-column="59" />
               <folding>
                 <element signature="e#325#334#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/website/template/main.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="506">
+              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/website/template/gallery.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -139,15 +138,20 @@
         <option value="$PROJECT_DIR$/web/staticfiles/image_dir.json" />
         <option value="$PROJECT_DIR$/semlog_vis/semlog_vis/PointCloudGenerator.py" />
         <option value="$PROJECT_DIR$/web/website/urls.py" />
-        <option value="$PROJECT_DIR$/web/website/template/gallery.html" />
         <option value="$PROJECT_DIR$/web/website/point_cloud_viewer/views.py" />
+        <option value="$PROJECT_DIR$/web/website/template/index.html" />
+        <option value="$PROJECT_DIR$/web/website/settings.py" />
+        <option value="$PROJECT_DIR$/web/website/template/main.html" />
+        <option value="$PROJECT_DIR$/web/website/template/gallery.html" />
+        <option value="$PROJECT_DIR$/web/website/imageViewer/views.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="279" />
+    <option name="y" value="42" />
+    <option name="width" value="975" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -187,6 +191,13 @@
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="website" type="462c0819:PsiDirectoryNode" />
               <item name="imageViewer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="website" type="462c0819:PsiDirectoryNode" />
+              <item name="template" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -344,7 +355,7 @@
       <workItem from="1556805480706" duration="6488000" />
       <workItem from="1556822479412" duration="72000" />
       <workItem from="1556824251172" duration="1449000" />
-      <workItem from="1556869505756" duration="15096000" />
+      <workItem from="1556869505756" duration="18374000" />
     </task>
     <task id="LOCAL-00001" summary="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields">
       <created>1556211767113</created>
@@ -394,7 +405,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51207000" />
+    <option name="totallyTimeSpent" value="54485000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -414,7 +425,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49128687" weight="0.32827735" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5093834" side_tool="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4966488" weight="0.32914925" />
-      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" weight="0.32827735" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="manage.py@pyWeb" order="13" weight="0.32914925" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -567,20 +578,6 @@
     <entry file="file://$PROJECT_DIR$/web/website/imageViewer/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/template/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/staticfiles/image_dir.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -605,13 +602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/template/gallery.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="45" column="86" selection-start-line="45" selection-start-column="86" selection-end-line="45" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/website/template/gallery_cut.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -629,6 +619,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/template/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/template/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="123" column="59" selection-start-line="123" selection-start-column="59" selection-end-line="123" selection-end-column="59" />
+          <folding>
+            <element signature="e#325#334#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/template/gallery.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -639,25 +670,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
+        <state relative-caret-position="550">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#325#334#0" expanded="true" />
           </folding>
         </state>
       </provider>
