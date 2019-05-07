@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da4f4817-ee53-4274-b501-2d8f29694c29" name="Default Changelist" comment="Update json">
-      <change beforePath="$PROJECT_DIR$/web/website/imageViewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/imageViewer/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/template/gallery.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/template/gallery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/template/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/template/main.html" afterDir="false" />
-    </list>
+    <list default="true" id="da4f4817-ee53-4274-b501-2d8f29694c29" name="Default Changelist" comment="Update json" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +13,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="484">
@@ -35,11 +30,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="1276">
+              <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -355,7 +350,7 @@
       <workItem from="1556805480706" duration="6488000" />
       <workItem from="1556822479412" duration="72000" />
       <workItem from="1556824251172" duration="1449000" />
-      <workItem from="1556869505756" duration="18374000" />
+      <workItem from="1556869505756" duration="18991000" />
     </task>
     <task id="LOCAL-00001" summary="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields">
       <created>1556211767113</created>
@@ -405,7 +400,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54485000" />
+    <option name="totallyTimeSpent" value="55102000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -626,13 +621,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/template/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/website/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="404">
@@ -653,6 +641,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1276">
+          <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/website/template/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/website/template/gallery.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -664,16 +669,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
           <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
