@@ -2,8 +2,7 @@ from pymongo import MongoClient
 import os
 import gridfs
 import shutil
-from bson.json_util import dumps,RELAXED_JSON_OPTIONS
-import json
+from multiprocessing import Pool
 
 
 class MongoDB():
@@ -80,11 +79,10 @@ class MongoDB():
 
             download_db = gridfs.GridFSBucket(
                 MongoClient(self.ip,self.port)[self.database], self.collection)
+
             for i in image_id_list:
-                # img_path=path+"\\"+str(i)+".png"
                 img_path=os.path.join(path,str(i)+".png")
                 file = open(img_path, "wb+")
-                # img_dir.append(img_path)
 
                 if "Color" in img_path:
                     img_dir['Color'].append(img_path)

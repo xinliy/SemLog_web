@@ -3,181 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="da4f4817-ee53-4274-b501-2d8f29694c29" name="Default Changelist" comment="Update json">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/web/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/imageViewer/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/imageViewer/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a3cadd3ffb60f000145d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a3cadd3ffb60f0001461.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a3cadd3ffb60f0001465.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a3cbdd3ffb60f0001469.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a3cbdd3ffb60f000146d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a3cbdd3ffb60f0001471.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a541dd3ffb60f000148e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a541dd3ffb60f0001492.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a541dd3ffb60f0001496.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a5ccdd3ffb60f000149c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color/5c92a5ccdd3ffb60f00014a0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3c8dd3ffb60f0001445.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3c8dd3ffb60f0001445.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3c8dd3ffb60f0001449.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3c8dd3ffb60f0001449.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3c9dd3ffb60f0001451.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3c9dd3ffb60f0001451.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3c9dd3ffb60f0001455.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3c9dd3ffb60f0001455.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3cadd3ffb60f000145d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3cadd3ffb60f0001461.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3cadd3ffb60f0001465.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3cbdd3ffb60f0001469.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3cbdd3ffb60f000146d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a3cbdd3ffb60f0001471.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a540dd3ffb60f0001476.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a540dd3ffb60f0001476.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a540dd3ffb60f000147a.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a540dd3ffb60f000147a.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a541dd3ffb60f0001482.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a541dd3ffb60f0001482.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a541dd3ffb60f0001486.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a541dd3ffb60f0001486.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a541dd3ffb60f000148e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a541dd3ffb60f0001492.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a541dd3ffb60f0001496.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5ccdd3ffb60f000149c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5ccdd3ffb60f00014a0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cddd3ffb60f00014a8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cddd3ffb60f00014ac.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cddd3ffb60f00014b0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cedd3ffb60f00014b4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cedd3ffb60f00014b8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cedd3ffb60f00014bc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cfdd3ffb60f00014c0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cfdd3ffb60f00014c4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5cfdd3ffb60f00014c8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5d0dd3ffb60f00014d0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5d0dd3ffb60f00014d4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5d0dd3ffb60f00014dc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Color_cut/5c92a5d0dd3ffb60f00014e0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a3cadd3ffb60f000145e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a3cadd3ffb60f0001462.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a3cadd3ffb60f0001466.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a3cbdd3ffb60f000146a.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a3cbdd3ffb60f000146e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a3cbdd3ffb60f0001472.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a541dd3ffb60f000148f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a541dd3ffb60f0001493.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a541dd3ffb60f0001497.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a5ccdd3ffb60f000149d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth/5c92a5ccdd3ffb60f00014a1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3c8dd3ffb60f0001446.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3c8dd3ffb60f0001446.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3c8dd3ffb60f000144a.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3c8dd3ffb60f000144a.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3c9dd3ffb60f0001452.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3c9dd3ffb60f0001452.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3c9dd3ffb60f0001456.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3c9dd3ffb60f0001456.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3cadd3ffb60f000145e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3cadd3ffb60f0001462.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3cadd3ffb60f0001466.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3cbdd3ffb60f000146a.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3cbdd3ffb60f000146e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a3cbdd3ffb60f0001472.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a540dd3ffb60f0001477.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a540dd3ffb60f0001477.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a540dd3ffb60f000147b.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a540dd3ffb60f000147b.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a541dd3ffb60f0001483.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a541dd3ffb60f0001483.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a541dd3ffb60f0001487.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a541dd3ffb60f0001487.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a541dd3ffb60f000148f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a541dd3ffb60f0001493.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a541dd3ffb60f0001497.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5ccdd3ffb60f000149d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5ccdd3ffb60f00014a1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cddd3ffb60f00014a9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cddd3ffb60f00014ad.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cddd3ffb60f00014b1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cedd3ffb60f00014b5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cedd3ffb60f00014b9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cedd3ffb60f00014bd.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cfdd3ffb60f00014c1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cfdd3ffb60f00014c5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5cfdd3ffb60f00014c9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5d0dd3ffb60f00014d1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5d0dd3ffb60f00014d5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5d0dd3ffb60f00014dd.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Depth_cut/5c92a5d0dd3ffb60f00014e1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a3cadd3ffb60f000145f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a3cadd3ffb60f0001463.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a3cadd3ffb60f0001467.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a3cbdd3ffb60f000146b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a3cbdd3ffb60f000146f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a3cbdd3ffb60f0001473.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a541dd3ffb60f0001490.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a541dd3ffb60f0001494.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a541dd3ffb60f0001498.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a5ccdd3ffb60f000149e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask/5c92a5ccdd3ffb60f00014a2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3c8dd3ffb60f0001447.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3c8dd3ffb60f0001447.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3c8dd3ffb60f000144b.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3c8dd3ffb60f000144b.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3c9dd3ffb60f0001453.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3c9dd3ffb60f0001453.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3c9dd3ffb60f0001457.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3c9dd3ffb60f0001457.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3cadd3ffb60f000145f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3cadd3ffb60f0001463.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3cadd3ffb60f0001467.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3cbdd3ffb60f000146b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3cbdd3ffb60f000146f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a3cbdd3ffb60f0001473.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a540dd3ffb60f0001478.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a540dd3ffb60f0001478.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a540dd3ffb60f000147c.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a540dd3ffb60f000147c.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a541dd3ffb60f0001484.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a541dd3ffb60f0001484.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a541dd3ffb60f0001488.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a541dd3ffb60f0001488.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a541dd3ffb60f0001490.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a541dd3ffb60f0001494.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a541dd3ffb60f0001498.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5ccdd3ffb60f000149e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5ccdd3ffb60f00014a2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cddd3ffb60f00014aa.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cddd3ffb60f00014ae.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cddd3ffb60f00014b2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cedd3ffb60f00014b6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cedd3ffb60f00014ba.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cedd3ffb60f00014be.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cfdd3ffb60f00014c2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cfdd3ffb60f00014c6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5cfdd3ffb60f00014ca.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5d0dd3ffb60f00014d2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5d0dd3ffb60f00014d6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5d0dd3ffb60f00014de.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Mask_cut/5c92a5d0dd3ffb60f00014e2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a3cadd3ffb60f0001460.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a3cadd3ffb60f0001464.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a3cadd3ffb60f0001468.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a3cbdd3ffb60f000146c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a3cbdd3ffb60f0001470.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a3cbdd3ffb60f0001474.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a541dd3ffb60f0001491.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a541dd3ffb60f0001495.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a541dd3ffb60f0001499.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a5ccdd3ffb60f000149f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal/5c92a5ccdd3ffb60f00014a3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3c8dd3ffb60f0001448.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3c8dd3ffb60f0001448.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3c8dd3ffb60f000144c.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3c8dd3ffb60f000144c.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3c9dd3ffb60f0001454.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3c9dd3ffb60f0001454.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3c9dd3ffb60f0001458.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3c9dd3ffb60f0001458.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3cadd3ffb60f0001460.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3cadd3ffb60f0001464.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3cadd3ffb60f0001468.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3cbdd3ffb60f000146c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3cbdd3ffb60f0001470.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a3cbdd3ffb60f0001474.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a540dd3ffb60f0001479.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a540dd3ffb60f0001479.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a540dd3ffb60f000147d.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a540dd3ffb60f000147d.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a541dd3ffb60f0001485.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a541dd3ffb60f0001485.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a541dd3ffb60f0001489.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a541dd3ffb60f0001489.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a541dd3ffb60f0001491.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a541dd3ffb60f0001495.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a541dd3ffb60f0001499.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5ccdd3ffb60f000149f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5ccdd3ffb60f00014a3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cddd3ffb60f00014ab.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cddd3ffb60f00014af.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cddd3ffb60f00014b3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cedd3ffb60f00014b7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cedd3ffb60f00014bb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cedd3ffb60f00014bf.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cfdd3ffb60f00014c3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cfdd3ffb60f00014c7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5cfdd3ffb60f00014cb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5d0dd3ffb60f00014d3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5d0dd3ffb60f00014d7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5d0dd3ffb60f00014df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/website/static/Normal_cut/5c92a5d0dd3ffb60f00014e3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semlog_mongo/test/test_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/semlog_mongo/test/test_class.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -190,22 +17,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8">
+            <state relative-caret-position="1044">
               <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -214,13 +29,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            <state relative-caret-position="140">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test_class.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -303,8 +130,6 @@
         <option value="$PROJECT_DIR$/web/helloworld/template/point_cloud_template.html" />
         <option value="$PROJECT_DIR$/web/helloworld/settings.py" />
         <option value="$PROJECT_DIR$/Dockerfile" />
-        <option value="$PROJECT_DIR$/semlog_mongo/test/test_class.py" />
-        <option value="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" />
         <option value="$PROJECT_DIR$/semlog_vis/semlog_vis/ImageCutter.py" />
         <option value="$PROJECT_DIR$/web/helloworld/template/main.html" />
         <option value="$PROJECT_DIR$/web/helloworld/template/gallery_cut.html" />
@@ -323,13 +148,14 @@
         <option value="$PROJECT_DIR$/web/website/template/main.html" />
         <option value="$PROJECT_DIR$/web/website/template/gallery.html" />
         <option value="$PROJECT_DIR$/web/website/imageViewer/views.py" />
+        <option value="$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py" />
+        <option value="$PROJECT_DIR$/semlog_mongo/test/test_class.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="277" />
-    <option name="y" value="40" />
-    <option name="width" value="975" />
+    <option name="x" value="952" />
+    <option name="width" value="977" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -357,6 +183,12 @@
               <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
               <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
               <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="semlog_mongo" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyWeb" type="b2602c69:ProjectViewProjectNode" />
@@ -401,7 +233,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/web/helloworld/template" />
-    <property name="settings.editor.selected.configurable" value="com.maddyhome.idea.vim.ui.VimEmulationConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -546,7 +378,7 @@
       <workItem from="1556822479412" duration="72000" />
       <workItem from="1556824251172" duration="1449000" />
       <workItem from="1556869505756" duration="18991000" />
-      <workItem from="1557226480439" duration="282000" />
+      <workItem from="1557226480439" duration="3437000" />
     </task>
     <task id="LOCAL-00001" summary="Update views.py in imageViewer.&#10;Right now the input can be read and semlog_mongo worked well depending on the input fields">
       <created>1556211767113</created>
@@ -596,18 +428,18 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55384000" />
+    <option name="totallyTimeSpent" value="58539000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17962466" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17962466" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49128687" weight="0.33261105" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49128687" visible="true" weight="0.33240223" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -616,7 +448,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49128687" weight="0.32827735" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5093834" side_tool="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4966488" weight="0.32914925" />
-      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" weight="0.32827735" />
+      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4919571" weight="0.3282123" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="manage.py@pyWeb" order="13" weight="0.32914925" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -665,7 +497,7 @@
     <SUITE FILE_PATH="coverage/pyWeb$mongo.coverage" NAME="mongo Coverage Results" MODIFIED="1556801476043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo/semlog_mongo" />
     <SUITE FILE_PATH="coverage/pyWeb$views__1_.coverage" NAME="views (1) Coverage Results" MODIFIED="1556617002397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/web/helloworld/point_cloud_viewer" />
     <SUITE FILE_PATH="coverage/pyWeb$pointCloud_sample.coverage" NAME="pointCloud_sample Coverage Results" MODIFIED="1556692235831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_vis/sample" />
-    <SUITE FILE_PATH="coverage/pyWeb$test_class.coverage" NAME="test_class Coverage Results" MODIFIED="1556871934737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo/test" />
+    <SUITE FILE_PATH="coverage/pyWeb$test_class.coverage" NAME="test_class Coverage Results" MODIFIED="1557229566647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo/test" />
     <SUITE FILE_PATH="coverage/pyWeb$pytest_in_test_class_py.coverage" NAME="pytest in test_class.py Coverage Results" MODIFIED="1556809006660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/semlog_mongo" />
   </component>
   <component name="editorHistoryManager">
@@ -705,9 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semlog_mongo/setup.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test.json" />
     <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
@@ -720,16 +549,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="43" selection-start-column="43" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -827,6 +646,29 @@
     <entry file="file://$PROJECT_DIR$/web/website/imageViewer/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semlog_mongo/test/test_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/website/point_cloud_viewer/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -839,20 +681,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/website/imageViewer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
+        <state relative-caret-position="1044">
           <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semlog_mongo/semlog_mongo/mongo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>

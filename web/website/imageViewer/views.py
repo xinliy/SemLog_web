@@ -5,6 +5,7 @@ from semlog_vis.semlog_vis.ImageCutter import cut_object
 from web.website import settings
 import json
 import shutil
+import time
 
 # Global variable
 IP = "mongodb+srv://admin:admin@semlog-cluster-fucxw.mongodb.net/test?retryWrites=true"
@@ -24,6 +25,7 @@ def start_search(request):
         return None if v == '' else v
 
     timestamp = object_id = view_id = image_type = None
+    t0=time.time()
 
     # Read the input from teh user.
     if request.method == 'GET':
@@ -37,11 +39,14 @@ def start_search(request):
     # Convert string input to be float.
     if timestamp is not None:
         timestamp = float(timestamp)
+    print("Read input Done with:",time.time()-t0)
     r = m.search(timestamp=timestamp, object_id=object_id, view_id=view_id,
                  image_type=image_type)
+    print("Search objects Done with:",time.time()-t0)
 
     # Save image paths to json.
     image_dir = m.download(r, abs_path=settings.IMAGE_ROOT)
+    print("Download objects Done with:",time.time()-t0)
     with open(os.path.join(settings.STATIC_ROOT, "image_dir.json"), "w") as outfile:
         json.dump(image_dir, outfile)
     with open(os.path.join(settings.STATIC_ROOT, "object_id.json"), "w") as outfile:
