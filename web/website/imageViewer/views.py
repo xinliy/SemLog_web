@@ -29,6 +29,8 @@ def start_search(request):
 
     # Read the input from teh user.
     if request.method == 'GET':
+        # DB=request.GET["database"]
+        # COLLECTION=request.GET["collection"]
         timestamp = convert_none(request.GET["timestamp"])
         object_id = convert_none(request.GET['object_id'])
         view_id = convert_none(request.GET['view_id'])
