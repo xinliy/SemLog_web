@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from web.website.json_loader import get_image_dir
+from website.json_loader import get_image_dir
 from semlog_vis.semlog_vis.PointCloudGenerator import PointCloudGenerator
 
 

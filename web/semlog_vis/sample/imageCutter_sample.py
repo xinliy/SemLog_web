@@ -1,7 +1,7 @@
 import sys
 sys.path.append("..")
 
-from semlog_vis.ImageCutter import cut_object
+from web.semlog_vis import cut_object
 import matplotlib.pyplot as plt
 
 

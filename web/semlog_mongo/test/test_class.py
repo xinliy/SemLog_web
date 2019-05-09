@@ -1,4 +1,4 @@
-from semlog_mongo.semlog_mongo.mongo import MongoDB
+from web.semlog_mongo.semlog_mongo.mongo import MongoDB
 import pprint
 ip = "mongodb+srv://admin:admin@semlog-cluster-fucxw.mongodb.net/test?retryWrites=true"
 m=MongoDB(database="SemLog",collection="20",ip=ip)

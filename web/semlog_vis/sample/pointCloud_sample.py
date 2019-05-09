@@ -1,6 +1,7 @@
-import sys, os
+import sys
+
 sys.path.append("..")
-from semlog_vis.semlog_vis.PointCloudGenerator import PointCloudGenerator
+from web.semlog_vis.semlog_vis.PointCloudGenerator import PointCloudGenerator
 rgb = 'p.png'
 depth = 'd.png'
 pc = 'pc.ply'

@@ -2,7 +2,7 @@ from django.shortcuts import render
 import os
 from semlog_mongo.semlog_mongo.mongo import MongoDB
 from semlog_vis.semlog_vis.ImageCutter import cut_object
-from web.website import settings
+from website import settings
 import json
 import shutil
 import time

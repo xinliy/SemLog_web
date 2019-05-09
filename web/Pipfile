@@ -15,6 +15,11 @@ python_version = "3.6"
 "psycopg2-binary" = "*"
 django-heroku = "*"
 gunicorn = "*"
+opencv-python="4.1"
+pillow="*"
+pymongo="*"
+numpy="*"
+pandas="*"
 
 
 [dev-packages]
