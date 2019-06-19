@@ -1,3 +1,6 @@
 [submodule "web/semlog_vis"]
 	path = web/semlog_vis
 	url = https://github.com/robcog-iai/semlog_vis.git
+[submodule "web/semlog_mongo"]
+	path = web/semlog_mongo
+	url = https://github.com/robcog-iai/semlog_mongo.git
