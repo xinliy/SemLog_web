@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Search Engine</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"
+        integrity="sha256-QVBN0oT74UhpCtEo4Ko+k3sNo+ykJFBBtGduw13V9vw=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"
+        integrity="sha256-qs5p0BFSqSvrstBxPvex+zdyrzcyGdHNeNmAirO2zc0=" crossorigin="anonymous"></script>
+
+    <script>
+        // assign django global variable for js
+        var token = '{{csrf_token}}'
+
+        $(document).ready(function () {
+            $('.ui.accordion').accordion();
+            $('.ui.dropdown').dropdown({
+                allowAdditions: true,
+            })
+
+        });
+    </script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+</head>
+
+<body>
+    <div class="ui column stackable center page grid">
+        <div class="row">
+            <div class="four wide column"></div>
+            <form method="post" class="ui form eight wide column" id="formadd">
+                <h1>Connect to database:</h1>
+                {% csrf_token %}
+                <div class="field">
+                    <div class="ui pointing below label">
+                        Please enter the MongoDB address
+                    </div>
+                    <input type="text" id="ip_address" placeholder="localhost" value="localhost" />
+
+                </div>
+
+                <button type="submit" class="ui fluid secondary button" id="button_ip">Connect</button>
+            </form>
+        </div>
+
+        <div class="row">
+
+            <div class="four wide column"></div>
+
+            <div class="ui styled accordion eight wide column">
+                <form method="get" class="ui form" action="/start_search/" id='main_form' hidden>
+                    <h1>Search the database:</h1>
+
+                    <div class="database"></div>
+                    <div class="active title">
+                        <i class="dropdown icon"></i>
+                        Choose collections:
+                    </div>
+                    <div class="active content">
+                        <select name="collections" id="collection_selector" multiple=""
+                            class="ui fluid search dropdown">
+                            <option value="" disabled selected hidden>Add collections..</option>
+                        </select>
+                        <div class="db_input" hidden></div>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        1.Time interval:
+                    </div>
+                    <div class="content">
+
+                        <label>Time from/at:<input class="time" type="text" name="time_from" value="0"
+                                placeholder="from/at"></label>
+                        <label>Until:<input class="time" type="text" name="time_until" value="5"
+                                placeholder="until"></label>
+                    </div>
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        2.Target pattern:
+                    </div>
+                    <div class="content">
+                        <div class="inline fields">
+                            <label>Choose one way:</label>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_object_pattern" value="id" checked="checked">
+                                    <label>Search by id</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_object_pattern" value="class">
+                                    <label>Search by class</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grouped fields">
+                            <label>Choose search logic:</label>
+                            <div class="field">
+                                <div class="ui slider checkbox">
+                                    <input type="radio" name="checkbox_object_logic" value="and" checked="checked">
+                                    <label>and</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui slider checkbox">
+                                    <input type="radio" name="checkbox_object_logic" value='or'>
+                                    <label>or</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="object_container" hidden>
+
+                            <button class="ui primary button" type="button" id="add">Add object</button>
+                            <button class="ui button" type="button" id="remove">Remove object</button>
+
+                            <div class="object_list">
+                                <input type="text" name="object_id001" placeholder="Object id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        3.View specification:
+                    </div>
+                    <div class="content">
+                        <div class="inline fields">
+                            <label>Choose one way:</label>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_view_pattern" value='id' checked="checked">
+                                    <label>Search by id</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_view_pattern" value='class'>
+                                    <label>Search by class</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grouped fields">
+                            <label>Choose search logic:</label>
+                            <div class="field">
+                                <div class="ui slider checkbox">
+                                    <input type="radio" name="checkbox_view_logic" value="and" checked="checked">
+                                    <label>and</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui slider checkbox">
+                                    <input type="radio" name="checkbox_view_logic" value="or">
+                                    <label>or</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="object_container" hidden>
+
+                            <button class="ui primary button" type="button" id="view_add">Add object</button>
+                            <button class="ui button" type="button" id="view_remove">Remove object</button>
+
+                            <div class="view_object_list">
+                                <input type="text" name="view_object_id001" placeholder="View object id">
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        4.Minimum percentage size:
+                    </div>
+                    <div class="content">
+                        <input type="text" name="percentage" placeholder="least percentage">
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        5.Resize image
+                    </div>
+                    <div class="content">
+                        <div class="inline fields">
+                            <label>Choose one way:</label>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_resize_type" value="cut" checked="checked">
+                                    <label>Cut</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_resize_type" value="zoom">
+                                    <label>Zoom</label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" name="width" placeholder="width">
+                        <input type="text" name="height" placeholder="height">
+
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        6.Image type:
+                    </div>
+                    <div class="content">
+                        <div class="inline fields">
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="rgb" checked="checked">
+                                    <label>RGB</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="depth" checked="checked">
+                                    <label>Depth</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="mask" checked="checked">
+                                    <label>mask</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="normal" checked="checked">
+                                    <label>Normal</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        7.Enable bounding box:
+                    </div>
+                    <div class="content">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" name="checkbox_bounding_box">
+                            <label>Add bounding box views for objects</label>
+                        </div>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" name="checkbox_remove_background">
+                            <label>Remove backgrounds behind objects</label>
+                        </div>
+                    </div>
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        8.Return image limit:
+                    </div>
+                    <div class="content">
+                        <input type="number" name="image_limit" placeholder="Maximum image returned" value=20>
+                    </div>
+
+                    <button type="submit" id="search" formtarget="_blank" class="fluid ui left labeled icon button">
+                        <i class="search icon"></i>
+                        Search
+                    </button>
+                    <!-- <button type="button" id='test'> test</button> -->
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

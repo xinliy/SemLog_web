@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            height: 100%;
+        }
+
+        canvas {
+            display: block;
+        }
+
+    </style>
+</head>
+<body onload="draw();">
+</body>
+<script src="https://johnson2heng.github.io/three.js-demo/lib/three.js"></script>
+<script src="https://johnson2heng.github.io/three.js-demo/lib/js/controls/OrbitControls.js"></script>
+<script src="https://johnson2heng.github.io/three.js-demo/lib/js/libs/stats.min.js"></script>
+<script src="https://johnson2heng.github.io/three.js-demo/lib/js/libs/dat.gui.min.js"></script>
+<script type="text/javascript">
+    var pc_data={{point|safe}}
+
+    var renderer;
+
+    function initRender() {
+        renderer = new THREE.WebGLRenderer({antialias: true});
+        {#renderer.setClearColor(new THREE.Color(0xf9fafc, 1.0)); //Background color#}
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+    }
+
+    var camera;
+
+    function initCamera() {
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+        camera.position.set(0, -30, 70);
+    }
+
+    var scene;
+
+    function initScene() {
+        scene = new THREE.Scene();
+    }
+
+    var light;
+
+    function initLight() {
+        scene.add(new THREE.AmbientLight(0x404040));
+
+        light = new THREE.DirectionalLight(0xffffff);
+        light.position.set(1, 1, 1);
+        scene.add(light);
+    }
+
+    function initModel() {
+
+        {#var object = new THREE.AxesHelper(500);#}
+        {#scene.add(object);#}
+
+        var geometry = new THREE.Geometry();
+        var material = new THREE.PointCloudMaterial({size:4, vertexColors:true, color:0xffffff});
+        function componentToHex(c) {
+            var hex = c.toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+        // alert( rgbToHex(0, 51, 255) ); // #0033ff
+
+        for (var i in pc_data){
+            p=pc_data[i];
+
+            var particle = new THREE.Vector3(p[0]*20, p[1]*20, p[2]*20);
+            geometry.vertices.push(particle);
+            geometry.colors.push(new THREE.Color(rgbToHex(p[3],p[4],p[5])));
+        }
+
+
+
+        var cloud = new THREE.PointCloud(geometry, material);
+        scene.add(cloud);
+
+    }
+
+
+
+
+    var stats;
+
+    function initStats() {
+        stats = new Stats();
+        document.body.appendChild(stats.dom);
+    }
+
+    //Control
+    var controls;
+
+    function initControls() {
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+        //
+        //controls.addEventListener( 'change', render );
+        //
+        controls.enableDamping = true;
+        //
+        //controls.dampingFactor = 0.25;
+        controls.enableZoom = true;
+        controls.autoRotate = false;
+        controls.minDistance = 20;
+        controls.maxDistance = 10000;
+        controls.enablePan = true;
+    }
+
+    var gui;
+    function initGui() {
+        gui = {
+
+        };
+        var datGui = new dat.GUI();
+    }
+
+    function render() {
+        renderer.render(scene, camera);
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        render();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+    }
+
+    function animate() {
+        controls.update();
+        render();
+
+        stats.update();
+        requestAnimationFrame(animate);
+    }
+
+    function draw() {
+        initRender();
+        initScene();
+        initCamera();
+        initLight();
+        initModel();
+        initControls();
+        initStats();
+        initGui();
+
+        animate();
+        window.onresize = onWindowResize;
+    }
+</script>
+</html>
