@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from pymongo import MongoClient
 import cv2
 
-from web.semlog_mongo import MongoDB
-from web.semlog_vis import cut_object, resize_image
+from web.semlog_mongo.semlog_mongo.mongo import MongoDB
+from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
 from web.website import settings
 
 import os
