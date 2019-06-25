@@ -132,6 +132,11 @@ def start_search(request):
         width = int(request.GET['width']) if request.GET['width'] != "" else ""
         height = int(request.GET['height']
                      ) if request.GET['height'] != "" else ""
+        bounding_box_width = int(
+            request.GET['bounding_box_width']) if request.GET['bounding_box_width'] != "" else ""
+        bounding_box_height = int(request.GET['bounding_box_height']
+                                  ) if request.GET['bounding_box_height'] != "" else ""
+
         percentage = 0.0000001 if percentage == "" else float(percentage)
         OBJECT_LOGIC = object_logic = form_dict['checkbox_object_logic']
 
@@ -220,6 +225,7 @@ def start_search(request):
                 m[collection_name].drop()
                 print("drop old collection")
             print("object_id_list", object_id_list)
+
             # Search all objects and store into pyweb collection
             for object_id in object_id_list:
                 database = MongoDB(ip=IP, database=DB, collection=COLLECTION)
@@ -260,7 +266,7 @@ def start_search(request):
                 pool = Pool(10)
                 for object_id in object_id_list:
                     bounding_box_dict[object_id] = (create_bounding_box(
-                        DB, COLLECTION, IP, object_logic, object_id, user_id, num_object, image_type_list, flag_remove_background))
+                        DB, COLLECTION, IP, object_logic, object_id, user_id, num_object, image_type_list, flag_remove_background,bounding_box_width,bounding_box_height))
 
                 pprint.pprint(bounding_box_dict)
 
@@ -272,10 +278,11 @@ def start_search(request):
                 image_dir[image_type] = [os.path.join(
                     folder_path, i) for i in image_list]
             NUM_OBJECT = len(object_id_list)
+
             # Resize image
             if width != "" or height != "":
-                for key,value in image_dir.items():
-                    image_path=image_path+value
+                for key, value in image_dir.items():
+                    image_path = image_path+value
                 print("Enter resizing.", width)
                 pool = Pool(10)
                 pool.starmap(resize_image, zip(
@@ -287,7 +294,7 @@ def start_search(request):
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
 
-def create_bounding_box(database, collection, ip, object_logic, object_id, user_id, num_object, img_type, flag_remove_background):
+def create_bounding_box(database, collection, ip, object_logic, object_id, user_id, num_object, img_type, flag_remove_background,bounding_box_width,bounding_box_height):
 
     client = MongoClient(ip)[database][collection + ".pyweb"]
     pipeline = []
@@ -330,7 +337,7 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                 saving_folder, os.path.basename(rgb_img))
             try:
                 cut_object(rgb_img, mask_img, rgb, saving_path=img_saving_path,
-                           flag_remove_background=flag_remove_background)
+                           flag_remove_background=flag_remove_background,width=bounding_box_width,height=bounding_box_height)
             except Exception as e:
                 print(e)
                 continue

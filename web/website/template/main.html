@@ -59,7 +59,6 @@
 
             <div class="ui styled accordion eight wide column">
                 <form method="get" class="ui form" action="/start_search/" id='main_form' hidden>
-                    <h1>Search the database:</h1>
 
                     <div class="database"></div>
                     <div class="active title">
@@ -74,6 +73,7 @@
                         <div class="db_input" hidden></div>
                     </div>
 
+                    <h3>Image selecting:</h3>
                     <div class="title">
                         <i class="dropdown icon"></i>
                         1.Time interval:
@@ -175,7 +175,7 @@
                             <div class="view_object_list">
                                 <input type="text" name="view_object_id001" placeholder="View object id">
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -188,34 +188,10 @@
                         <input type="text" name="percentage" placeholder="least percentage">
                     </div>
 
-                    <div class="title">
-                        <i class="dropdown icon"></i>
-                        5.Resize image
-                    </div>
-                    <div class="content">
-                        <div class="inline fields">
-                            <label>Choose one way:</label>
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input type="radio" name="checkbox_resize_type" value="cut" checked="checked">
-                                    <label>Stretch</label>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input type="radio" name="checkbox_resize_type" value="zoom">
-                                    <label>Scale</label>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="text" name="width" placeholder="width">
-                        <input type="text" name="height" placeholder="height">
-
-                    </div>
 
                     <div class="title">
                         <i class="dropdown icon"></i>
-                        6.Image type:
+                        5.Image type:
                     </div>
                     <div class="content">
                         <div class="inline fields">
@@ -248,7 +224,48 @@
 
                     <div class="title">
                         <i class="dropdown icon"></i>
-                        7.Enable bounding box:
+                        6.Return image limit:
+                    </div>
+                    <div class="content">
+                        <input type="number" name="image_limit" placeholder="Maximum image returned" value=20>
+                    </div>
+
+
+
+                    <h3>Image preprocessing:</h3>
+
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        1.Resize image
+                    </div>
+                    <div class="content">
+                        <div class="inline fields">
+                            <label>Choose one way:</label>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_resize_type" value="cut" checked="checked">
+                                    <label>Stretch</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_resize_type" value="zoom">
+                                    <label>Scale</label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" name="width" placeholder="width">
+                        <input type="text" name="height" placeholder="height">
+
+                    </div>
+
+
+
+
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        2.Enable bounding box:
                     </div>
                     <div class="content">
                         <div class="ui toggle checkbox">
@@ -259,21 +276,17 @@
                             <input type="checkbox" name="checkbox_remove_background">
                             <label>Remove backgrounds behind objects</label>
                         </div>
-                    </div>
+                        <h5 class="ui header">Resize bounding box:</h5>
+                        <input type="text" name="bounding_box_width" placeholder="bounding_box_width">
+                        <input type="text" name="bounding_box_height" placeholder="bounding_box_height">
 
-                    <div class="title">
-                        <i class="dropdown icon"></i>
-                        8.Return image limit:
-                    </div>
-                    <div class="content">
-                        <input type="number" name="image_limit" placeholder="Maximum image returned" value=20>
-                    </div>
 
-                    <button type="submit" id="search" formtarget="_blank" class="fluid ui left labeled icon button">
-                        <i class="search icon"></i>
-                        Search
-                    </button>
-                    <!-- <button type="button" id='test'> test</button> -->
+
+                        <button type="submit" id="search" formtarget="_blank" class="fluid ui left labeled icon button">
+                            <i class="search icon"></i>
+                            Search
+                        </button>
+                        <!-- <button type="button" id='test'> test</button> -->
 
                 </form>
             </div>
