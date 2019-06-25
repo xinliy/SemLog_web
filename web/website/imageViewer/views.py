@@ -117,6 +117,7 @@ def start_search(request):
         time_until = None
         flag_bounding_box = False
         flag_remove_background = False
+        flag_stretch_background=False
 
         print("<------------------------------->")
         print("GET INPUT", request.GET.dict())

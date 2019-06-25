@@ -27,6 +27,20 @@
                 allowAdditions: true,
             })
 
+            $("#enable_bounding_box").click(function () {
+                if ($("#checkbox_bounding_box").is(":checked")) {
+                    $("#checkbox_bounding_box").prop("checked", false)
+                    // alert("checked")
+                }
+                else {
+                    // alert("unchecked")
+                    $("#checkbox_bounding_box").prop("checked", true)
+                }
+
+            })
+            // $("#test").click(function(){
+            //     $("#checkbox_bounding_box").prop("checked",false)
+            // })
         });
     </script>
     <script src="{% static 'js/main.js' %}"></script>
@@ -263,13 +277,13 @@
 
 
 
-                    <div class="title">
+                    <div class="title" id="enable_bounding_box">
                         <i class="dropdown icon"></i>
                         2.Enable bounding box:
                     </div>
                     <div class="content">
                         <div class="ui toggle checkbox">
-                            <input type="checkbox" name="checkbox_bounding_box">
+                            <input type="checkbox" id="checkbox_bounding_box" name="checkbox_bounding_box">
                             <label>Add bounding box views for objects</label>
                         </div>
                         <div class="ui toggle checkbox">
