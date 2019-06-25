@@ -142,6 +142,8 @@ def start_search(request):
 
         # Read input from forms
         for key, value in form_dict.items():
+            if key.startswith("checkbox_stretch_background"):
+                flag_stretch_background=True
             if key.startswith("checkbox_remove_background"):
                 flag_remove_background = True
             if key.startswith("checkbox_bounding_box"):
@@ -266,7 +268,7 @@ def start_search(request):
                 pool = Pool(10)
                 for object_id in object_id_list:
                     bounding_box_dict[object_id] = (create_bounding_box(
-                        DB, COLLECTION, IP, object_logic, object_id, user_id, num_object, image_type_list, flag_remove_background,bounding_box_width,bounding_box_height))
+                        DB, COLLECTION, IP, object_logic, object_id, user_id, num_object, image_type_list, flag_remove_background,bounding_box_width,bounding_box_height,flag_stretch_background))
 
                 pprint.pprint(bounding_box_dict)
 
@@ -294,7 +296,7 @@ def start_search(request):
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
 
-def create_bounding_box(database, collection, ip, object_logic, object_id, user_id, num_object, img_type, flag_remove_background,bounding_box_width,bounding_box_height):
+def create_bounding_box(database, collection, ip, object_logic, object_id, user_id, num_object, img_type, flag_remove_background,bounding_box_width,bounding_box_height,flag_stretch_background):
 
     client = MongoClient(ip)[database][collection + ".pyweb"]
     pipeline = []
@@ -337,7 +339,7 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                 saving_folder, os.path.basename(rgb_img))
             try:
                 cut_object(rgb_img, mask_img, rgb, saving_path=img_saving_path,
-                           flag_remove_background=flag_remove_background,width=bounding_box_width,height=bounding_box_height)
+                           flag_remove_background=flag_remove_background,width=bounding_box_width,height=bounding_box_height,flag_stretch_background=flag_stretch_background)
             except Exception as e:
                 print(e)
                 continue
