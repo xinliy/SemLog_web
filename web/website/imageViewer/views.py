@@ -4,10 +4,6 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import cv2
 
-from web.semlog_mongo.semlog_mongo.mongo import MongoDB
-from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
-from web.website import settings
-
 import os
 import json
 import shutil
@@ -17,6 +13,19 @@ import glob
 from multiprocessing.dummy import Pool
 import itertools
 import pprint
+
+try:
+    from web.semlog_mongo.semlog_mongo.mongo import MongoDB
+    from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
+    from web.website import settings
+except Exception as e:
+    print("Clone two submodules(semlog_mongo and semlog_vis) first before run the server.")
+    os.system("git submodule init")
+    os.system("git submodul update")
+    from web.semlog_mongo.semlog_mongo.mongo import MongoDB
+    from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
+    from web.website import settings
+
 
 # Global variable
 IP = "mongodb+srv://admin:admin@semlog-cluster-fucxw.mongodb.net/test?retryWrites=true"
