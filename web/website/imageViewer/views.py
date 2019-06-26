@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import cv2
 
 from web.semlog_mongo.semlog_mongo.mongo import MongoDB
@@ -23,6 +24,7 @@ DB = 'SemLog'
 COLLECTION = '20'
 OBJECT_LOGIC = 'and'
 NUM_OBJECT = 1
+SUPPORT_COLLECTION = ""
 
 
 def convert_none(v):
@@ -59,12 +61,13 @@ def search(request):
     except Exception as e:
         pass
     print("Delete all folders for:", time.time() - t1)
+
     return render(request, 'main.html')
 
 
 def update_database_info(request):
     """Show avaiable database-collection in real time with ajax."""
-    global IP
+    global IP, SUPPORT_COLLECTION
     return_dict = {}
     neglect_list = ['admin', 'config', 'local']
     if request.method == 'POST':
@@ -117,7 +120,8 @@ def start_search(request):
         time_until = None
         flag_bounding_box = False
         flag_remove_background = False
-        flag_stretch_background=False
+        flag_stretch_background = False
+        flag_add_bounding_box_to_origin = False
 
         print("<------------------------------->")
         print("GET INPUT", request.GET.dict())
@@ -143,8 +147,10 @@ def start_search(request):
 
         # Read input from forms
         for key, value in form_dict.items():
+            if key.startswith("checkbox_add_bounding_box_to_origin"):
+                flag_add_bounding_box_to_origin = True
             if key.startswith("checkbox_stretch_background"):
-                flag_stretch_background=True
+                flag_stretch_background = True
             if key.startswith("checkbox_remove_background"):
                 flag_remove_background = True
             if key.startswith("checkbox_bounding_box"):
@@ -221,12 +227,18 @@ def start_search(request):
             DB = database_collection[0]
             COLLECTION = database_collection[1]
             m = MongoClient(IP)[DB]
-            collection_name = COLLECTION + ".pyweb"
+            # collection_name = COLLECTION + "." + user_id + "." + "info"
+            SUPPORT_COLLECTION = COLLECTION + "." + user_id + "." + "info"
 
-            # Drop former collection, May cause problem if multi different dbs are selected
-            if collection_name in m.list_collection_names():
-                m[collection_name].drop()
-                print("drop old collection")
+            support_collection = MongoClient(IP)[DB][SUPPORT_COLLECTION]
+            print("Support collection created at:%s,%s,%s" %
+                  (IP, DB, SUPPORT_COLLECTION))
+            # Drop former collection, May cause problem if multi different dbs
+            # are selected
+            for collection_name in m.list_collection_names():
+                if ".info" in collection_name:
+                    m[collection_name].drop()
+                    print("drop old collection")
             print("object_id_list", object_id_list)
 
             # Search all objects and store into pyweb collection
@@ -236,12 +248,10 @@ def start_search(request):
                     image_info = database.search(time_from, time_until, object_id, view_id, image_type_list, percentage,
                                                  int(
                                                      image_limit / len(database_collection_list)))
-                    collection = MongoClient(IP)[DB][collection_name]
-                    print("Support collection created at:%s,%s,%s" %
-                          (IP, DB, collection_name))
+
                     print("Object_id: %s,num of images: %s" %
                           (object_id, len(image_info)))
-                    collection.insert_many(image_info)
+                    support_collection.insert_many(image_info)
                     print("Search images successfully for:", object_id)
                 except Exception as e:
                     print("object_id: %s has no images in this condition!" %
@@ -252,7 +262,8 @@ def start_search(request):
             # Connect the db and get download image list
             database = MongoDB(ip=IP, database=DB, collection=COLLECTION)
             r = database.get_download_image_list(
-                num_object=len(object_id_list), object_logic=object_logic)
+                num_object=len(object_id_list), object_logic=object_logic, user_id=user_id)
+            print("Download list:",len(r))
 
             # Parallel download images
             pool = Pool(10)
@@ -269,7 +280,9 @@ def start_search(request):
                 pool = Pool(10)
                 for object_id in object_id_list:
                     bounding_box_dict[object_id] = (create_bounding_box(
-                        DB, COLLECTION, IP, object_logic, object_id, user_id, num_object, image_type_list, flag_remove_background,bounding_box_width,bounding_box_height,flag_stretch_background))
+                        DB, COLLECTION, IP, object_logic, object_id, user_id, num_object,
+                        image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
+                        flag_stretch_background, flag_add_bounding_box_to_origin))
 
                 pprint.pprint(bounding_box_dict)
 
@@ -277,6 +290,8 @@ def start_search(request):
             for image_type in image_type_list:
                 folder_path = os.path.join(
                     settings.IMAGE_ROOT, user_id + image_type)
+                if os.path.isdir(folder_path) is False:
+                    os.mkdir(folder_path)
                 image_list = os.listdir(folder_path)
                 image_dir[image_type] = [os.path.join(
                     folder_path, i) for i in image_list]
@@ -285,7 +300,7 @@ def start_search(request):
             # Resize image
             if width != "" or height != "":
                 for key, value in image_dir.items():
-                    image_path = image_path+value
+                    image_path = image_path + value
                 print("Enter resizing.", width)
                 pool = Pool(10)
                 pool.starmap(resize_image, zip(
@@ -297,18 +312,23 @@ def start_search(request):
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
 
-def create_bounding_box(database, collection, ip, object_logic, object_id, user_id, num_object, img_type, flag_remove_background,bounding_box_width,bounding_box_height,flag_stretch_background):
+def create_bounding_box(database, collection, ip, object_logic, object_id, user_id,
+                        num_object, img_type, flag_remove_background, bounding_box_width, bounding_box_height,
+                        flag_stretch_background, flag_add_bounding_box_to_origin):
 
-    client = MongoClient(ip)[database][collection + ".pyweb"]
+    client = MongoClient(ip)[database][collection +
+                                       "." + user_id + "." + "info"]
     pipeline = []
 
     if object_logic == 'and':
         m = MongoDB(database, collection, ip)
-        r = m.get_download_image_list(num_object, object_logic='and')
+        r = m.get_download_image_list(
+            num_object, object_logic='and', user_id=user_id)
     else:
         pipeline.append({"$match": {"object": object_id}})
         pipeline.append({"$project": {"file_id": 1, "type": 1, "_id": 0}})
         r = list(client.aggregate(pipeline))
+
     # Type to be cut
     image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
     for image_info in r:
@@ -338,12 +358,15 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
             img_saving_path = os.path.join(
                 saving_folder, os.path.basename(rgb_img))
-            try:
-                cut_object(rgb_img, mask_img, rgb, saving_path=img_saving_path,
-                           flag_remove_background=flag_remove_background,width=bounding_box_width,height=bounding_box_height,flag_stretch_background=flag_stretch_background)
-            except Exception as e:
-                print(e)
-                continue
+
+            # Cut object and update location to the collection
+            wmin, wmax, hmin, hmax = cut_object(rgb_img, mask_img, rgb, saving_path=img_saving_path,
+                                                flag_remove_background=flag_remove_background,
+                                                width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
+                                                flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
+            client.update({"object": object_id, "file_id": ObjectId(
+                os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin": int(wmin), "wmax": int(wmax), "hmin": int(hmin), "hmax": int(hmax)}})
+
             image_dir[folder_map].append(img_saving_path)
 
     image_dir = {key: image_dir[key] for key in list(
@@ -352,6 +375,8 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
 
 
 def make_archive(source, destination):
+    """Support function for download"""
+
     print(source, destination)
     base = os.path.basename(destination)
     name = base.split('.')[0]
@@ -364,16 +389,19 @@ def make_archive(source, destination):
 
 
 def download(request):
+    """Download images as .zip file. """
+
     img_type = request.GET['img_type']
     user_id = request.session['user_id']
     image_root = settings.IMAGE_ROOT
-    zip_target = os.path.join(image_root, user_id+img_type)
+    zip_target = os.path.join(image_root, user_id + img_type)
     zip_path = os.path.join(image_root, "Color_images.zip")
     make_archive(zip_target, zip_path)
     print("finish zip.")
     zip_file = open(zip_path, '+rb')
     response = HttpResponse(zip_file, content_type='application/zip')
-    response['Content-Disposition'] = 'attachment; filename=%s' % img_type+"_images.zip"
+    response[
+        'Content-Disposition'] = 'attachment; filename=%s' % img_type + "_images.zip"
     response['Content-Length'] = os.path.getsize(zip_path)
     zip_file.close()
 
