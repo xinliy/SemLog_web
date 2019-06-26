@@ -21,7 +21,7 @@ try:
 except Exception as e:
     print("Clone two submodules(semlog_mongo and semlog_vis) first before run the server.")
     os.system("git submodule init")
-    os.system("git submodul update")
+    os.system("git submodule update")
     from web.semlog_mongo.semlog_mongo.mongo import MongoDB
     from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
     from web.website import settings
@@ -91,8 +91,6 @@ def update_database_info(request):
             return_dict[db] = [
                 i for i in m[db].list_collection_names() if "." not in i]
 
-        print(type(return_dict))
-        print(return_dict)
         return_dict = json.dumps(return_dict)
 
         return HttpResponse(return_dict)
@@ -272,7 +270,7 @@ def start_search(request):
             database = MongoDB(ip=IP, database=DB, collection=COLLECTION)
             r = database.get_download_image_list(
                 num_object=len(object_id_list), object_logic=object_logic, user_id=user_id)
-            print("Download list:",len(r))
+            print("Download list length:",len(r))
 
             # Parallel download images
             pool = Pool(10)
@@ -292,8 +290,6 @@ def start_search(request):
                         DB, COLLECTION, IP, object_logic, object_id, user_id, num_object,
                         image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
                         flag_stretch_background, flag_add_bounding_box_to_origin))
-
-                pprint.pprint(bounding_box_dict)
 
             # Create dict to frontend
             for image_type in image_type_list:
