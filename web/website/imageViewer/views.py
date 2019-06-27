@@ -358,8 +358,11 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         saving_folder = os.path.join(settings.IMAGE_ROOT, folder_name)
 
         # Read resolution of origin image and add to info collection
-        sample_img=cv2.imread(rgb_img_list[0])
-        origin_width,origin_height=sample_img.shape[1],sample_img.shape[0]
+        if len(rgb_img_list) == 0:
+            origin_width=origin_height=0
+        else:
+            sample_img=cv2.imread(rgb_img_list[0])
+            origin_width,origin_height=sample_img.shape[1],sample_img.shape[0]
         print(origin_width,origin_height)
 
         os.makedirs(saving_folder)
