@@ -9,6 +9,13 @@ import cv2
 def create_pc(request):
     """Create point clouds depending on the image clicked."""
     img_path = request.GET['img_path']
+    if "boundingBox" in img_path:
+        flag_depth_conversion=False
+    else:
+        flag_depth_conversion=True
+    img=cv2.imread(img_path)
+    width=img.shape[0]
+    print(img.shape,width)
     print("point cloud dict:", request.GET.dict())
     user_id=request.session['user_id']
 
@@ -36,9 +43,9 @@ def create_pc(request):
 
     # Calculate PointCloud
     generator = PointCloudGenerator(rgb_file=img_path, depth_file=depth_img_path,
-                                    focal_length=360, scalingfactor=10)
+                                    focal_length=width//2, scalingfactor=10)
     # Calculate 3d position
-    generator.calculate()
+    generator.calculate(flag_depth_conversion)
 
     # Remove the alpha column
     data = generator.df[:6]

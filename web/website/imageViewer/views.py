@@ -28,12 +28,8 @@ except Exception as e:
 
 
 # Global variable
-IP = "mongodb+srv://admin:admin@semlog-cluster-fucxw.mongodb.net/test?retryWrites=true"
-DB = 'SemLog'
-COLLECTION = '20'
 OBJECT_LOGIC = 'and'
 NUM_OBJECT = 1
-SUPPORT_COLLECTION = ""
 
 
 def convert_none(v):
@@ -76,14 +72,13 @@ def search(request):
 
 def update_database_info(request):
     """Show avaiable database-collection in real time with ajax."""
-    global IP, SUPPORT_COLLECTION
     return_dict = {}
     neglect_list = ['admin', 'config', 'local']
     if request.method == 'POST':
         print("enter update database!")
         print(request.POST.dict())
         target_ip = request.POST['ip_address']
-        IP = target_ip
+        request.session['ip']=request.POST['ip_address']
         m = MongoClient(target_ip, 27017)
         db_list = m.list_database_names()
         db_list = [i for i in db_list if i not in neglect_list]
@@ -108,7 +103,7 @@ def show_one_image(request):
 
 def start_search(request):
     """Read the form and search the db, download images to static folder."""
-    global IP, DB, COLLECTION, OBJECT_LOGIC, NUM_OBJECT
+    global OBJECT_LOGIC, NUM_OBJECT
     print("<------------------------------->")
     print("START SEARCH")
     print("<------------------------------->")
@@ -130,6 +125,7 @@ def start_search(request):
         flag_remove_background = False
         flag_stretch_background = False
         flag_add_bounding_box_to_origin = False
+        ip=request.session['ip']
 
         print("<------------------------------->")
         print("GET INPUT", request.GET.dict())
@@ -201,7 +197,7 @@ def start_search(request):
                 DB = database_collection[0]
                 COLLECTION = database_collection[1]
                 m = MongoDB(
-                    database=DB, collection=COLLECTION + ".meta", ip=IP)
+                    database=DB, collection=COLLECTION + ".meta", ip=ip)
                 object_id_list = object_id_list + \
                     m.get_object_by_class(class_id_list)
                 # class_object_list=m.get_object_list_by_class_list(cl)
@@ -233,34 +229,35 @@ def start_search(request):
         for database_collection in database_collection_list:
             database_collection = database_collection.split("->")
             print("Enter database_collection:", database_collection)
-            DB = database_collection[0]
-            COLLECTION = database_collection[1]
-            m = MongoClient(IP)[DB]
-            # collection_name = COLLECTION + "." + user_id + "." + "info"
-            SUPPORT_COLLECTION = COLLECTION + "." + user_id + "." + "info"
+            database_name = database_collection[0]
+            collection_name = database_collection[1]
+            m = MongoClient(ip)[database_name]
+            support_collection_name = collection_name + "." + user_id + "." + "info"
 
-            support_collection = MongoClient(IP)[DB][SUPPORT_COLLECTION]
+            support_collection_client = MongoClient(ip)[database_name][support_collection_name]
             print("Support collection created at:%s,%s,%s" %
-                  (IP, DB, SUPPORT_COLLECTION))
+                  (ip,database_name,support_collection_name))
             # Drop former collection, May cause problem if multi different dbs
             # are selected
-            for collection_name in m.list_collection_names():
-                if ".info" in collection_name:
-                    m[collection_name].drop()
+            for c in m.list_collection_names():
+                if ".info" in c:
+                    m[c].drop()
                     print("drop old collection")
             print("object_id_list", object_id_list)
 
+            print(ip,database_name,collection_name)
+
             # Search all objects and store into pyweb collection
             for object_id in object_id_list:
-                database = MongoDB(ip=IP, database=DB, collection=COLLECTION)
+                m = MongoDB(ip=ip, database=database_name, collection=collection_name)
                 try:
-                    image_info = database.search(time_from, time_until, object_id, view_id, image_type_list, percentage,
+                    image_info = m.search(time_from, time_until, object_id, view_id, image_type_list, percentage,
                                                  int(
                                                      image_limit / len(database_collection_list)))
 
                     print("Object_id: %s,num of images: %s" %
                           (object_id, len(image_info)))
-                    support_collection.insert_many(image_info)
+                    support_collection_client.insert_many(image_info)
                     print("Search images successfully for:", object_id)
                 except Exception as e:
                     print("object_id: %s has no images in this condition!" %
@@ -268,8 +265,9 @@ def start_search(request):
                     print(e)
             print("Search objects Done with:", time.time() - t0)
 
+
             # Connect the db and get download image list
-            database = MongoDB(ip=IP, database=DB, collection=COLLECTION)
+            database = MongoDB(ip=ip, database=database_name, collection=collection_name)
             r = database.get_download_image_list(
                 num_object=len(object_id_list), object_logic=object_logic, user_id=user_id)
             print("Download list length:",len(r))
@@ -289,7 +287,7 @@ def start_search(request):
                 pool = Pool(10)
                 for object_id in object_id_list:
                     bounding_box_dict[object_id] = (create_bounding_box(
-                        DB, COLLECTION, IP, object_logic, object_id, user_id, num_object,
+                        database_name, collection_name, ip, object_logic, object_id, user_id, num_object,
                         image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
                         flag_stretch_background, flag_add_bounding_box_to_origin))
 
@@ -359,6 +357,11 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         mask_img_list = sorted(image_dir['Mask'])
         saving_folder = os.path.join(settings.IMAGE_ROOT, folder_name)
 
+        # Read resolution of origin image and add to info collection
+        sample_img=cv2.imread(rgb_img_list[0])
+        origin_width,origin_height=sample_img.shape[1],sample_img.shape[0]
+        print(origin_width,origin_height)
+
         os.makedirs(saving_folder)
 
         # Create and save cut images
@@ -372,7 +375,7 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                                                 width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
                                                 flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
             client.update({"object": object_id, "file_id": ObjectId(
-                os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin": int(wmin), "wmax": int(wmax), "hmin": int(hmin), "hmax": int(hmax)}})
+                os.path.basename(rgb_img)[:-4])}, {"$set": {"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
 
             image_dir[folder_map].append(img_saving_path)
 
