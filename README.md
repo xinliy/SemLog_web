@@ -8,7 +8,7 @@
 - In "Advanced options", tick both options (Add Anaconda to my PATH environment)
 - Note: You can test if Python is installed by enter "python" in your terminal.
 
-2. Open terminal, run "**pip install django pillow opencv-python pandas numpy matplotlib pymongo django_heroku dnspython**".
+2. Open terminal, run "**pip install django pillow opencv-python pandas numpy matplotlib pymongo django_heroku dnspython open3d-python**".
 
 3. clone the repo "**git clone https://github.com/robcog-iai/semlog_web.git**".
 
