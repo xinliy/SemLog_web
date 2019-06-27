@@ -6,6 +6,8 @@ venv
 static/
 workspace*
 web/staticfiles/*.json
+__pycache__/
+
 
 
 *.json

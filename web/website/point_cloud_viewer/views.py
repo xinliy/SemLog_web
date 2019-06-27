@@ -33,7 +33,6 @@ def create_pc(request):
         depth_hex_id = str(hex(hex_id - 2))[2:]
         depth_img_path=img_path.replace("Normal","Depth").replace(img_id,depth_hex_id)
 
-    height,width=img.shape[:2]
 
     # Calculate PointCloud
     generator = PointCloudGenerator(rgb_file=img_path, depth_file=depth_img_path,

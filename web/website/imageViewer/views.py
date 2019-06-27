@@ -92,6 +92,7 @@ def update_database_info(request):
                 i for i in m[db].list_collection_names() if "." not in i]
 
         return_dict = json.dumps(return_dict)
+        print(return_dict)
 
         return HttpResponse(return_dict)
     else:
@@ -203,6 +204,7 @@ def start_search(request):
                     database=DB, collection=COLLECTION + ".meta", ip=IP)
                 object_id_list = object_id_list + \
                     m.get_object_by_class(class_id_list)
+                # class_object_list=m.get_object_list_by_class_list(cl)
                 print("Input class_id_list is:", class_id_list)
                 print("Retrieved object_id_list is:", object_id_list)
                 print('image_type_list', image_type_list)
