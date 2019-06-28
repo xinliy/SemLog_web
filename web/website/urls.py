@@ -28,5 +28,6 @@ urlpatterns = [
     path(r'create_pc/', pc_views.create_pc),
     path(r'update_database_info/', image_views.update_database_info),
     path(r'show_one_image/',image_views.show_one_image),
-    path(r'download/',image_views.download)
+    path(r'download/',image_views.download),
+    path(r'download_label/',image_views.download_label)
 ]

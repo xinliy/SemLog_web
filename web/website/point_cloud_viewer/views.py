@@ -14,7 +14,7 @@ def create_pc(request):
     else:
         flag_depth_conversion=True
     img=cv2.imread(img_path)
-    width=img.shape[0]
+    width=img.shape[1]
     print(img.shape,width)
     print("point cloud dict:", request.GET.dict())
     user_id=request.session['user_id']
@@ -45,6 +45,7 @@ def create_pc(request):
     generator = PointCloudGenerator(rgb_file=img_path, depth_file=depth_img_path,
                                     focal_length=width//2, scalingfactor=10)
     # Calculate 3d position
+    print(flag_depth_conversion)
     generator.calculate(flag_depth_conversion)
 
     # Remove the alpha column

@@ -225,26 +225,36 @@ def start_search(request):
         image_path = []
         num_object = len(object_id_list)
 
+        # Create support db-collection to store processed data
+        support_database_name="semlog_web"
+        support_collection_name=user_id+"."+"info"
+
+        # Delete old user info
+        m=MongoClient(ip)[support_database_name]
+        for _collection_name in m.list_collection_names():
+            try:
+                m[_collection_name].drop()
+            except Exception as e:
+                print(e)
+
+        # support_client=MongoClient(ip)[support_database_name][support_collection_name]
+        support_client=MongoDB(ip=ip,database=support_database_name,collection=support_collection_name)
+
         # loop all selected collections
         for database_collection in database_collection_list:
             database_collection = database_collection.split("->")
             print("Enter database_collection:", database_collection)
             database_name = database_collection[0]
             collection_name = database_collection[1]
-            m = MongoClient(ip)[database_name]
-            support_collection_name = collection_name + "." + user_id + "." + "info"
+            download_client=MongoDB(ip=ip,database=database_name,collection=collection_name)
+            # support_collection_name = collection_name + "." + user_id + "." + "info"
 
-            support_collection_client = MongoClient(ip)[database_name][support_collection_name]
-            print("Support collection created at:%s,%s,%s" %
-                  (ip,database_name,support_collection_name))
+            # support_collection_client = MongoClient(ip)[database_name][support_collection_name]
+            # print("Support collection created at:%s,%s,%s" %
+                #   (ip,database_name,support_collection_name))
             # Drop former collection, May cause problem if multi different dbs
             # are selected
-            for c in m.list_collection_names():
-                if ".info" in c:
-                    m[c].drop()
-                    print("drop old collection")
             print("object_id_list", object_id_list)
-
             print(ip,database_name,collection_name)
 
             # Search all objects and store into pyweb collection
@@ -257,7 +267,7 @@ def start_search(request):
 
                     print("Object_id: %s,num of images: %s" %
                           (object_id, len(image_info)))
-                    support_collection_client.insert_many(image_info)
+                    support_client.insert_many(image_info)
                     print("Search images successfully for:", object_id)
                 except Exception as e:
                     print("object_id: %s has no images in this condition!" %
@@ -267,14 +277,14 @@ def start_search(request):
 
 
             # Connect the db and get download image list
-            database = MongoDB(ip=ip, database=database_name, collection=collection_name)
-            r = database.get_download_image_list(
+            # downl_client = MongoDB(ip=ip, database=support_database_name, collection=support_collection_name)
+            r = support_client.get_download_image_list(
                 num_object=len(object_id_list), object_logic=object_logic, user_id=user_id)
             print("Download list length:",len(r))
 
             # Parallel download images
             pool = Pool(10)
-            pool.starmap(database.download_one, zip(
+            pool.starmap(download_client.download_one, zip(
                 r, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
             pool.close()
             pool.join()
@@ -321,18 +331,19 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                         num_object, img_type, flag_remove_background, bounding_box_width, bounding_box_height,
                         flag_stretch_background, flag_add_bounding_box_to_origin):
 
-    client = MongoClient(ip)[database][collection +
-                                       "." + user_id + "." + "info"]
+    support_database_name="semlog_web"
+    support_collection_name=user_id+"."+"info"
+    support_client = MongoClient(ip)[support_database_name][support_collection_name]
     pipeline = []
 
     if object_logic == 'and':
-        m = MongoDB(database, collection, ip)
+        m = MongoDB(support_database_name, support_collection_name, ip)
         r = m.get_download_image_list(
             num_object, object_logic='and', user_id=user_id)
     else:
         pipeline.append({"$match": {"object": object_id}})
         pipeline.append({"$project": {"file_id": 1, "type": 1, "_id": 0}})
-        r = list(client.aggregate(pipeline))
+        r = list(support_client.aggregate(pipeline))
 
     # Type to be cut
     image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
@@ -340,9 +351,10 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         image_dir[image_info["type"]].append(
             os.path.join(settings.IMAGE_ROOT, user_id + image_info["type"], str(image_info["file_id"]) + ".png"))
 
-    # Init MongoDB and get the corresponding color
+    # Init MongoDB and get the corresponding color, class name
     m = MongoDB(ip=ip, database=database, collection=collection)
     rgb = m.get_object_rgb(object_id, collection=collection + ".meta")
+    class_name=MongoDB(ip=ip,database=database,collection=collection+".meta").get_class_by_object_id(object_id)
 
     print("<------------------------------->")
     print("Object id: %s, rgb_color: %s" % (object_id, rgb))
@@ -361,6 +373,7 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         if len(rgb_img_list) == 0:
             origin_width=origin_height=0
         else:
+            print(rgb_img_list)
             sample_img=cv2.imread(rgb_img_list[0])
             origin_width,origin_height=sample_img.shape[1],sample_img.shape[0]
         print(origin_width,origin_height)
@@ -377,8 +390,8 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                                                 flag_remove_background=flag_remove_background,
                                                 width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
                                                 flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
-            client.update({"object": object_id, "file_id": ObjectId(
-                os.path.basename(rgb_img)[:-4])}, {"$set": {"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
+            support_client.update({"object": object_id, "file_id": ObjectId(
+                os.path.basename(rgb_img)[:-4])}, {"$set": {"class":class_name,"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
 
             image_dir[folder_map].append(img_saving_path)
 
@@ -419,3 +432,21 @@ def download(request):
     zip_file.close()
 
     return response
+
+
+def download_label(request):
+
+    user_id=request.session['user_id']
+    ip=request.session['ip']
+    support_database_name="semlog_web"
+    support_collection_name=user_id+"."+"info"
+    m=MongoDB(ip=ip,database=support_database_name,collection=support_collection_name)
+    class_list=MongoClient(host=ip)[support_database_name][support_collection_name].distinct('class')
+    print("distinct class is",class_list)
+    label_info=m.get_label_from_info()
+
+    label_folder_name="label_info"
+    label_folder_path=os.path.join(settings.IMAGE_ROOT,user_id+"_"+label_folder_name)
+
+
+    return HttpResponse(label_info)
