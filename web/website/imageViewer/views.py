@@ -109,6 +109,7 @@ def start_search(request):
     print("<------------------------------->")
     t0 = time.time()
 
+
     # Read the input from teh user.
     if request.method == "GET":
         user_id = str(uuid.uuid4())
@@ -373,10 +374,12 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         if len(rgb_img_list) == 0:
             origin_width=origin_height=0
         else:
-            print(rgb_img_list)
+            # print(rgb_img_list)
             sample_img=cv2.imread(rgb_img_list[0])
             origin_width,origin_height=sample_img.shape[1],sample_img.shape[0]
-        print(origin_width,origin_height)
+        print("width",origin_width)
+        print('height',origin_height)
+        # print(origin_width,origin_height)
 
         os.makedirs(saving_folder)
 
@@ -446,7 +449,33 @@ def download_label(request):
     label_info=m.get_label_from_info()
 
     label_folder_name="label_info"
+    text_folder_name="class.txt"
     label_folder_path=os.path.join(settings.IMAGE_ROOT,user_id+"_"+label_folder_name)
+    image_label_folder_path=os.path.join(label_folder_path,'image_label')
+    text_folder_path=os.path.join(label_folder_path,text_folder_name)
+    print(label_folder_path)
+
+    #Create label info folder and add class name
+    os.makedirs(label_folder_path)
+    os.makedirs(image_label_folder_path)
+    with open(text_folder_path,'w') as class_file:
+        for _class_name in class_list:
+            class_file.write('%s\n' % _class_name)
+
+    for _each_image_info in label_info:
+        _image_name=_each_image_info['_id']
+        _txt=os.path.join(image_label_folder_path,str(_image_name)+".txt")
+        for _each_label in _each_image_info['class_list']:
+            _class_index=class_list.index(_each_label['class'])
+
+            if not os.path.isfile(_txt):
+                with open(_txt,'w') as txt_file:
+                    txt_file.write('%s %s %s %s %s\n' %(_class_index,_each_label['x_center'],_each_label['y_center'],_each_label['width'],_each_label['height']))
+            else:
+                with open(_txt,'a') as txt_file:
+                    txt_file.write('%s %s %s %s %s\n' %(_class_index,_each_label['x_center'],_each_label['y_center'],_each_label['width'],_each_label['height']))
+
+    pprint.pprint(_each_image_info)
 
 
     return HttpResponse(label_info)
