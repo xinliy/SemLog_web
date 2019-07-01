@@ -394,7 +394,7 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                                                 width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
                                                 flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
             support_client.update({"object": object_id, "file_id": ObjectId(
-                os.path.basename(rgb_img)[:-4])}, {"$set": {"class":class_name,"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
+                os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin":int(wmin),"wmax":int(wmax),"hmin":int(hmin),"hmax":int(hmax),"class":class_name,"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
 
             image_dir[folder_map].append(img_saving_path)
 
@@ -439,7 +439,7 @@ def download(request):
 
 def download_label(request):
 
-    user_id=request.session['user_id']
+    user_id=str(request.session['user_id'])
     ip=request.session['ip']
     support_database_name="semlog_web"
     support_collection_name=user_id+"."+"info"
@@ -453,7 +453,7 @@ def download_label(request):
     label_folder_path=os.path.join(settings.IMAGE_ROOT,user_id+"_"+label_folder_name)
     image_label_folder_path=os.path.join(label_folder_path,'image_label')
     text_folder_path=os.path.join(label_folder_path,text_folder_name)
-    print(label_folder_path)
+    # print(label_folder_path)
 
     #Create label info folder and add class name
     os.makedirs(label_folder_path)
@@ -463,19 +463,20 @@ def download_label(request):
             class_file.write('%s\n' % _class_name)
 
     for _each_image_info in label_info:
-        _image_name=_each_image_info['_id']
-        _txt=os.path.join(image_label_folder_path,str(_image_name)+".txt")
-        for _each_label in _each_image_info['class_list']:
+        _image_name=str(_each_image_info['_id'])
+        # _txt=os.path.join(image_label_folder_path,str(_image_name)+".txt")
+        _txt=os.path.join(image_label_folder_path,"train.txt")
+
+        # pprint.pprint(_each_image_info)
+        for i,_each_label in enumerate(_each_image_info['class_list']):
             _class_index=class_list.index(_each_label['class'])
-
-            if not os.path.isfile(_txt):
-                with open(_txt,'w') as txt_file:
-                    txt_file.write('%s %s %s %s %s\n' %(_class_index,_each_label['x_center'],_each_label['y_center'],_each_label['width'],_each_label['height']))
+            txt_file=open(_txt,'a')
+            if i==0:  # first loop
+                txt_file.write('%s %s,%s,%s,%s,%s' %(os.path.join(user_id+"Color",_image_name+".png"),_each_label['wmin'],_each_label['hmin'],_each_label['wmax'],_each_label['hmax'],_class_index))
             else:
-                with open(_txt,'a') as txt_file:
-                    txt_file.write('%s %s %s %s %s\n' %(_class_index,_each_label['x_center'],_each_label['y_center'],_each_label['width'],_each_label['height']))
-
-    pprint.pprint(_each_image_info)
+                txt_file.write(' %s,%s,%s,%s,%s' %(_each_label['wmin'],_each_label['hmin'],_each_label['wmax'],_each_label['hmax'],_class_index))
+            if i==len(_each_image_info['class_list'])-1:  # last loop
+                txt_file.write("\n")
 
 
     return HttpResponse(label_info)
