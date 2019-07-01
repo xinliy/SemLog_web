@@ -30,7 +30,7 @@
                 .popup();
 
             $("#enable_bounding_box").click(function () {
-                $("#checkbox_bounding_box").prop("checked",true)
+                $("#checkbox_bounding_box").prop("checked", true)
                 // if ($("#checkbox_bounding_box").is(":checked")) {
                 //     $("#checkbox_bounding_box").prop("checked", false)
                 // }
@@ -283,22 +283,38 @@
                         2.Enable bounding box:
                     </div>
                     <div class="content">
-                        <div class="ui toggle checkbox">
-                            <input type="checkbox" id="checkbox_bounding_box" name="checkbox_bounding_box">
-                            <label>Add bounding box views for objects</label>
-                       
+                        <div class="ui grid">
+                            <div class="sixteen wide column">
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" id="checkbox_bounding_box" name="checkbox_bounding_box">
+                                    <label>Add bounding box views for objects</label>
+
+                                </div>
+                                <i class="question circle icon" id="helper_bounding_box"
+                                    data-content="Create a new UI for each object searched."></i>
+
+                            </div>
+
+                            <div class="sixteen wide column">
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="checkbox_add_bounding_box_to_origin">
+                                    <label>Add bounding box to origin images</label>
+                                </div>
+                                <i class="question circle icon"
+                                    data-content="Mark all searched objects in the origin images."></i>
+
+
+                            </div>
+                            <div class="sixteen wide column">
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="checkbox_remove_background">
+                                    <label>Remove backgrounds behind objects</label>
+                                </div>
+                                <i class="question circle icon" data-content="Replace background with pure black."></i>
+
+                            </div>
                         </div>
-                            <i class="question circle icon" id="helper_bounding_box" data-content="Create a new UI for each object searched."></i>
-                        <div class="ui toggle checkbox">
-                            <input type="checkbox" name="checkbox_add_bounding_box_to_origin">
-                            <label>Add bounding box to origin images</label>
-                        </div>
-                            <i class="question circle icon" data-content="Mark all searched objects in the origin images."></i>
-                        <div class="ui toggle checkbox">
-                            <input type="checkbox" name="checkbox_remove_background">
-                            <label>Remove backgrounds behind objects</label>
-                        </div>
-                            <i class="question circle icon" data-content="Replace background with pure black."></i>
+
 
                         <h5 class="ui header">Resize bounding box:</h5>
                         <input type="text" name="bounding_box_width" placeholder="bounding_box_width">
@@ -307,7 +323,8 @@
                             <input type="checkbox" name="checkbox_stretch_background">
                             <label>Stretch background for defined resolution</label>
                         </div>
-                            <i class="question circle icon" data-content="Available only if both width and heigth are specified."></i>
+                        <i class="question circle icon"
+                            data-content="Available only if both width and heigth are specified."></i>
 
                     </div>
 

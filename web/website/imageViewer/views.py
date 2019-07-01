@@ -291,17 +291,6 @@ def start_search(request):
             pool.join()
             print("Download objects Done with:", time.time() - t0)
 
-            # Do object cutting
-            if flag_bounding_box is True:
-                print("Start generate bounding box")
-                bounding_box_dict = {key: [] for key in object_id_list}
-                pool = Pool(10)
-                for object_id in object_id_list:
-                    bounding_box_dict[object_id] = (create_bounding_box(
-                        database_name, collection_name, ip, object_logic, object_id, user_id, num_object,
-                        image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
-                        flag_stretch_background, flag_add_bounding_box_to_origin))
-
             # Create dict to frontend
             for image_type in image_type_list:
                 folder_path = os.path.join(
@@ -313,16 +302,33 @@ def start_search(request):
                     folder_path, i) for i in image_list]
             NUM_OBJECT = len(object_id_list)
 
+
             # Resize image
             if width != "" or height != "":
                 for key, value in image_dir.items():
                     image_path = image_path + value
                 print("Enter resizing.", width)
+                print(image_path)
+                print("99999999999999999999999999999999999999")
                 pool = Pool(10)
                 pool.starmap(resize_image, zip(
                     image_path, itertools.repeat(width), itertools.repeat(height), itertools.repeat(flag_resize_type)))
                 pool.close()
                 pool.join()
+
+            # Do object cutting
+            if flag_bounding_box is True:
+                print("Start generate bounding box")
+                bounding_box_dict = {key: [] for key in object_id_list}
+                pool = Pool(10)
+                for object_id in object_id_list:
+                    bounding_box_dict[object_id] = (create_bounding_box(
+                        database_name, collection_name, ip, object_logic, object_id, user_id, num_object,
+                        image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
+                        flag_stretch_background, flag_add_bounding_box_to_origin))
+
+
+
 
         return render(request, 'gallery.html',
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
@@ -394,7 +400,7 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                                                 width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
                                                 flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
             support_client.update({"object": object_id, "file_id": ObjectId(
-                os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin":int(wmin),"wmax":int(wmax),"hmin":int(hmin),"hmax":int(hmax),"class":class_name,"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
+                os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin":int(hmin),"wmax":int(hmax),"hmin":int(wmin),"hmax":int(wmax),"class":class_name,"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
 
             image_dir[folder_map].append(img_saving_path)
 
