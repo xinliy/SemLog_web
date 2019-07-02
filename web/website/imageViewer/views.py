@@ -215,9 +215,9 @@ def start_search(request):
         if len(database_collection_list) != 1:
             time_from = time_until = None
         if time_from is not None:
-            time_from = float(time_from)
+            time_from = float(time_from) if time_from!="" else None
         if time_until is not None:
-            time_until = float(time_until)
+            time_until = float(time_until) if time_until!="" else None
 
         # Remove blank input
         database_collection_list = [
