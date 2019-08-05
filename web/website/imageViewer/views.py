@@ -308,8 +308,7 @@ def start_search(request):
                 for key, value in image_dir.items():
                     image_path = image_path + value
                 print("Enter resizing.", width)
-                print(image_path)
-                print("99999999999999999999999999999999999999")
+                # print(image_path)
                 pool = Pool(10)
                 pool.starmap(resize_image, zip(
                     image_path, itertools.repeat(width), itertools.repeat(height), itertools.repeat(flag_resize_type)))
@@ -322,11 +321,10 @@ def start_search(request):
                 bounding_box_dict = {key: [] for key in object_id_list}
                 pool = Pool(10)
                 for object_id in object_id_list:
-                    bounding_box_dict[object_id] = (create_bounding_box(
+                    bounding_box_dict[object_id] = (create_bounding_box(image_dir,
                         database_name, collection_name, ip, object_logic, object_id, user_id, num_object,
                         image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
                         flag_stretch_background, flag_add_bounding_box_to_origin))
-
 
 
 
@@ -334,7 +332,7 @@ def start_search(request):
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
 
-def create_bounding_box(database, collection, ip, object_logic, object_id, user_id,
+def create_bounding_box(image_dir,database, collection, ip, object_logic, object_id, user_id,
                         num_object, img_type, flag_remove_background, bounding_box_width, bounding_box_height,
                         flag_stretch_background, flag_add_bounding_box_to_origin):
 
@@ -351,12 +349,15 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         pipeline.append({"$match": {"object": object_id}})
         pipeline.append({"$project": {"file_id": 1, "type": 1, "_id": 0}})
         r = list(support_client.aggregate(pipeline))
-
+    
+    # print("((((((((((((((((((((")
+    # print(r)
     # Type to be cut
-    image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
-    for image_info in r:
-        image_dir[image_info["type"]].append(
-            os.path.join(settings.IMAGE_ROOT, user_id + image_info["type"], str(image_info["file_id"]) + ".png"))
+    
+    # image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
+    # for image_info in r:
+    #     image_dir[image_info["type"]].append(
+    #         os.path.join(settings.IMAGE_ROOT, user_id + image_info["type"], str(image_info["file_id"]) + ".png"))
 
     # Init MongoDB and get the corresponding color, class name
     m = MongoDB(ip=ip, database=database, collection=collection)
@@ -375,6 +376,7 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         rgb_img_list = sorted(image_dir[t])
         mask_img_list = sorted(image_dir['Mask'])
         saving_folder = os.path.join(settings.IMAGE_ROOT, folder_name)
+        print("****length of rgb_img_list****:",len(rgb_img_list))
 
         # Read resolution of origin image and add to info collection
         if len(rgb_img_list) == 0:
@@ -388,6 +390,7 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
         # print(origin_width,origin_height)
 
         os.makedirs(saving_folder)
+        count=0
 
         # Create and save cut images
         for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
@@ -399,17 +402,36 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                                                 flag_remove_background=flag_remove_background,
                                                 width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
                                                 flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
-            wmin=1 if wmin==0
-            wmax=1 if wmax==0
-            hmin=1 if hmin==0
-            hmax=1 if hmax==0
+            if wmin==-1:
+                continue
+            wmin=1 if wmin==0 else wmin
+            wmax=1 if wmax==0 else wmax
+            hmin=1 if hmin==0 else hmin
+            hmax=1 if hmax==0 else hmax
+            if "Color" in rgb_img:
+                image_type="Color"
+            elif "Depth" in rgb_img:
+                image_type="Depth"
+            elif "Mask" in rgb_img:
+                image_type="Mask"
+            elif "Normal" in rgb_img:
+                image_type="Normal"
+            if list(support_client.find({"object": object_id, "file_id": ObjectId(
+                os.path.basename(rgb_img)[:-4]),"type":image_type}))==[]:
+                support_client.insert({"object": object_id, "file_id": ObjectId(
+                os.path.basename(rgb_img)[:-4]),'type':image_type}, {"$set": {"wmin":int(hmin),"wmax":int(hmax),"hmin":int(wmin),"hmax":int(wmax),"class":class_name,"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
+
             support_client.update({"object": object_id, "file_id": ObjectId(
                 os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin":int(hmin),"wmax":int(hmax),"hmin":int(wmin),"hmax":int(wmax),"class":class_name,"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
+            count=count+1
 
             image_dir[folder_map].append(img_saving_path)
+        print("object:",object_id)
+        print('update time:',count)
 
     image_dir = {key: image_dir[key] for key in list(
         image_dir.keys()) if key.endswith("_cut")}
+    print("object cutting finished")
     return image_dir
 
 
@@ -479,6 +501,9 @@ def download_label(request):
 
         # pprint.pprint(_each_image_info)
         for i,_each_label in enumerate(_each_image_info['class_list']):
+            if "hmax" not in _each_label.keys():
+                continue
+            print(_each_label.keys())
             _class_index=class_list.index(_each_label['class'])
             txt_file=open(_txt,'a')
             if i==0:  # first loop
