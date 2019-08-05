@@ -9,6 +9,10 @@ import cv2
 def create_pc(request):
     """Create point clouds depending on the image clicked."""
     img_path = request.GET['img_path']
+    color_folder=os.path.dirname(img_path)
+    print("Color folder:",color_folder)
+    color_image_list=sorted(os.listdir(color_folder))
+    color_image=os.path.basename(os.path.normpath(img_path))
     if "boundingBox" in img_path:
         flag_depth_conversion=False
     else:
@@ -20,25 +24,25 @@ def create_pc(request):
     user_id=request.session['user_id']
 
     if 'Color' in img_path:
-        img_id = os.path.basename(os.path.normpath(img_path))[:-4]
-        hex_id = int(img_id, 16)
-        depth_hex_id = str(hex(hex_id + 1))[2:]
-        depth_img_path=img_path.replace("Color","Depth").replace(img_id,depth_hex_id)
-        depth_img_path=depth_img_path.replace(img_id,depth_hex_id)
-        print(("color mode",depth_img_path))
+        depth_folder=color_folder.replace("Color","Depth")
+        depth_image_list=sorted(os.listdir(depth_folder))
+        loc_index=color_image_list.index(color_image)
+        depth_image=depth_image_list[loc_index]
+        depth_img_path=os.path.join(depth_folder,depth_image)
     elif 'Depth' in img_path:
         depth_img_path = img_path
     elif 'Mask' in img_path:
-        img_id = os.path.basename(os.path.normpath(img_path))[:-4]
-        hex_id = int(img_id, 16)
-        depth_hex_id = str(hex(hex_id - 1))[2:]
-
-        depth_img_path=img_path.replace("Mask","Depth").replace(img_id,depth_hex_id)
+        depth_folder=color_folder.replace("Color","Mask")
+        depth_image_list=sorted(os.listdir(depth_folder))
+        loc_index=color_image_list.index(color_image)
+        depth_image=depth_image_list[loc_index]
+        depth_img_path=os.path.join(depth_folder,depth_image)
     elif 'Normal' in img_path:
-        img_id = os.path.basename(os.path.normpath(img_path))[:-4]
-        hex_id = int(img_id, 16)
-        depth_hex_id = str(hex(hex_id - 2))[2:]
-        depth_img_path=img_path.replace("Normal","Depth").replace(img_id,depth_hex_id)
+        depth_folder=color_folder.replace("Color","Normal")
+        depth_image_list=sorted(os.listdir(depth_folder))
+        loc_index=color_image_list.index(color_image)
+        depth_image=depth_image_list[loc_index]
+        depth_img_path=os.path.join(depth_folder,depth_image)
 
 
     # Calculate PointCloud

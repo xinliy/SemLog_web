@@ -399,6 +399,10 @@ def create_bounding_box(database, collection, ip, object_logic, object_id, user_
                                                 flag_remove_background=flag_remove_background,
                                                 width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
                                                 flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
+            wmin=1 if wmin==0
+            wmax=1 if wmax==0
+            hmin=1 if hmin==0
+            hmax=1 if hmax==0
             support_client.update({"object": object_id, "file_id": ObjectId(
                 os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin":int(hmin),"wmax":int(hmax),"hmin":int(wmin),"hmax":int(wmax),"class":class_name,"x_center":((wmax+wmin)/2)/origin_width,"y_center":((hmax+hmin)/2)/origin_height,"width":(wmax-wmin)/origin_width,"height":(hmax-hmin)/origin_height}})
 
