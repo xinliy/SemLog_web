@@ -19,8 +19,8 @@ $(document).ready(function () {
                     var collection_list = result[k[i]].sort();
                     for (j = 0; j < collection_list.length; j++) {
                         var option = document.createElement("option");
-                        option.text = k[i] + "->" + collection_list[j];
-                        c = k[i] + "_" + collection_list[j];
+                        option.text = k[i] + "$" + collection_list[j];
+                        c = k[i] + "$" + collection_list[j];
                         var v = "<input type='text' name=" + "database_collection" + i.toString() + j.toString() + " value=" + c + " hidden>";
 
                         $("#collection_selector").append(option)
@@ -79,7 +79,7 @@ $(document).ready(function () {
         $("a.ui.label.transition.visible").each(function(){
             console.log($(this)[0].outerText)
             // alert($(this)[0].outerText)
-            r=r+$(this)[0].outerText+"_"
+            r=r+$(this)[0].outerText+"@"
         })
         console.log(r)
         var i=document.createElement("input")
