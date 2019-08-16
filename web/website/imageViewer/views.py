@@ -126,6 +126,11 @@ def start_search(request):
         flag_remove_background = False
         flag_stretch_background = False
         flag_add_bounding_box_to_origin = False
+        flag_ignore_duplicate_image = False
+        flag_apply_filtering=False
+        linear_distance_tolerance=50
+        angular_distance_tolerance=1
+
         ip = request.session['ip']
 
         print("<------------------------------->")
@@ -146,6 +151,8 @@ def start_search(request):
             request.GET['bounding_box_width']) if request.GET['bounding_box_width'] != "" else ""
         bounding_box_height = int(request.GET['bounding_box_height']
                                   ) if request.GET['bounding_box_height'] != "" else ""
+        linear_distance_tolerance=form_dict['linear_distance_tolerance']
+        angular_distance_tolerance=form_dict['angular_distance_tolerance']
 
         percentage = 0.0000001 if percentage == "" else float(percentage)
         OBJECT_LOGIC = object_logic = form_dict['checkbox_object_logic']
@@ -160,6 +167,10 @@ def start_search(request):
                 flag_remove_background = True
             if key.startswith("checkbox_bounding_box"):
                 flag_bounding_box = True
+            if key.startswith("checkbox_ignore_duplicate_image"):
+                flag_ignore_duplicate_image = True
+            if key.startswith("checkbox_apply_filtering"):
+                flag_apply_filtering=True
             if key.startswith('database_collection_list'):
                 database_collection_list = value.split("@")
             # Get multiply objects/classes from input fields
@@ -211,6 +222,7 @@ def start_search(request):
         # Change to list in the future
         view_id = None
 
+
         # Convert time to float
         if len(database_collection_list) != 1:
             time_from = time_until = None
@@ -248,27 +260,28 @@ def start_search(request):
             print("Enter database_collection:", database_collection)
             database_name = database_collection[0]
             collection_name = database_collection[1]
-            download_client = MongoDB(
-                ip=ip, database=database_name, collection=collection_name)
-            # support_collection_name = collection_name + "." + user_id + "." + "info"
-
-            # support_collection_client = MongoClient(ip)[database_name][support_collection_name]
-            # print("Support collection created at:%s,%s,%s" %
-            #   (ip,database_name,support_collection_name))
-            # Drop former collection, May cause problem if multi different dbs
-            # are selected
-            print("object_id_list", object_id_list)
             print(ip, database_name, collection_name)
 
+            #------------Perform filtering function----------------#
+
+            m = MongoDB(ip=ip, database=database_name,
+                        collection=collection_name)
+            if flag_apply_filtering is True:
+                m.check_and_update_duplicate(linear_distance_tolerance,angular_distance_tolerance)
+
+            # If no entry for object id/class, search for all
+            if object_id_list==[]:
+                object_id_list=m.get_all_object()
+
+            print("object_id_list", object_id_list)
             # Search all objects and store into pyweb collection
             for object_id in object_id_list:
-                m = MongoDB(ip=ip, database=database_name,
-                            collection=collection_name)
+
                 try:
                     image_info = m.search(time_from, time_until, object_id, view_id, image_type_list, percentage,
-                                          int(
-                                              image_limit / len(database_collection_list)))
+                                          int(image_limit / len(database_collection_list)),flag_ignore_duplicate_image)
 
+                    print("_____________________image info_________________:",image_info)
                     print("Object_id: %s,num of images: %s" %
                           (object_id, len(image_info)))
                     support_client.insert_many(image_info)
@@ -287,7 +300,7 @@ def start_search(request):
 
             # Parallel download images
             pool = Pool(10)
-            pool.starmap(download_client.download_one, zip(
+            pool.starmap(m.download_one, zip(
                 r, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
             pool.close()
             pool.join()
@@ -397,7 +410,6 @@ def create_bounding_box(image_dir, database, collection, ip, object_logic, objec
 
         # Create and save cut images
         for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
-            print(rgb_img,mask_img)
             img_saving_path = os.path.join(
                 saving_folder, os.path.basename(rgb_img))
 
@@ -406,7 +418,6 @@ def create_bounding_box(image_dir, database, collection, ip, object_logic, objec
                                                 flag_remove_background=flag_remove_background,
                                                 width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
                                                 flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
-            print(wmin,wmax,hmin,hmax)
             if wmin == -1:
                 continue
             wmin = 1 if wmin == 0 else wmin

@@ -95,9 +95,9 @@
                     </div>
                     <div class="content">
 
-                        <label>Time from/at:<input class="time" type="text" name="time_from" value="10"
+                        <label>Time from/at:<input class="time" type="text" name="time_from" value="0"
                                 placeholder="from/at"></label>
-                        <label>Until:<input class="time" type="text" name="time_until" value="15"
+                        <label>Until:<input class="time" type="text" name="time_until" value="100"
                                 placeholder="until"></label>
                     </div>
                     <div class="title">
@@ -244,7 +244,24 @@
                     <div class="content">
                         <input type="number" name="image_limit" placeholder="Maximum image returned" value=20>
                     </div>
-
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        7.Filtering functions:
+                    </div>
+                    <div class="content">
+                        <label>Linear distance tolerance:</label>
+                        <input type="number" name="linear_distance_tolerance" placeholder="Threshold for filtering out duplicates" value=50>
+                        <label>Angular distance tolerance:</label>
+                        <input type="number" name="angular_distance_tolerance" placeholder="Threshold for filtering out duplicates" value=1>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" name="checkbox_apply_filtering">
+                            <label>Apply dulicate images filtering function</label>
+                        </div>
+                        <div class="ui toggle checkbox">
+                                <input type="checkbox"  name="checkbox_ignore_duplicate_image">
+                                <label>Ignore duplicate images in results</label>
+                        </div>
+                    </div>
 
 
                     <h3>Image preprocessing:</h3>
@@ -288,7 +305,6 @@
                                 <div class="ui toggle checkbox">
                                     <input type="checkbox" id="checkbox_bounding_box" name="checkbox_bounding_box">
                                     <label>Add bounding box views for objects</label>
-
                                 </div>
                                 <i class="question circle icon" id="helper_bounding_box"
                                     data-content="Create a new UI for each object searched."></i>
