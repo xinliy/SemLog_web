@@ -128,6 +128,11 @@ def start_search(request):
         flag_add_bounding_box_to_origin = False
         flag_ignore_duplicate_image = False
         flag_apply_filtering=False
+        flag_class_ignore_duplicate_image=False
+        flag_class_apply_filtering=False
+        class_linear_distance_tolerance=150
+        class_angular_distance_tolerance=0.005
+        class_num_pixels_tolerance=150
         linear_distance_tolerance=50
         angular_distance_tolerance=1
 
@@ -151,8 +156,11 @@ def start_search(request):
             request.GET['bounding_box_width']) if request.GET['bounding_box_width'] != "" else ""
         bounding_box_height = int(request.GET['bounding_box_height']
                                   ) if request.GET['bounding_box_height'] != "" else ""
-        linear_distance_tolerance=form_dict['linear_distance_tolerance']
-        angular_distance_tolerance=form_dict['angular_distance_tolerance']
+        linear_distance_tolerance=float(form_dict['linear_distance_tolerance'])
+        angular_distance_tolerance=float(form_dict['angular_distance_tolerance'])
+        class_linear_distance_tolerance=float(form_dict['class_linear_distance_tolerance'])
+        class_angular_distance_tolerance=float(form_dict['class_angular_distance_tolerance'])
+        class_num_pixels_tolerance=int(form_dict['class_num_pixels_tolerance'])
 
         percentage = 0.0000001 if percentage == "" else float(percentage)
         OBJECT_LOGIC = object_logic = form_dict['checkbox_object_logic']
@@ -171,6 +179,10 @@ def start_search(request):
                 flag_ignore_duplicate_image = True
             if key.startswith("checkbox_apply_filtering"):
                 flag_apply_filtering=True
+            if key.startswith("checkbox_class_ignore_duplicate_image"):
+                flag_class_ignore_duplicate_image = True
+            if key.startswith("checkbox_class_ignore_duplicate_image"):
+                flag_class_apply_filtering = True
             if key.startswith('database_collection_list'):
                 database_collection_list = value.split("@")
             # Get multiply objects/classes from input fields
@@ -200,7 +212,7 @@ def start_search(request):
         # Conditional branch for class searching
         if checkbox_object_pattern == 'class':
             print("Target pattern -> class")
-            class_id_list = object_id_list
+            class_id_list = object_id_list.copy()
             object_id_list = []
             print("Search range:", database_collection_list)
             for database_collection in database_collection_list:
@@ -269,17 +281,27 @@ def start_search(request):
             if flag_apply_filtering is True:
                 m.check_and_update_duplicate(linear_distance_tolerance,angular_distance_tolerance)
 
+
+
+            if checkbox_object_pattern=="class" and flag_class_apply_filtering is True:
+                print("Enter per class filtering function.")
+                m.check_and_update_duplicate_per_class(class_list=class_id_list,
+                    num_pixels_tolerance=class_num_pixels_tolerance,
+                    linear_distance_tolerance=class_linear_distance_tolerance,
+                    angular_distance_tolerance=class_angular_distance_tolerance,
+                    flag_ignore_duplicate_image=flag_ignore_duplicate_image)
+
+
             # If no entry for object id/class, search for all
             if object_id_list==[]:
                 object_id_list=m.get_all_object()
-
             print("object_id_list", object_id_list)
             # Search all objects and store into pyweb collection
             for object_id in object_id_list:
 
                 try:
                     image_info = m.search(time_from, time_until, object_id, view_id, image_type_list, percentage,
-                                          int(image_limit / len(database_collection_list)),flag_ignore_duplicate_image)
+                                          int(image_limit / len(database_collection_list)),flag_ignore_duplicate_image,flag_class_ignore_duplicate_image)
 
                     print("_____________________image info_________________:",image_info)
                     print("Object_id: %s,num of images: %s" %
