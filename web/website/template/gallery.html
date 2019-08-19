@@ -80,15 +80,21 @@
 </div>
 <div class="ui tab segment" data-tab="second">
     <div class="ui top attached tabular menu">
+        <div class="ui grid">
 
         {% comment %} create tab label for each object_id {% endcomment %}
         {% for image_object_id, image_package in bounding_box.items %}
             {% if forloop.first %}
+                <div class="three wide column">
                 <a class="active item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
+                </div>
             {% else %}
+                <div class="three wide column">
                 <a class="item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
+                </div>
             {% endif %}
         {% endfor %}
+        </div>
     </div>
 
     {% comment %} create content for every object id {% endcomment %}
