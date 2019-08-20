@@ -162,7 +162,7 @@ def start_search(request):
         class_angular_distance_tolerance=float(form_dict['class_angular_distance_tolerance'])
         class_num_pixels_tolerance=int(form_dict['class_num_pixels_tolerance'])
 
-        percentage = 0.0000001 if percentage == "" else float(percentage)
+        percentage = None if percentage == "" else float(percentage)
         OBJECT_LOGIC = object_logic = form_dict['checkbox_object_logic']
 
         # Read input from forms
@@ -308,8 +308,6 @@ def start_search(request):
                       (object_id_list, len(image_info)))
                 support_client.insert_many(image_info)
             except Exception as e:
-                print("object_id: %s has no images in this condition!" %
-                      object_id)
                 print(e)
             print("Search objects Done with:", time.time() - t0)
 
