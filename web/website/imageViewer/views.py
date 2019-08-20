@@ -297,21 +297,20 @@ def start_search(request):
                 object_id_list=m.get_all_object()
             print("object_id_list", object_id_list)
             # Search all objects and store into pyweb collection
-            for object_id in object_id_list:
 
-                try:
-                    image_info = m.search(time_from, time_until, object_id, view_id, image_type_list, percentage,
-                                          int(image_limit / len(database_collection_list)),flag_ignore_duplicate_image,flag_class_ignore_duplicate_image)
 
-                    print("_____________________image info_________________:",image_info)
-                    print("Object_id: %s,num of images: %s" %
-                          (object_id, len(image_info)))
-                    support_client.insert_many(image_info)
-                    print("Search images successfully for:", object_id)
-                except Exception as e:
-                    print("object_id: %s has no images in this condition!" %
-                          object_id)
-                    print(e)
+            try:
+                image_info = m.search(time_from, time_until, object_id_list, view_id, image_type_list, percentage,
+                                      int(image_limit / len(database_collection_list)),flag_ignore_duplicate_image,flag_class_ignore_duplicate_image)
+
+                print("_____________________image info_________________:",image_info)
+                print("Object_id_list: %s,num of images: %s" %
+                      (object_id_list, len(image_info)))
+                support_client.insert_many(image_info)
+            except Exception as e:
+                print("object_id: %s has no images in this condition!" %
+                      object_id)
+                print(e)
             print("Search objects Done with:", time.time() - t0)
 
             # Connect the db and get download image list
@@ -389,11 +388,11 @@ def create_bounding_box(image_dir, database, collection, ip, object_logic, objec
     # print(r)
     # Type to be cut
 
-    # image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
-    # for image_info in r:
-    #     image_dir[image_info["type"]].append(
-    # os.path.join(settings.IMAGE_ROOT, user_id + image_info["type"],
-    # str(image_info["file_id"]) + ".png"))
+    image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
+    for image_info in r:
+        image_dir[image_info["type"]].append(
+    os.path.join(settings.IMAGE_ROOT, user_id + image_info["type"],
+    str(image_info["file_id"]) + ".png"))
 
     # Init MongoDB and get the corresponding color, class name
     m = MongoDB(ip=ip, database=database, collection=collection)
