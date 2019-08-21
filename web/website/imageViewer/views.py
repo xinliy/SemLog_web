@@ -70,6 +70,13 @@ def search(request):
 
     return render(request, 'main.html')
 
+def training(request):
+    return render(request,'training_setting.html')
+
+def start_training(request):
+    training_dict=request.GET.dict()
+
+    return HttpResponse('ok')
 
 def update_database_info(request):
     """Show avaiable database-collection in real time with ajax."""
@@ -99,7 +106,7 @@ def show_one_image(request):
     img_path = request.GET['img_path']
     dic = {}
     dic['img_path'] = img_path
-    return render(request, 'a.html', dic)
+    return render(request, 'origin_size.html', dic)
 
 
 def start_search(request):
@@ -554,3 +561,6 @@ def download_label(request):
                 txt_file.write("\n")
 
     return HttpResponse(label_info)
+
+
+
