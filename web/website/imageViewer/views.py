@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import cv2
+import pandas as pd
 
 import os
 import json
@@ -28,9 +29,8 @@ except Exception as e:
 
 
 # Global variable
-OBJECT_LOGIC = 'and'
-NUM_OBJECT = 1
-
+df=pd.DataFrame(columns=['class','collection','database','document',
+    'file_id','object','size','type'])
 
 def convert_none(v):
     """Blank input cannot be recognized in pymongo. Convert to None."""
@@ -52,18 +52,19 @@ def clean_folder(x):
 
 def search(request):
     t1 = time.time()
-    try:
-        delete_path = os.listdir(settings.image_root)
-        delete_path = [os.path.join(settings.image_root, i)
-                       for i in delete_path]
-        pool = pool(12)
-        pool.map(clean_folder, delete_path)
-        pool.close()
-        pool.join()
-        shutil.rmtree(settings.IMAGE_ROOT)
-    except Exception as e:
-        pass
-    print("Delete all folders for:", time.time() - t1)
+    shutil.rmtree(settings.IMAGE_ROOT)
+    # try:
+    #     delete_path = os.listdir(settings.IMAGE_ROOT)
+    #     delete_path = [os.path.join(settings.IMAGE_ROOT, i)
+    #                    for i in delete_path]
+    #     pool = pool(12)
+    #     pool.map(clean_folder, delete_path)
+    #     pool.close()
+    #     pool.join()
+    #     shutil.rmtree(settings.IMAGE_ROOT)
+    # except Exception as e:
+    #     pass
+    # print("Delete all folders for:", time.time() - t1)
     if os.path.isdir(settings.IMAGE_ROOT) is False:
         print("Create image root.")
         os.makedirs(settings.IMAGE_ROOT)
@@ -110,8 +111,11 @@ def show_one_image(request):
 
 
 def start_search(request):
+    # global df
+    df=pd.DataFrame(columns=['class','collection','database','document',
+    'file_id','object','size','type'])
+    request.session['df']=df.to_json(orient='records')
     """Read the form and search the db, download images to static folder."""
-    global OBJECT_LOGIC, NUM_OBJECT
     print("<------------------------------->")
     print("START SEARCH")
     print("<------------------------------->")
@@ -170,7 +174,7 @@ def start_search(request):
         class_num_pixels_tolerance=int(form_dict['class_num_pixels_tolerance'])
 
         percentage = None if percentage == "" else float(percentage)
-        OBJECT_LOGIC = object_logic = form_dict['checkbox_object_logic']
+        object_logic = form_dict['checkbox_object_logic']
 
         # Read input from forms
         for key, value in form_dict.items():
@@ -305,92 +309,97 @@ def start_search(request):
             print("object_id_list", object_id_list)
             # Search all objects and store into pyweb collection
 
+            if object_logic=='and' and checkbox_object_pattern=='class':
+                image_info=m.search_class_by_and(time_from,time_until,class_id_list,image_type_list=image_type_list,flag_ignore_duplicate_image=flag_ignore_duplicate_image)
+            elif object_logic=='and' and checkbox_object_pattern=='id':
+                image_info=m.search_object_by_and(time_from,time_until,object_id_list,image_type_list=image_type_list,flag_ignore_duplicate_image=flag_ignore_duplicate_image)
+            elif object_logic=='or':
+                try:
+                    image_info = m.search(time_from, time_until, object_id_list, view_id, image_type_list, percentage,
+                                          int(image_limit / len(database_collection_list)),flag_ignore_duplicate_image,flag_class_ignore_duplicate_image)
 
-            try:
-                image_info = m.search(time_from, time_until, object_id_list, view_id, image_type_list, percentage,
-                                      int(image_limit / len(database_collection_list)),flag_ignore_duplicate_image,flag_class_ignore_duplicate_image)
+                    support_client.insert_many(image_info)
+                except Exception as e:
+                    print(e)
+                print("Search objects Done with:", time.time() - t0)
 
-                print("_____________________image info_________________:",image_info)
-                print("Object_id_list: %s,num of images: %s" %
-                      (object_id_list, len(image_info)))
-                support_client.insert_many(image_info)
-            except Exception as e:
-                print(e)
-            print("Search objects Done with:", time.time() - t0)
+            print("length of info:",len(image_info))
+            df=df.append(image_info,ignore_index=True)
+        # Connect the db and get download image list
+        # downl_client = MongoDB(ip=ip, database=support_database_name, collection=support_collection_name)
+        print('df:',df)
+        r = support_client.get_download_image_list(
+            num_object=len(object_id_list), object_logic=object_logic, user_id=user_id)
+        print("Download list length:", len(r))
 
-            # Connect the db and get download image list
-            # downl_client = MongoDB(ip=ip, database=support_database_name, collection=support_collection_name)
-            r = support_client.get_download_image_list(
-                num_object=len(object_id_list), object_logic=object_logic, user_id=user_id)
-            print("Download list length:", len(r))
+        # Parallel download images
+        pool = Pool(10)
+        download_info_list=df.to_dict('records')
+        pool.starmap(m.download_one, zip(
+            download_info_list, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
+        pool.close()
+        pool.join()
+        print("Download objects Done with:", time.time() - t0)
 
-            # Parallel download images
+        # Create dict to frontend
+        for image_type in image_type_list:
+            folder_path = os.path.join(
+                settings.IMAGE_ROOT, user_id + image_type)
+            if os.path.isdir(folder_path) is False:
+                os.mkdir(folder_path)
+            image_list = os.listdir(folder_path)
+            image_dir[image_type] = [os.path.join(
+                folder_path, i) for i in image_list]
+
+        # Resize image
+        if width != "" or height != "":
+            for key, value in image_dir.items():
+                image_path = image_path + value
+            print("Enter resizing.", width)
+            # print(image_path)
             pool = Pool(10)
-            pool.starmap(m.download_one, zip(
-                r, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
+            pool.starmap(resize_image, zip(
+                image_path, itertools.repeat(width), itertools.repeat(height), itertools.repeat(flag_resize_type)))
             pool.close()
             pool.join()
-            print("Download objects Done with:", time.time() - t0)
 
-            # Create dict to frontend
-            for image_type in image_type_list:
-                folder_path = os.path.join(
-                    settings.IMAGE_ROOT, user_id + image_type)
-                if os.path.isdir(folder_path) is False:
-                    os.mkdir(folder_path)
-                image_list = os.listdir(folder_path)
-                image_dir[image_type] = [os.path.join(
-                    folder_path, i) for i in image_list]
-            NUM_OBJECT = len(object_id_list)
-
-            # Resize image
-            if width != "" or height != "":
-                for key, value in image_dir.items():
-                    image_path = image_path + value
-                print("Enter resizing.", width)
-                # print(image_path)
-                pool = Pool(10)
-                pool.starmap(resize_image, zip(
-                    image_path, itertools.repeat(width), itertools.repeat(height), itertools.repeat(flag_resize_type)))
-                pool.close()
-                pool.join()
-
-            # Do object cutting
-            if flag_bounding_box is True:
-                print("Start generate bounding box")
-                bounding_box_dict = {key: [] for key in object_id_list}
-                pool = Pool(10)
-                for object_id in object_id_list:
-                    bounding_box_dict[object_id] = (create_bounding_box(image_dir,
-                                                                        database_name, collection_name, ip, object_logic, object_id, user_id, num_object,
-                                                                        image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
-                                                                        flag_stretch_background, flag_add_bounding_box_to_origin))
+        # Do object cutting
+        if flag_bounding_box is True:
+            print("Start generate bounding box")
+            bounding_box_dict = {key: [] for key in object_id_list}
+            pool = Pool(10)
+            for object_id in object_id_list:
+                bounding_box_dict[object_id] = (create_bounding_box(df,
+                                                                    database_name, collection_name, ip, object_logic, object_id, user_id, num_object,
+                                                                    image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
+                                                                    flag_stretch_background, flag_add_bounding_box_to_origin))
 
         return render(request, 'gallery.html',
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
 
-def create_bounding_box(image_dir, database, collection, ip, object_logic, object_id, user_id,
+def create_bounding_box(df, database, collection, ip, object_logic, object_id, user_id,
                         num_object, img_type, flag_remove_background, bounding_box_width, bounding_box_height,
                         flag_stretch_background, flag_add_bounding_box_to_origin):
+    # global df
+    df=df.reindex(columns=[*df.columns.tolist(),'wmin','wmax','hmin','hmax','x_center','y_center','width','height'])
+    df['file_id']=df['file_id'].astype(str)
+    r=df[df.object==object_id][["type","file_id"]].to_dict('records')
+    # support_database_name = "semlog_web"
+    # support_collection_name = user_id + "." + "info"
+    # support_client = MongoClient(ip)[support_database_name][
+    #     support_collection_name]
+    # pipeline = []
 
-    support_database_name = "semlog_web"
-    support_collection_name = user_id + "." + "info"
-    support_client = MongoClient(ip)[support_database_name][
-        support_collection_name]
-    pipeline = []
+    # if object_logic == 'and':
+    #     m = MongoDB(support_database_name, support_collection_name, ip)
+    #     r = m.get_download_image_list(
+    #         num_object, object_logic='and', user_id=user_id)
+    # else:
+    #     pipeline.append({"$match": {"object": object_id}})
+    #     pipeline.append({"$project": {"file_id": 1, "type": 1, "_id": 0}})
+    #     r = list(support_client.aggregate(pipeline))
 
-    if object_logic == 'and':
-        m = MongoDB(support_database_name, support_collection_name, ip)
-        r = m.get_download_image_list(
-            num_object, object_logic='and', user_id=user_id)
-    else:
-        pipeline.append({"$match": {"object": object_id}})
-        pipeline.append({"$project": {"file_id": 1, "type": 1, "_id": 0}})
-        r = list(support_client.aggregate(pipeline))
-
-    # print("((((((((((((((((((((")
-    # print(r)
     # Type to be cut
 
     image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
@@ -430,8 +439,8 @@ def create_bounding_box(image_dir, database, collection, ip, object_logic, objec
         print("width", origin_width)
         print('height', origin_height)
         # print(origin_width,origin_height)
-
-        os.makedirs(saving_folder)
+        if not os.path.isdir(saving_folder):
+            os.makedirs(saving_folder)
         count = 0
 
         # Create and save cut images
@@ -458,18 +467,30 @@ def create_bounding_box(image_dir, database, collection, ip, object_logic, objec
                 image_type = "Mask"
             elif "Normal" in rgb_img:
                 image_type = "Normal"
-            if list(support_client.find({"object": object_id, "file_id": ObjectId(
-                    os.path.basename(rgb_img)[:-4]), "type": image_type})) == []:
-                support_client.insert({"object": object_id, "file_id": ObjectId(
-                    os.path.basename(rgb_img)[:-4]), 'type': image_type}, {"$set": {"wmin": int(hmin), "wmax": int(hmax), "hmin": int(wmin), "hmax": int(wmax), "class": class_name, "x_center": ((wmax + wmin) / 2) / origin_width, "y_center": ((hmax + hmin) / 2) / origin_height, "width": (wmax - wmin) / origin_width, "height": (hmax - hmin) / origin_height}})
+            image_file_id=os.path.basename(rgb_img)[:-4]
+            ind=df[(df.object==object_id)&(df.file_id==os.path.basename(rgb_img)[:-4])].index[0]
+            update_dict={"wmin": int(hmin), "wmax": int(hmax), "hmin": int(wmin), "hmax": int(wmax), 
+            "x_center": ((wmax + wmin) / 2) / origin_width, 
+            "y_center": ((hmax + hmin) / 2) / origin_height, 
+            "width": (wmax - wmin) / origin_width, "height": (hmax - hmin) / origin_height}
+            print('--------------------------------------------')
+            print(update_dict)
+            for key,value in update_dict.items():
+                df.loc[ind,key]=value
+            print(df.loc[ind])
+            # if list(support_client.find({"object": object_id, "file_id": ObjectId(
+            #         os.path.basename(rgb_img)[:-4]), "type": image_type})) == []:
+            #     support_client.insert({"object": object_id, "file_id": ObjectId(
+            #         os.path.basename(rgb_img)[:-4]), 'type': image_type}, {"$set": {"wmin": int(hmin), "wmax": int(hmax), "hmin": int(wmin), "hmax": int(wmax), "class": class_name, "x_center": ((wmax + wmin) / 2) / origin_width, "y_center": ((hmax + hmin) / 2) / origin_height, "width": (wmax - wmin) / origin_width, "height": (hmax - hmin) / origin_height}})
 
-            support_client.update({"object": object_id, "file_id": ObjectId(
-                os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin": int(hmin), "wmax": int(hmax), "hmin": int(wmin), "hmax": int(wmax), "class": class_name, "x_center": ((wmax + wmin) / 2) / origin_width, "y_center": ((hmax + hmin) / 2) / origin_height, "width": (wmax - wmin) / origin_width, "height": (hmax - hmin) / origin_height}})
+            # support_client.update({"object": object_id, "file_id": ObjectId(
+            #     os.path.basename(rgb_img)[:-4])}, {"$set": {"wmin": int(hmin), "wmax": int(hmax), "hmin": int(wmin), "hmax": int(wmax), "class": class_name, "x_center": ((wmax + wmin) / 2) / origin_width, "y_center": ((hmax + hmin) / 2) / origin_height, "width": (wmax - wmin) / origin_width, "height": (hmax - hmin) / origin_height}})
             count = count + 1
 
             image_dir[folder_map].append(img_saving_path)
         print("object:", object_id)
         print('update time:', count)
+    print(df.head())
 
     image_dir = {key: image_dir[key] for key in list(
         image_dir.keys()) if key.endswith("_cut")}
@@ -510,19 +531,14 @@ def download(request):
 
     return response
 
-
 def download_label(request):
+    # global df
+    df=pd.read_json(request.session['df'],orient='records')
+    user_id=str(request.session['user_id'])
+    class_list=df['class'].unique()
+    df=df[df.type=='Color']
+    image_id_list=df['file_id']
 
-    user_id = str(request.session['user_id'])
-    ip = request.session['ip']
-    support_database_name = "semlog_web"
-    support_collection_name = user_id + "." + "info"
-    m = MongoDB(ip=ip, database=support_database_name,
-                collection=support_collection_name)
-    class_list = MongoClient(host=ip)[support_database_name][
-        support_collection_name].distinct('class')
-    print("distinct class is", class_list)
-    label_info = m.get_label_from_info()
 
     label_folder_name = "label_info"
     text_folder_name = "class.txt"
@@ -538,29 +554,64 @@ def download_label(request):
     with open(text_folder_path, 'w') as class_file:
         for _class_name in class_list:
             class_file.write('%s\n' % _class_name)
+    return HttpResponse('sss')
 
-    for _each_image_info in label_info:
-        _image_name = str(_each_image_info['_id'])
-        # _txt=os.path.join(image_label_folder_path,str(_image_name)+".txt")
-        _txt = os.path.join(image_label_folder_path, "train.txt")
+    for each_image in image_id_list:
+        info=df[df['file_id']==each_image]
+        print(info)
 
-        # pprint.pprint(_each_image_info)
-        for i, _each_label in enumerate(_each_image_info['class_list']):
-            if "hmax" not in _each_label.keys():
-                continue
-            print(_each_label.keys())
-            _class_index = class_list.index(_each_label['class'])
-            txt_file = open(_txt, 'a')
-            if i == 0:  # first loop
-                txt_file.write('%s %s,%s,%s,%s,%s' % (os.path.join(user_id + "Color", _image_name + ".png"), _each_label[
-                               'wmin'], _each_label['hmin'], _each_label['wmax'], _each_label['hmax'], _class_index))
-            else:
-                txt_file.write(' %s,%s,%s,%s,%s' % (_each_label['wmin'], _each_label[
-                               'hmin'], _each_label['wmax'], _each_label['hmax'], _class_index))
-            if i == len(_each_image_info['class_list']) - 1:  # last loop
-                txt_file.write("\n")
+# def download_label(request):
+#     global df
 
-    return HttpResponse(label_info)
+#     user_id = str(request.session['user_id'])
+#     ip = request.session['ip']
+#     support_database_name = "semlog_web"
+#     support_collection_name = user_id + "." + "info"
+#     m = MongoDB(ip=ip, database=support_database_name,
+#                 collection=support_collection_name)
+#     class_list = MongoClient(host=ip)[support_database_name][
+#         support_collection_name].distinct('class')
+#     class_list=df['class'].unique()
+#     print("distinct class is", class_list)
+#     label_info = m.get_label_from_info()
+
+#     label_folder_name = "label_info"
+#     text_folder_name = "class.txt"
+#     label_folder_path = os.path.join(
+#         settings.IMAGE_ROOT, user_id + "_" + label_folder_name)
+#     image_label_folder_path = os.path.join(label_folder_path, 'image_label')
+#     text_folder_path = os.path.join(label_folder_path, text_folder_name)
+#     # print(label_folder_path)
+
+#     # Create label info folder and add class name
+#     os.makedirs(label_folder_path)
+#     os.makedirs(image_label_folder_path)
+#     with open(text_folder_path, 'w') as class_file:
+#         for _class_name in class_list:
+#             class_file.write('%s\n' % _class_name)
+
+#     for _each_image_info in label_info:
+#         _image_name = str(_each_image_info['_id'])
+#         # _txt=os.path.join(image_label_folder_path,str(_image_name)+".txt")
+#         _txt = os.path.join(image_label_folder_path, "train.txt")
+
+#         # pprint.pprint(_each_image_info)
+#         for i, _each_label in enumerate(_each_image_info['class_list']):
+#             if "hmax" not in _each_label.keys():
+#                 continue
+#             print(_each_label.keys())
+#             _class_index = class_list.index(_each_label['class'])
+#             txt_file = open(_txt, 'a')
+#             if i == 0:  # first loop
+#                 txt_file.write('%s %s,%s,%s,%s,%s' % (os.path.join(user_id + "Color", _image_name + ".png"), _each_label[
+#                                'wmin'], _each_label['hmin'], _each_label['wmax'], _each_label['hmax'], _class_index))
+#             else:
+#                 txt_file.write(' %s,%s,%s,%s,%s' % (_each_label['wmin'], _each_label[
+#                                'hmin'], _each_label['wmax'], _each_label['hmax'], _class_index))
+#             if i == len(_each_image_info['class_list']) - 1:  # last loop
+#                 txt_file.write("\n")
+
+#     return HttpResponse(label_info)
 
 
 
