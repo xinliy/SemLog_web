@@ -459,6 +459,8 @@ def create_bounding_box(support_database, support_collection, ip, object_id,rgb,
 
         # Create and save cut images
         for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
+            print(rgb_img)
+            print(mask_img)
             img_saving_path = os.path.join(
                 saving_folder, os.path.basename(rgb_img))
 
