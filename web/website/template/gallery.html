@@ -91,11 +91,11 @@
         {% comment %} create tab label for each object_id {% endcomment %}
         {% for image_object_id, image_package in bounding_box.items %}
             {% if forloop.first %}
-                <div class="three wide column">
+                <div class="four wide column">
                 <a class="active item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
                 </div>
             {% else %}
-                <div class="three wide column">
+                <div class="four wide column">
                 <a class="item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
                 </div>
             {% endif %}
