@@ -56,17 +56,17 @@ def search(request):
     delete_path = os.listdir(settings.IMAGE_ROOT)
     delete_path = [os.path.join(settings.IMAGE_ROOT, i)
                    for i in delete_path]
-    print(delete_path)
-    pool = Pool(12)
-    pool.map(clean_folder, delete_path)
-    pool.close()
-    pool.join()
     try:
-        shutil.rmtree(settings.IMAGE_ROOT)
+        pool = Pool(12)
+        pool.map(clean_folder, delete_path)
+        pool.close()
+        pool.join()
     except Exception as e:
         print(e)
         print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
         pass
+
+    shutil.rmtree(settings.IMAGE_ROOT)
     print("Delete all folders for:", time.time() - t1)
     if os.path.isdir(settings.IMAGE_ROOT) is False:
         print("Create image root.")
