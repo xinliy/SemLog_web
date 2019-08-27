@@ -130,6 +130,7 @@ def start_search(request):
         class_id_list = []
         image_type_list = []
         bounding_box_dict = {}
+        object_rgb_dict={}
         object_logic = 'and'
         time_from = None
         time_until = None
@@ -236,13 +237,22 @@ def start_search(request):
                 object_id_list = object_id_list + \
                     m.get_object_by_class(class_id_list)
                 object_id_list=list(set(object_id_list))
+                if flag_bounding_box is True:
+                    for object_id in object_id_list:
+                        if object_id not in object_rgb_dict.keys():
+                            rgb=m.get_object_rgb(object_id) 
+                            if rgb is not None:
+                                object_rgb_dict[object_id]=rgb
+
                 # class_object_list=m.get_object_list_by_class_list(cl)
                 print("Input class_id_list is:", class_id_list)
                 print("Retrieved object_id_list is:", object_id_list)
                 print('image_type_list', image_type_list)
+
         else:
             print("Target pattern -> id")
             print(object_id_list)
+
         # Change to list in the future
         view_id = None
 
@@ -366,19 +376,21 @@ def start_search(request):
         if flag_bounding_box is True:
             print("Start generate bounding box")
             bounding_box_dict = {key: [] for key in object_id_list}
-            pool = Pool(10)
+            # pool = Pool(10)
+            # pool.starmap(create_bounding_box)
             for object_id in object_id_list:
-                bounding_box_dict[object_id] = (create_bounding_box(image_dir,
-                                                                    database_name, collection_name, ip, object_logic, object_id, user_id, num_object,
+                rgb=object_rgb_dict[object_id]
+                bounding_box_dict[object_id] = (create_bounding_box(
+                                                                    support_database_name, support_collection_name, ip, object_id,rgb, user_id,
                                                                     image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
                                                                     flag_stretch_background, flag_add_bounding_box_to_origin))
 
+        print(bounding_box_dict)
         return render(request, 'gallery.html',
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
 
-def create_bounding_box(image_dir, database, collection, ip, object_logic, object_id, user_id,
-                        num_object, img_type, flag_remove_background, bounding_box_width, bounding_box_height,
+def create_bounding_box(support_database, support_collection, ip, object_id,rgb, user_id, img_type, flag_remove_background, bounding_box_width, bounding_box_height,
                         flag_stretch_background, flag_add_bounding_box_to_origin):
 
     support_database_name = "semlog_web"
@@ -387,6 +399,8 @@ def create_bounding_box(image_dir, database, collection, ip, object_logic, objec
     pipeline = []
     r=support_client.get_download_list_by_id(object_id)
     support_client=MongoClient(host=ip)[support_database_name][support_collection_name]
+    print("length of bounding box:",len(r))
+
 
     # if object_logic == 'and':
     #     m = MongoDB(support_database_name, support_collection_name, ip)
@@ -399,16 +413,19 @@ def create_bounding_box(image_dir, database, collection, ip, object_logic, objec
     # Type to be cut
 
     image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
+    if len(r)==0:
+        return image_dir
+    class_name=r[0]['class']
     for image_info in r:
         image_dir[image_info["type"]].append(
     os.path.join(settings.IMAGE_ROOT, user_id + image_info["type"],
     str(image_info["file_id"]) + ".png"))
 
     # Init MongoDB and get the corresponding color, class name
-    m = MongoDB(ip=ip, database=database, collection=collection)
-    rgb = m.get_object_rgb(object_id, collection=collection + ".meta")
-    class_name = MongoDB(ip=ip, database=database, collection=collection +
-                         ".meta").get_class_by_object_id(object_id)
+    # m = MongoDB(ip=ip, database=database, collection=collection)
+    # rgb = m.get_object_rgb(object_id, collection=collection + ".meta")
+    # class_name = MongoDB(ip=ip, database=database, collection=collection +
+                         # ".meta").get_class_by_object_id(object_id)
 
     print("<------------------------------->")
     print("Object id: %s, rgb_color: %s" % (object_id, rgb))
@@ -451,6 +468,7 @@ def create_bounding_box(image_dir, database, collection, ip, object_logic, objec
                                                 width=bounding_box_width, height=bounding_box_height, flag_stretch_background=flag_stretch_background,
                                                 flag_add_bounding_box_to_origin=flag_add_bounding_box_to_origin)
             if wmin == -1:
+                print("ignore this bounding box!")
                 continue
             wmin = 1 if wmin == 0 else wmin
             wmax = 1 if wmax == 0 else wmax
