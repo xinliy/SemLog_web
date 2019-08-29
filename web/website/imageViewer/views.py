@@ -69,8 +69,10 @@ def search(request):
         print(e)
         print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
         pass
-
-    shutil.rmtree(settings.IMAGE_ROOT)
+    try:
+        shutil.rmtree(settings.IMAGE_ROOT)
+    except Exception as e:
+        print(e)
     print("Delete all folders for:", time.time() - t1)
     if os.path.isdir(settings.IMAGE_ROOT) is False:
         print("Create image root.")
@@ -319,7 +321,7 @@ def start_search(request):
 
 
             # If no entry for object id/class, search for all
-            if object_id_list==[]:
+            if object_id_list==[] and checkbox_object_pattern=="id":
                 object_id_list=m.get_all_object()
             print("object_id_list", object_id_list)
 
