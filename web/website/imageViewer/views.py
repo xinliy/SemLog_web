@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import cv2
+import gridfs
 
 import os
 import json
@@ -53,6 +54,9 @@ def clean_folder(x):
 
 def search(request):
     t1 = time.time()
+    if os.path.isdir(settings.IMAGE_ROOT) is False:
+        print("Create image root.")
+        os.makedirs(settings.IMAGE_ROOT)
     delete_path = os.listdir(settings.IMAGE_ROOT)
     delete_path = [os.path.join(settings.IMAGE_ROOT, i)
                    for i in delete_path]
@@ -336,17 +340,38 @@ def start_search(request):
             print("Search objects Done with:", time.time() - t0)
             if len(image_info)!=0:
                 support_client.insert_many(image_info)
+            print(len(image_info))
+            download_agent=gridfs.GridFSBucket(
+            MongoClient(ip)[database_name], collection_name)
+            for each_image in image_info:
+                m.download_one(download_agent,each_image,settings.IMAGE_ROOT,str(user_id))
 
-        # Connect the db and get download image list
-        r = support_client.get_download_image_list()
-        print("Download list length:", len(r))
 
-        # Parallel download images
-        pool = Pool(10)
-        pool.starmap(m.download_one, zip(
-            r, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
-        pool.close()
-        pool.join()
+
+        # def chunker_list(seq, size):
+        #     return (seq[i::size] for i in range(size))
+        # # Connect the db and get download image list
+            
+        # r = support_client.get_download_image_list()
+        # print("Download list length:", len(r))
+        # if len(r)>4000:
+        #     r_list=chunker_list(r,5)
+        #     for each_patch in r_list:
+        #         print("patch length:",len(each_patch))
+        #         pool = Pool(5)
+        #         pool.starmap(m.download_one, zip(
+        #         each_patch, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
+        #         pool.close()
+        #         pool.join()
+        # else:
+        #     # Parallel download images
+        #     pool = Pool(5)
+        #     pool.starmap(m.download_one, zip(
+        #     r, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
+        #     pool.close()
+        #     pool.join()
+        # for each_image in r:
+            # m.download_one(each_image,settings.IMAGE_ROOT,str(user_id))
         print("Download objects Done with:", time.time() - t0)
 
         # Create dict to frontend
@@ -385,7 +410,6 @@ def start_search(request):
                                                                     image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
                                                                     flag_stretch_background, flag_add_bounding_box_to_origin))
 
-        print(bounding_box_dict)
         return render(request, 'gallery.html',
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
@@ -459,8 +483,6 @@ def create_bounding_box(support_database, support_collection, ip, object_id,rgb,
 
         # Create and save cut images
         for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
-            print(rgb_img)
-            print(mask_img)
             img_saving_path = os.path.join(
                 saving_folder, os.path.basename(rgb_img))
 
