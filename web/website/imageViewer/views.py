@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import cv2
 import gridfs
+import pandas as pd
 
 import os
 import json
@@ -232,6 +233,7 @@ def start_search(request):
             print("Target pattern -> class")
             class_id_list = object_id_list.copy()
             object_id_list = []
+            class_object_mapping={i:[] for i in class_id_list}
             print("Search range:", database_collection_list)
             for database_collection in database_collection_list:
                 database_collection = database_collection.split("$")
@@ -240,20 +242,30 @@ def start_search(request):
                 COLLECTION = database_collection[1]
                 m = MongoDB(
                     database=DB, collection=COLLECTION + ".meta", ip=ip)
-                object_id_list = object_id_list + \
-                    m.get_object_by_class(class_id_list)
-                object_id_list=list(set(object_id_list))
+                # object_id_list = object_id_list + \
+                    # m.get_object_by_class(class_id_list)
+                class_object_dict=m.get_object_list_by_class_list(class_id_list)
+                for key,value in class_object_dict.items():
+                    class_object_mapping[key].extend(value)
+                for objects in class_object_dict.values():
+                    object_id_list.extend(objects)
                 if flag_bounding_box is True:
                     for object_id in object_id_list:
                         if object_id not in object_rgb_dict.keys():
                             rgb=m.get_object_rgb(object_id) 
                             if rgb is not None:
                                 object_rgb_dict[object_id]=rgb
+            object_id_list=[]
+            for objects in class_object_mapping.values():
+                object_id_list.extend(objects)
+
 
                 # class_object_list=m.get_object_list_by_class_list(cl)
-                print("Input class_id_list is:", class_id_list)
-                print("Retrieved object_id_list is:", object_id_list)
-                print('image_type_list', image_type_list)
+            print("Input class_id_list is:", class_id_list)
+            print("Retrieved object_id_list is:", object_id_list)
+            print("class_object_mapping:",class_object_mapping)
+            print('image_type_list', image_type_list)
+            print("rgb_dict",object_rgb_dict)
 
         else:
             print("Target pattern -> id")
@@ -412,6 +424,8 @@ def start_search(request):
                                                                     image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
                                                                     flag_stretch_background, flag_add_bounding_box_to_origin))
 
+
+
         return render(request, 'gallery.html',
                       {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
@@ -486,7 +500,7 @@ def create_bounding_box(support_database, support_collection, ip, object_id,rgb,
         # Create and save cut images
         for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
             img_saving_path = os.path.join(
-                saving_folder, os.path.basename(rgb_img))
+                saving_folder, os.path.basename(rgb_img[:-4])+"_"+class_name+'.png')
 
             # Cut object and update location to the collection
             wmin, wmax, hmin, hmax = cut_object(rgb_img, mask_img, rgb, saving_path=img_saving_path,
