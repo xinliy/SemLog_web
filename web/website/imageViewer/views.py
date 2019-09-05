@@ -258,7 +258,7 @@ def start_search(request):
             object_id_list=[]
             for objects in class_object_mapping.values():
                 object_id_list.extend(objects)
-
+            object_id_list=list(set(object_id_list))
 
                 # class_object_list=m.get_object_list_by_class_list(cl)
             print("Input class_id_list is:", class_id_list)
@@ -473,6 +473,8 @@ def create_bounding_box(support_database, support_collection, ip, object_id,rgb,
 
     # Create dict and folder
     for t in img_type:
+        # if t!="Color":
+        #     continue
         folder_name = user_id + "_" + object_id + "_" + t + 'boundingBox'
         folder_map = t + "_cut"
         image_dir[folder_map] = []
@@ -585,6 +587,7 @@ def download_label(request):
                 collection=support_collection_name)
     class_list = MongoClient(host=ip)[support_database_name][
         support_collection_name].distinct('class')
+    class_list=sorted(class_list)
     print("distinct class is", class_list)
     label_info = m.get_label_from_info()
 
