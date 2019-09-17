@@ -246,7 +246,8 @@ def start_search(request):
                     # m.get_object_by_class(class_id_list)
                 class_object_dict=m.get_object_list_by_class_list(class_id_list)
                 for key,value in class_object_dict.items():
-                    class_object_mapping[key].extend(value)
+                    if value not in class_object_mapping[key]:
+                       class_object_mapping[key].extend(value)
                 for objects in class_object_dict.values():
                     object_id_list.extend(objects)
                 if flag_bounding_box is True:
@@ -260,12 +261,26 @@ def start_search(request):
                 object_id_list.extend(objects)
             object_id_list=list(set(object_id_list))
 
-                # class_object_list=m.get_object_list_by_class_list(cl)
+            class_to_object_dict={}
+            for key,value in class_object_mapping.items():
+                class_to_object_dict[key]=list(set(value))
+            # Encode name 
+            encoding_dict={}
+            for k,v in class_to_object_dict.items():
+                for i,object_id in enumerate(v):
+                    encoding_dict[object_id]=k+str(i+1)
+
             print("Input class_id_list is:", class_id_list)
             print("Retrieved object_id_list is:", object_id_list)
             print("class_object_mapping:",class_object_mapping)
             print('image_type_list', image_type_list)
             print("rgb_dict",object_rgb_dict)
+            print("encoding_dict",encoding_dict)
+
+
+
+
+
 
         else:
             print("Target pattern -> id")
@@ -414,20 +429,27 @@ def start_search(request):
         # Do object cutting
         if flag_bounding_box is True:
             print("Start generate bounding box")
-            bounding_box_dict = {key: [] for key in object_id_list}
+            bounding_box_dict = {}
+            class_color_dict={}
             # pool = Pool(10)
             # pool.starmap(create_bounding_box)
             for object_id in object_id_list:
                 rgb=object_rgb_dict[object_id]
-                bounding_box_dict[object_id] = (create_bounding_box(
+                key_value = encoding_dict[object_id] if checkbox_object_pattern=='class' else object_id
+                print(object_id,key_value)
+                bounding_box_dict[key_value] = (create_bounding_box(
                                                                     support_database_name, support_collection_name, ip, object_id,rgb, user_id,
                                                                     image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
                                                                     flag_stretch_background, flag_add_bounding_box_to_origin))
+            sorted_keys=sorted(bounding_box_dict.keys())
+            bounding_box_dictionary={key:bounding_box_dict[key] for key in sorted_keys}
+        else:
+            bounding_box_dictionary={}
 
 
 
         return render(request, 'gallery.html',
-                      {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
+                      {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dictionary})
 
 
 def create_bounding_box(support_database, support_collection, ip, object_id,rgb, user_id, img_type, flag_remove_background, bounding_box_width, bounding_box_height,
@@ -460,6 +482,7 @@ def create_bounding_box(support_database, support_collection, ip, object_id,rgb,
         image_dir[image_info["type"]].append(
     os.path.join(settings.IMAGE_ROOT, user_id + image_info["type"],
     str(image_info["file_id"]) + ".png"))
+
 
     # Init MongoDB and get the corresponding color, class name
     # m = MongoDB(ip=ip, database=database, collection=collection)
@@ -627,7 +650,7 @@ def download_label(request):
             if i == len(_each_image_info['class_list']) - 1:  # last loop
                 txt_file.write("\n")
 
-    return HttpResponse(label_info)
+    return HttpResponse("Download successfully!")
 
 
 
