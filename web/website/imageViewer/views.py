@@ -278,13 +278,12 @@ def start_search(request):
             print("encoding_dict",encoding_dict)
 
 
-
-
-
-
         else:
             print("Target pattern -> id")
             print(object_id_list)
+
+        if object_id_list==[]:
+            return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
 
         # Change to list in the future
         view_id = None
