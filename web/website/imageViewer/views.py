@@ -269,13 +269,18 @@ def start_search(request):
             for k,v in class_to_object_dict.items():
                 for i,object_id in enumerate(v):
                     encoding_dict[object_id]=k+str(i+1)
+            class_object_rgb_dict={}
+            for _each_class_name,_object_id_list in class_object_mapping.items():
+                class_object_rgb_dict[_each_class_name]={i:object_rgb_dict[i] for i in _object_id_list}
 
             print("Input class_id_list is:", class_id_list)
             print("Retrieved object_id_list is:", object_id_list)
             print("class_object_mapping:",class_object_mapping)
-            print('image_type_list', image_type_list)
-            print("rgb_dict",object_rgb_dict)
-            print("encoding_dict",encoding_dict)
+            print('image_type_list:', image_type_list)
+            print("rgb_dict:",object_rgb_dict)
+            print("encoding_dict:",encoding_dict)
+            print("class_object_rgb_dict:",class_object_rgb_dict)
+            request.session['class_object_rgb_dict']=class_object_rgb_dict
 
 
         else:
@@ -602,6 +607,7 @@ def download(request):
 def download_label(request):
 
     user_id = str(request.session['user_id'])
+    class_object_rgb_dict=request.session['class_object_rgb_dict']
     ip = request.session['ip']
     support_database_name = "semlog_web"
     support_collection_name = user_id + "." + "info"
@@ -611,22 +617,27 @@ def download_label(request):
         support_collection_name].distinct('class')
     class_list=sorted(class_list)
     print("distinct class is", class_list)
+    print("mask_mapping is:",class_object_rgb_dict)
     label_info = m.get_label_from_info()
 
     label_folder_name = "label_info"
-    text_folder_name = "class.txt"
+    text_file_name = "class.txt"
+    mask_file_name = "mask.json"
     label_folder_path = os.path.join(
         settings.IMAGE_ROOT, user_id + "_" + label_folder_name)
     image_label_folder_path = os.path.join(label_folder_path, 'image_label')
-    text_folder_path = os.path.join(label_folder_path, text_folder_name)
+    text_file_path = os.path.join(label_folder_path, text_file_name)
+    mask_file_path=os.path.join(label_folder_path,mask_file_name)
     # print(label_folder_path)
 
     # Create label info folder and add class name
     os.makedirs(label_folder_path)
     os.makedirs(image_label_folder_path)
-    with open(text_folder_path, 'w') as class_file:
+    with open(text_file_path, 'w') as class_file:
         for _class_name in class_list:
             class_file.write('%s\n' % _class_name)
+    with open(mask_file_path,'w') as mask_file:
+        json.dump(class_object_rgb_dict,mask_file)
 
     for _each_image_info in label_info:
         _image_name = str(_each_image_info['_id'])
@@ -637,7 +648,6 @@ def download_label(request):
         for i, _each_label in enumerate(_each_image_info['class_list']):
             if "hmax" not in _each_label.keys():
                 continue
-            print(_each_label.keys())
             _class_index = class_list.index(_each_label['class'])
             txt_file = open(_txt, 'a')
             if i == 0:  # first loop
