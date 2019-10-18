@@ -138,12 +138,14 @@ def start_search(request):
         print("Retrieved object_id_list is:", d.object_id_list)
         print("class_object_rgb_dict:",d.class_object_rgb_dict) 
 
-        if d.object_id_list==[]:
+        if d.object_id_list==[] and d.search_pattern=="entity_search":
             return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
         # Create support db-collection to store processed data
         print("search pattern:",d.search_pattern)
         if d.search_pattern=="entity_search":
             d.entity_search()
+        else:
+            d.event_search()
 
         # Resize image
         if d.width != "" or d.height != "":
@@ -158,29 +160,10 @@ def start_search(request):
             pool.join()
 
         # Do object cutting
-        if d.flag_bounding_box is True:
+        if d.flag_bounding_box is True and d.search_pattern=="entity_search":
             d.generate_bounding_box()
         else:
             d.bounding_box_dictionary={}
-        #     print("Start generate bounding box")
-        #     bounding_box_dict = {}
-        #     class_color_dict={}
-        #     # pool = Pool(10)
-        #     # pool.starmap(create_bounding_box)
-        #     for object_id in object_id_list:
-        #         rgb=object_rgb_dict[object_id]
-        #         key_value = encoding_dict[object_id] if checkbox_object_pattern=='class' else object_id
-        #         print(object_id,key_value)
-        #         bounding_box_dict[key_value] = (create_bounding_box(
-        #                                                             support_database_name, support_collection_name, ip, object_id,rgb, user_id,
-        #                                                             image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
-        #                                                             flag_stretch_background, flag_add_bounding_box_to_origin))
-        #     sorted_keys=sorted(bounding_box_dict.keys())
-        #     bounding_box_dictionary={key:bounding_box_dict[key] for key in sorted_keys}
-        # else:
-        #     bounding_box_dictionary={}
-
-
 
         return render(request, 'gallery.html',
                       {"object_id_list": d.object_id_list, "image_dir": d.image_dir, "bounding_box": d.bounding_box_dictionary})

@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 import os
 import cv2
 try:
-    from web.semlog_mongo.semlog_mongo.mongo import MongoDB
+    from web.semlog_mongo.semlog_mongo.mongo import MongoDB,search_single_image_by_view
     from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
     from web.website import settings
 except Exception as e:
@@ -27,8 +27,12 @@ class Data():
         object_id_list = []
         class_id_list = []
         image_type_list = []
+        view_list=[]
         bounding_box_dict = {}
         object_rgb_dict={}
+        class_to_object_dict={}
+        class_object_mapping={}
+        encoding_dict={}
         object_logic = 'and'
         support_database_name="semlog_web"
         search_pattern='entity_search'
@@ -88,8 +92,13 @@ class Data():
                 flag_class_apply_filtering = True
             if key.startswith('checkbox_search_pattern'):
                 search_pattern=value
+            if key.startswith("view_object_id"):
+                v=value.split('-')
+                if len(v)!=4:
+                    raise ValueError("The input search gramma is wrong.")
+                else:
+                    view_list.append(v)
             if key.startswith('database_collection_list'):
-
                 m = MongoClient(ip, 27017)
                 if value=='':
                     # Append all available collections 
@@ -116,10 +125,6 @@ class Data():
                             new_list.append(database_collection)
                     database_collection_list=sorted(list(set(new_list)))
                     print("new lsit:",database_collection_list)
-
-
-
-                        
 
             # Get multiply objects/classes from input fields
             if key.startswith('object_id') and value != '':
@@ -240,6 +245,7 @@ class Data():
         self.user_id=user_id
         self.ip=ip
         self.view_id=None
+        self.view_list=view_list
         m=MongoClient(ip)[support_database_name]
         self.support_client = MongoDB(
         ip=ip, database=self.support_database_name, collection=self.support_collection_name)
@@ -251,6 +257,23 @@ class Data():
                 m[_collection_name].drop()
             except Exception as e:
                 print(e)
+
+
+    def event_search(self):
+        for s in self.view_list:
+            print(s)
+            client=MongoClient(self.ip)[s[0]][s[1]]
+            m=MongoDB(s[0],s[1],ip=self.ip)
+            image_info=search_single_image_by_view(client,timestamp=float(s[3]),view_id=s[2])
+            print("result images:",image_info)
+            download_agent=gridfs.GridFSBucket(
+            MongoClient(self.ip)[s[0]], s[1])
+            for each_image in image_info:
+                m.download_one(download_agent,each_image,settings.IMAGE_ROOT,str(self.user_id))
+        self.scann_images()
+           
+            
+
 
 
     def entity_search(self):
@@ -306,7 +329,9 @@ class Data():
             MongoClient(self.ip)[database_name], collection_name)
             for each_image in image_info:
                 m.download_one(download_agent,each_image,settings.IMAGE_ROOT,str(self.user_id))
+        self.scann_images()
 
+    def scann_images(self):
         # Create dict to frontend
         for image_type in self.image_type_list:
             folder_path = os.path.join(
