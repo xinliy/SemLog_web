@@ -14,7 +14,19 @@ $(document).ready(function () {
             dataType: "json",
             success: function (result, statues, xml) {
                 $("#collection_selector").empty();
-                const k = Object.keys(result);
+                var k = Object.keys(result);
+                k=k.filter(function(e){return e !=="semlog_web"})
+
+                // Add DB$ALL options
+                for (i=0;i<k.length;i++){
+                        var option = document.createElement("option");
+                        option.text = k[i] + "$" + "ALL";
+                        c = k[i] + "$" + "ALL";
+                        var v = "<input type='text' name=" + "database_collection" + i.toString() + "ALL" + " value=" + c + " hidden>";
+                        $("#collection_selector").append(option)                   
+                }
+
+                // Add every options
                 for (i = 0; i < k.length; i++) {
                     var collection_list = result[k[i]].sort();
                     for (j = 0; j < collection_list.length; j++) {
@@ -36,6 +48,15 @@ $(document).ready(function () {
 
 
 
+    // Add hide/show for two search pattern
+    $("#entity_search").click(function(){
+        $("#div_entity_search").show();
+        $("#div_event_search").hide();
+    });
+    $("#event_search").click(function(){
+        $("#div_event_search").show();
+        $("#div_entity_search").hide();
+    });
 
     var id = 0;
     $("#view_add").click(function () {

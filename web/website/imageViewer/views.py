@@ -16,6 +16,8 @@ from multiprocessing.dummy import Pool
 import itertools
 import pprint
 
+from web.website.imageViewer.utils import *
+
 try:
     from web.semlog_mongo.semlog_mongo.mongo import MongoDB
     from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
@@ -130,254 +132,26 @@ def start_search(request):
 
     # Read the input from teh user.
     if request.method == "GET":
-        user_id = str(uuid.uuid4())
-        request.session['user_id'] = user_id
         form_dict = request.GET.dict()
-        object_id_list = []
-        class_id_list = []
-        image_type_list = []
-        bounding_box_dict = {}
-        object_rgb_dict={}
-        object_logic = 'and'
-        time_from = None
-        time_until = None
-        flag_bounding_box = False
-        flag_remove_background = False
-        flag_stretch_background = False
-        flag_add_bounding_box_to_origin = False
-        flag_ignore_duplicate_image = False
-        flag_apply_filtering=False
-        flag_class_ignore_duplicate_image=False
-        flag_class_apply_filtering=False
-        class_linear_distance_tolerance=150
-        class_angular_distance_tolerance=0.005
-        class_num_pixels_tolerance=150
-        linear_distance_tolerance=50
-        angular_distance_tolerance=1
+        d=Data(form_dict,request.session['ip'])
+        request.session['user_id'] = d.user_id
+        request.session['class_object_rgb_dict']=d.class_object_rgb_dict
+        print("Input class_id_list is:", d.class_id_list)
+        print("Retrieved object_id_list is:", d.object_id_list)
+        print("class_object_mapping:",d.class_object_mapping)
+        print('image_type_list:', d.image_type_list)
+        print("rgb_dict:",d.object_rgb_dict)
+        print("encoding_dict:",d.encoding_dict)
+        print("class_object_rgb_dict:",d.class_object_rgb_dict) 
 
-        ip = request.session['ip']
-
-        print("<------------------------------->")
-        print("GET INPUT", request.GET.dict())
-        print("<------------------------------->")
-
-        # Read input from the form
-        percentage = form_dict['percentage']
-        image_limit = int(form_dict['image_limit'])
-        checkbox_object_pattern = form_dict['checkbox_object_pattern']
-        flag_resize_type = form_dict['checkbox_resize_type']
-        time_from = form_dict['time_from']
-        time_until = form_dict['time_until']
-        width = int(request.GET['width']) if request.GET['width'] != "" else ""
-        height = int(request.GET['height']
-                     ) if request.GET['height'] != "" else ""
-        bounding_box_width = int(
-            request.GET['bounding_box_width']) if request.GET['bounding_box_width'] != "" else ""
-        bounding_box_height = int(request.GET['bounding_box_height']
-                                  ) if request.GET['bounding_box_height'] != "" else ""
-        linear_distance_tolerance=float(form_dict['linear_distance_tolerance'])
-        angular_distance_tolerance=float(form_dict['angular_distance_tolerance'])
-        class_linear_distance_tolerance=float(form_dict['class_linear_distance_tolerance'])
-        class_angular_distance_tolerance=float(form_dict['class_angular_distance_tolerance'])
-        class_num_pixels_tolerance=int(form_dict['class_num_pixels_tolerance'])
-
-        percentage = None if percentage == "" else float(percentage)
-        OBJECT_LOGIC = object_logic = form_dict['checkbox_object_logic']
-
-        # Read input from forms
-        for key, value in form_dict.items():
-            if key.startswith("checkbox_add_bounding_box_to_origin"):
-                flag_add_bounding_box_to_origin = True
-            if key.startswith("checkbox_stretch_background"):
-                flag_stretch_background = True
-            if key.startswith("checkbox_remove_background"):
-                flag_remove_background = True
-            if key.startswith("checkbox_bounding_box"):
-                flag_bounding_box = True
-            if key.startswith("checkbox_ignore_duplicate_image"):
-                flag_ignore_duplicate_image = True
-            if key.startswith("checkbox_apply_filtering"):
-                flag_apply_filtering=True
-            if key.startswith("checkbox_class_ignore_duplicate_image"):
-                flag_class_ignore_duplicate_image = True
-            if key.startswith("checkbox_class_ignore_duplicate_image"):
-                flag_class_apply_filtering = True
-            if key.startswith('database_collection_list'):
-                database_collection_list = value.split("@")
-            # Get multiply objects/classes from input fields
-            if key.startswith('object_id') and value != '':
-                object_id_list.append(value)
-            if key.startswith('class_id') and value != '':
-                class_id_list.append(value)
-            # Get selected image type checkbox
-            if key.startswith('rgb'):
-                image_type_list.append('Color')
-            if key.startswith('depth'):
-                image_type_list.append('Depth')
-            if key.startswith('normal'):
-                image_type_list.append('Normal')
-            if key.startswith('mask'):
-                image_type_list.append('Mask')
-
-            # Get the logic of object/class
-            if key.startswith('checkbox_object_logic'):
-                if value != 'and':
-                    object_logic = 'or'
-
-        # Remove blank input
-        database_collection_list = [
-            i for i in database_collection_list if i != ""]
-
-        # Conditional branch for class searching
-        if checkbox_object_pattern == 'class':
-            print("Target pattern -> class")
-            class_id_list = object_id_list.copy()
-            object_id_list = []
-            class_object_mapping={i:[] for i in class_id_list}
-            print("Search range:", database_collection_list)
-            for database_collection in database_collection_list:
-                database_collection = database_collection.split("$")
-                print("Enter database_collection:", database_collection)
-                DB = database_collection[0]
-                COLLECTION = database_collection[1]
-                m = MongoDB(
-                    database=DB, collection=COLLECTION + ".meta", ip=ip)
-                # object_id_list = object_id_list + \
-                    # m.get_object_by_class(class_id_list)
-                class_object_dict=m.get_object_list_by_class_list(class_id_list)
-                for key,value in class_object_dict.items():
-                    if value not in class_object_mapping[key]:
-                       class_object_mapping[key].extend(value)
-                for objects in class_object_dict.values():
-                    object_id_list.extend(objects)
-                if flag_bounding_box is True:
-                    for object_id in object_id_list:
-                        if object_id not in object_rgb_dict.keys():
-                            rgb=m.get_object_rgb(object_id) 
-                            if rgb is not None:
-                                object_rgb_dict[object_id]=rgb
-            object_id_list=[]
-            for objects in class_object_mapping.values():
-                object_id_list.extend(objects)
-            object_id_list=list(set(object_id_list))
-
-            class_to_object_dict={}
-            for key,value in class_object_mapping.items():
-                class_to_object_dict[key]=list(set(value))
-            # Encode name 
-            encoding_dict={}
-            for k,v in class_to_object_dict.items():
-                for i,object_id in enumerate(v):
-                    encoding_dict[object_id]=k+str(i+1)
-            class_object_rgb_dict={}
-            for _each_class_name,_object_id_list in class_object_mapping.items():
-                class_object_rgb_dict[_each_class_name]={i:object_rgb_dict[i] for i in _object_id_list}
-
-            print("Input class_id_list is:", class_id_list)
-            print("Retrieved object_id_list is:", object_id_list)
-            print("class_object_mapping:",class_object_mapping)
-            print('image_type_list:', image_type_list)
-            print("rgb_dict:",object_rgb_dict)
-            print("encoding_dict:",encoding_dict)
-            print("class_object_rgb_dict:",class_object_rgb_dict)
-            request.session['class_object_rgb_dict']=class_object_rgb_dict
-
-
-        else:
-            print("Target pattern -> id")
-            print(object_id_list)
-
-        if object_id_list==[]:
+        if d.object_id_list==[]:
             return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
-
-        # Change to list in the future
-        view_id = None
-
-
-        # Convert time to float
-        if len(database_collection_list) != 1:
-            time_from = time_until = None
-        if time_from is not None:
-            time_from = float(time_from) if time_from != "" else None
-        if time_until is not None:
-            time_until = float(time_until) if time_until != "" else None
-
-        # Remove blank input
-        database_collection_list = [
-            i for i in database_collection_list if i != '']
-        image_dir = {"Color": [], "Depth": [], "Mask": [], "Normal": []}
-        image_path = []
-        num_object = len(object_id_list)
-
         # Create support db-collection to store processed data
-        support_database_name = "semlog_web"
-        support_collection_name = user_id + "." + "info"
 
-        # Delete old user info
-        m = MongoClient(ip)[support_database_name]
-        for _collection_name in m.list_collection_names():
-            try:
-                m[_collection_name].drop()
-            except Exception as e:
-                print(e)
 
-        # support_client=MongoClient(ip)[support_database_name][support_collection_name]
-        support_client = MongoDB(
-            ip=ip, database=support_database_name, collection=support_collection_name)
 
         # loop all selected collections
-        for database_collection in database_collection_list:
-            database_collection = database_collection.split("$")
-            print("Enter database_collection:", database_collection)
-            database_name = database_collection[0]
-            collection_name = database_collection[1]
-            print(ip, database_name, collection_name)
 
-            #------------Perform filtering function----------------#
-
-            m = MongoDB(ip=ip, database=database_name,
-                        collection=collection_name)
-            if flag_apply_filtering is True:
-                m.check_and_update_duplicate(linear_distance_tolerance,angular_distance_tolerance)
-
-
-
-            if checkbox_object_pattern=="class" and flag_class_apply_filtering is True:
-                print("Enter per class filtering function.")
-                m.check_and_update_duplicate_per_class(class_list=class_id_list,
-                    num_pixels_tolerance=class_num_pixels_tolerance,
-                    linear_distance_tolerance=class_linear_distance_tolerance,
-                    angular_distance_tolerance=class_angular_distance_tolerance,
-                    flag_ignore_duplicate_image=flag_ignore_duplicate_image)
-
-
-            # If no entry for object id/class, search for all
-            if object_id_list==[] and checkbox_object_pattern=="id":
-                object_id_list=m.get_all_object()
-            print("object_id_list", object_id_list)
-
-            # Search all objects and store into pyweb collection
-            if object_logic=="and" and checkbox_object_pattern=='class':
-                image_info=m.search_class_by_and(time_from,time_until,class_id_list,
-                    image_type_list=image_type_list,flag_ignore_duplicate_image=flag_ignore_duplicate_image)
-            elif object_logic=="and" and checkbox_object_pattern=='id':
-                image_info=m.search_object_by_and(time_from,time_until,class_id_list,
-                    image_type_list=image_type_list,flag_ignore_duplicate_image=flag_ignore_duplicate_image)
-            else:
-                try:
-                    image_info = m.search(time_from, time_until, object_id_list, view_id, image_type_list, percentage,
-                                          int(image_limit / len(database_collection_list)),flag_ignore_duplicate_image,flag_class_ignore_duplicate_image)
-
-                except Exception as e:
-                    print(e)
-            print("Search objects Done with:", time.time() - t0)
-            if len(image_info)!=0:
-                support_client.insert_many(image_info)
-            print(len(image_info))
-            download_agent=gridfs.GridFSBucket(
-            MongoClient(ip)[database_name], collection_name)
-            for each_image in image_info:
-                m.download_one(download_agent,each_image,settings.IMAGE_ROOT,str(user_id))
 
 
 
@@ -407,53 +181,47 @@ def start_search(request):
             # m.download_one(each_image,settings.IMAGE_ROOT,str(user_id))
         print("Download objects Done with:", time.time() - t0)
 
-        # Create dict to frontend
-        for image_type in image_type_list:
-            folder_path = os.path.join(
-                settings.IMAGE_ROOT, user_id + image_type)
-            if os.path.isdir(folder_path) is False:
-                os.mkdir(folder_path)
-            image_list = os.listdir(folder_path)
-            image_dir[image_type] = [os.path.join(
-                folder_path, i) for i in image_list]
-        NUM_OBJECT = len(object_id_list)
+
 
         # Resize image
-        if width != "" or height != "":
-            for key, value in image_dir.items():
-                image_path = image_path + value
-            print("Enter resizing.", width)
+        if d.width != "" or d.height != "":
+            for key, value in d.image_dir.items():
+                d.image_path = d.image_path + value
+            print("Enter resizing.", d.width)
             # print(image_path)
             pool = Pool(10)
             pool.starmap(resize_image, zip(
-                image_path, itertools.repeat(width), itertools.repeat(height), itertools.repeat(flag_resize_type)))
+                d.image_path, itertools.repeat(d.width), itertools.repeat(d.height), itertools.repeat(d.flag_resize_type)))
             pool.close()
             pool.join()
 
         # Do object cutting
-        if flag_bounding_box is True:
-            print("Start generate bounding box")
-            bounding_box_dict = {}
-            class_color_dict={}
-            # pool = Pool(10)
-            # pool.starmap(create_bounding_box)
-            for object_id in object_id_list:
-                rgb=object_rgb_dict[object_id]
-                key_value = encoding_dict[object_id] if checkbox_object_pattern=='class' else object_id
-                print(object_id,key_value)
-                bounding_box_dict[key_value] = (create_bounding_box(
-                                                                    support_database_name, support_collection_name, ip, object_id,rgb, user_id,
-                                                                    image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
-                                                                    flag_stretch_background, flag_add_bounding_box_to_origin))
-            sorted_keys=sorted(bounding_box_dict.keys())
-            bounding_box_dictionary={key:bounding_box_dict[key] for key in sorted_keys}
+        if d.flag_bounding_box is True:
+            d.generate_bounding_box()
         else:
-            bounding_box_dictionary={}
+            d.bounding_box_dictionary={}
+        #     print("Start generate bounding box")
+        #     bounding_box_dict = {}
+        #     class_color_dict={}
+        #     # pool = Pool(10)
+        #     # pool.starmap(create_bounding_box)
+        #     for object_id in object_id_list:
+        #         rgb=object_rgb_dict[object_id]
+        #         key_value = encoding_dict[object_id] if checkbox_object_pattern=='class' else object_id
+        #         print(object_id,key_value)
+        #         bounding_box_dict[key_value] = (create_bounding_box(
+        #                                                             support_database_name, support_collection_name, ip, object_id,rgb, user_id,
+        #                                                             image_type_list, flag_remove_background, bounding_box_width, bounding_box_height,
+        #                                                             flag_stretch_background, flag_add_bounding_box_to_origin))
+        #     sorted_keys=sorted(bounding_box_dict.keys())
+        #     bounding_box_dictionary={key:bounding_box_dict[key] for key in sorted_keys}
+        # else:
+        #     bounding_box_dictionary={}
 
 
 
         return render(request, 'gallery.html',
-                      {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dictionary})
+                      {"object_id_list": d.object_id_list, "image_dir": d.image_dir, "bounding_box": d.bounding_box_dictionary})
 
 
 def create_bounding_box(support_database, support_collection, ip, object_id,rgb, user_id, img_type, flag_remove_background, bounding_box_width, bounding_box_height,
