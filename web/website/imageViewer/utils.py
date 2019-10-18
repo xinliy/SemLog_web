@@ -1,12 +1,27 @@
-from semlog_mongo.semlog_mongo.mongo import MongoDB
 from pymongo import MongoClient
 import uuid
 import gridfs
 from web.website import settings
+from bson.objectid import ObjectId
 import os
+import cv2
+try:
+    from web.semlog_mongo.semlog_mongo.mongo import MongoDB
+    from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
+    from web.website import settings
+except Exception as e:
+    print("Clone two submodules(semlog_mongo and semlog_vis) first before run the server.")
+    os.system("git submodule init")
+    os.system("git submodule update")
+    from web.semlog_mongo.semlog_mongo.mongo import MongoDB
+    from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
+    from web.website import settings
+
+
 
 class Data():
     def __init__(self,form_dict,ip):
+        print(form_dict)
 
         user_id=str(uuid.uuid4())
         object_id_list = []
@@ -16,6 +31,7 @@ class Data():
         object_rgb_dict={}
         object_logic = 'and'
         support_database_name="semlog_web"
+        search_pattern='entity_search'
         time_from = None
         time_until = None
         flag_bounding_box = False
@@ -70,8 +86,41 @@ class Data():
                 flag_class_ignore_duplicate_image = True
             if key.startswith("checkbox_class_ignore_duplicate_image"):
                 flag_class_apply_filtering = True
+            if key.startswith('checkbox_search_pattern'):
+                search_pattern=value
             if key.startswith('database_collection_list'):
-                database_collection_list = value.split("@")
+
+                m = MongoClient(ip, 27017)
+                if value=='':
+                    # Append all available collections 
+                    database_collection_list=[]
+                    neglect_list = ['admin', 'config', 'local','semlog_web']
+                    db_list = m.list_database_names()
+                    db_list = [i for i in db_list if i not in neglect_list]
+                    for db in db_list:
+                        for c in m[db].list_collection_names():
+                            if '.' not in c:
+                                database_collection_list.append(db+"$"+c)
+                else:
+                    # Convert all to available collections
+                    database_collection_list = value.split("@")
+                    database_collection_list = [
+                        i for i in database_collection_list if i != ""]
+                    new_list=[]
+                    for database_collection in database_collection_list:
+                        dc=database_collection.split("$")
+                        if dc[1]=="ALL":
+                            extend_list=[dc[0]+"$"+i for i in m[dc[0]].list_collection_names() if '.' not in i]
+                            new_list.extend(extend_list)
+                        else:
+                            new_list.append(database_collection)
+                    database_collection_list=sorted(list(set(new_list)))
+                    print("new lsit:",database_collection_list)
+
+
+
+                        
+
             # Get multiply objects/classes from input fields
             if key.startswith('object_id') and value != '':
                 object_id_list.append(value)
@@ -93,8 +142,7 @@ class Data():
                     object_logic = 'or'
 
         # Remove blank input
-        database_collection_list = [
-        i for i in database_collection_list if i != ""]
+
         # Convert time to float
         # if len(d['database_collection_list']) != 1:
         #     time_from = time_until = None
@@ -146,13 +194,7 @@ class Data():
             for _each_class_name,_object_id_list in class_object_mapping.items():
                 class_object_rgb_dict[_each_class_name]={i:object_rgb_dict[i] for i in _object_id_list}
 
-        # Delete old user info
-        m = MongoClient(ip)[support_database_name]
-        for _collection_name in m.list_collection_names():
-            try:
-                m[_collection_name].drop()
-            except Exception as e:
-                print(e)
+
 
         self.object_id_list=object_id_list
         self.class_id_list=class_id_list
@@ -175,6 +217,7 @@ class Data():
         self.class_num_pixels_tolerance=class_num_pixels_tolerance
         self.linear_distance_tolerance=linear_distance_tolerance
         self.angular_distance_tolerance=angular_distance_tolerance
+        self.search_pattern=search_pattern
         self.percentage=percentage
         self.image_limit=image_limit
         self.checkbox_object_pattern=checkbox_object_pattern
@@ -196,10 +239,19 @@ class Data():
         self.support_collection_name=user_id+"."+"info"
         self.user_id=user_id
         self.ip=ip
+        self.view_id=None
+        m=MongoClient(ip)[support_database_name]
         self.support_client = MongoDB(
         ip=ip, database=self.support_database_name, collection=self.support_collection_name)
         self.bounding_box_dict={}
         self.class_color_dict={}
+        # Delete old user info
+        for _collection_name in m.list_collection_names():
+            try:
+                m[_collection_name].drop()
+            except Exception as e:
+                print(e)
+
 
     def entity_search(self):
         for database_collection in self.database_collection_list:
@@ -207,13 +259,13 @@ class Data():
             print("Enter database_collection:", database_collection)
             database_name = database_collection[0]
             collection_name = database_collection[1]
-            print(ip, database_name, collection_name)
+            print(database_name, collection_name)
 
             #------------Perform filtering function----------------#
 
             m = MongoDB(ip=self.ip, database=database_name,
                         collection=collection_name)
-            if flag_apply_filtering is True:
+            if self.flag_apply_filtering is True:
                 m.check_and_update_duplicate(self.linear_distance_tolerance,self.angular_distance_tolerance)
 
 
@@ -247,10 +299,9 @@ class Data():
 
                 except Exception as e:
                     print(e)
-            print("Search objects Done with:", time.time() - t0)
+            print("Length of result:",len(image_info))
             if len(image_info)!=0:
                 self.support_client.insert_many(image_info)
-            print(len(image_info))
             download_agent=gridfs.GridFSBucket(
             MongoClient(self.ip)[database_name], collection_name)
             for each_image in image_info:
@@ -259,7 +310,7 @@ class Data():
         # Create dict to frontend
         for image_type in self.image_type_list:
             folder_path = os.path.join(
-                settings.IMAGE_ROOT, user_id + image_type)
+                settings.IMAGE_ROOT, self.user_id + image_type)
             if os.path.isdir(folder_path) is False:
                 os.mkdir(folder_path)
             image_list = os.listdir(folder_path)
@@ -300,8 +351,8 @@ class Data():
 
         # Create dict and folder
         for t in self.image_type_list:
-            # if t!="Color":
-            #     continue
+            if t!="Color":
+                continue
             folder_name = self.user_id + "_" + object_id + "_" + t + 'boundingBox'
             folder_map = t + "_cut"
             image_dir[folder_map] = []

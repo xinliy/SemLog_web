@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from pymongo import MongoClient
-from bson.objectid import ObjectId
 import cv2
 import gridfs
 import pandas as pd
@@ -18,17 +17,17 @@ import pprint
 
 from web.website.imageViewer.utils import *
 
-try:
-    from web.semlog_mongo.semlog_mongo.mongo import MongoDB
-    from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
-    from web.website import settings
-except Exception as e:
-    print("Clone two submodules(semlog_mongo and semlog_vis) first before run the server.")
-    os.system("git submodule init")
-    os.system("git submodule update")
-    from web.semlog_mongo.semlog_mongo.mongo import MongoDB
-    from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
-    from web.website import settings
+# try:
+#     from web.semlog_mongo.semlog_mongo.mongo import MongoDB
+#     from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
+#     from web.website import settings
+# except Exception as e:
+#     print("Clone two submodules(semlog_mongo and semlog_vis) first before run the server.")
+#     os.system("git submodule init")
+#     os.system("git submodule update")
+#     from web.semlog_mongo.semlog_mongo.mongo import MongoDB
+#     from web.semlog_vis.semlog_vis.ImageCutter import cut_object, resize_image
+#     from web.website import settings
 
 
 # Global variable
@@ -94,7 +93,7 @@ def start_training(request):
 def update_database_info(request):
     """Show avaiable database-collection in real time with ajax."""
     return_dict = {}
-    neglect_list = ['admin', 'config', 'local']
+    neglect_list = ['admin', 'config', 'local','semlog_web']
     if request.method == 'POST':
         print("enter update database!")
         print(request.POST.dict())
@@ -106,7 +105,6 @@ def update_database_info(request):
         for db in db_list:
             return_dict[db] = [
                 i for i in m[db].list_collection_names() if "." not in i]
-
         return_dict = json.dumps(return_dict)
         print(return_dict)
 
@@ -138,50 +136,14 @@ def start_search(request):
         request.session['class_object_rgb_dict']=d.class_object_rgb_dict
         print("Input class_id_list is:", d.class_id_list)
         print("Retrieved object_id_list is:", d.object_id_list)
-        print("class_object_mapping:",d.class_object_mapping)
-        print('image_type_list:', d.image_type_list)
-        print("rgb_dict:",d.object_rgb_dict)
-        print("encoding_dict:",d.encoding_dict)
         print("class_object_rgb_dict:",d.class_object_rgb_dict) 
 
         if d.object_id_list==[]:
             return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
         # Create support db-collection to store processed data
-
-
-
-        # loop all selected collections
-
-
-
-
-        # def chunker_list(seq, size):
-        #     return (seq[i::size] for i in range(size))
-        # # Connect the db and get download image list
-            
-        # r = support_client.get_download_image_list()
-        # print("Download list length:", len(r))
-        # if len(r)>4000:
-        #     r_list=chunker_list(r,5)
-        #     for each_patch in r_list:
-        #         print("patch length:",len(each_patch))
-        #         pool = Pool(5)
-        #         pool.starmap(m.download_one, zip(
-        #         each_patch, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
-        #         pool.close()
-        #         pool.join()
-        # else:
-        #     # Parallel download images
-        #     pool = Pool(5)
-        #     pool.starmap(m.download_one, zip(
-        #     r, itertools.repeat(settings.IMAGE_ROOT), itertools.repeat(str(user_id))))
-        #     pool.close()
-        #     pool.join()
-        # for each_image in r:
-            # m.download_one(each_image,settings.IMAGE_ROOT,str(user_id))
-        print("Download objects Done with:", time.time() - t0)
-
-
+        print("search pattern:",d.search_pattern)
+        if d.search_pattern=="entity_search":
+            d.entity_search()
 
         # Resize image
         if d.width != "" or d.height != "":
