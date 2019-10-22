@@ -29,6 +29,7 @@ class Data():
         image_type_list = []
         view_list=[]
         bounding_box_dict = {}
+        bounding_box_dictionary={}
         object_rgb_dict={}
         class_to_object_dict={}
         class_object_mapping={}
@@ -46,6 +47,7 @@ class Data():
         flag_apply_filtering=False
         flag_class_ignore_duplicate_image=False
         flag_class_apply_filtering=False
+        flag_split_bounding_box=False
         class_linear_distance_tolerance=150
         class_angular_distance_tolerance=0.005
         class_num_pixels_tolerance=150
@@ -90,9 +92,11 @@ class Data():
                 flag_class_ignore_duplicate_image = True
             if key.startswith("checkbox_class_ignore_duplicate_image"):
                 flag_class_apply_filtering = True
+            if key.startswith("checkbox_split_bounding_box"):
+                flag_split_bounding_box=True
             if key.startswith('checkbox_search_pattern'):
                 search_pattern=value
-            if key.startswith("view_object_id"):
+            if key.startswith("view_object_id") and value!='':
                 v=value.split('-')
                 if len(v)!=4:
                     raise ValueError("The input search gramma is wrong.")
@@ -124,7 +128,7 @@ class Data():
                         else:
                             new_list.append(database_collection)
                     database_collection_list=sorted(list(set(new_list)))
-                    print("new lsit:",database_collection_list)
+                    print("new db-col lists:",database_collection_list)
 
             # Get multiply objects/classes from input fields
             if key.startswith('object_id') and value != '':
@@ -204,7 +208,8 @@ class Data():
         self.object_id_list=object_id_list
         self.class_id_list=class_id_list
         self.image_type_list=image_type_list
-        self.bounding_box_dict=[]
+        self.bounding_box_dict=bounding_box_dict
+        self.bounding_box_dictionary=bounding_box_dictionary
         self.object_rgb_dict={}
         self.object_logic=object_logic
         self.time_from=time_from
@@ -217,6 +222,7 @@ class Data():
         self.flag_apply_filtering=flag_apply_filtering
         self.flag_class_ignore_duplicate_image=flag_class_ignore_duplicate_image
         self.flag_class_apply_filtering=flag_class_apply_filtering
+        self.flag_split_bounding_box=flag_split_bounding_box
         self.class_linear_distance_tolerance=class_linear_distance_tolerance
         self.class_angular_distance_tolerance=class_angular_distance_tolerance
         self.class_num_pixels_tolerance=class_num_pixels_tolerance
@@ -257,6 +263,47 @@ class Data():
                 m[_collection_name].drop()
             except Exception as e:
                 print(e)
+
+    def crop_with_all_bounding_box(self):
+        all_rgb=[]
+        for object_rgbs in self.class_object_rgb_dict.values():
+            all_rgb.extend(object_rgbs.values())
+        mask_dir=self.image_dir['Mask']
+        rgb_dir=self.image_dir['Color']
+        default_shape=cv2.imread(mask_dir[1])
+        default_hmax=default_shape[0]
+        default_wmax=default_shape[1]
+        coordinate_list=[]
+
+        for each_mask in mask_dir:
+            hmin_list = []
+            hmax_list = []
+            wmin_list = []
+            wmax_list = []
+            for each_color in all_rgb:
+                wmin,wmax,hmin,hmax=cut_object(each_mask,each_mask,each_color)
+                hmin_list.append(hmin)
+                hmax_list.append(hmax)
+                wmin_list.append(wmin)
+                wmax_list.append(wmax)
+            hmin=min([i for i in hmin_list if i!=-1]) 
+            hmax=max(hmax_list)
+            wmin=min([i for i in wmin_list if i!=-1])
+            wmax=max(wmax_list) 
+            coordinate_list.append([hmin,hmax,wmin,wmax])
+        
+        for (each_rgb,c) in zip(rgb_dir,coordinate_list):
+            img=cv2.imread(each_rgb)
+            img=img[c[2]:c[3],c[0]:c[1]]
+            cv2.imwrite(each_rgb,img)
+
+
+        
+        print(coordinate_list)
+
+
+
+
 
 
     def event_search(self):

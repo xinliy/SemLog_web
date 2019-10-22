@@ -143,8 +143,10 @@ def start_search(request):
         # Create support db-collection to store processed data
         print("search pattern:",d.search_pattern)
         if d.search_pattern=="entity_search":
+            print("ENTITY SEARCH")
             d.entity_search()
         else:
+            print("EVENT SEARCH")
             d.event_search()
 
         # Resize image
@@ -160,10 +162,10 @@ def start_search(request):
             pool.join()
 
         # Do object cutting
-        if d.flag_bounding_box is True and d.search_pattern=="entity_search":
+        if d.flag_split_bounding_box is not True:
+            d.crop_with_all_bounding_box()
+        elif d.flag_bounding_box is True and d.search_pattern=="entity_search":
             d.generate_bounding_box()
-        else:
-            d.bounding_box_dictionary={}
 
         return render(request, 'gallery.html',
                       {"object_id_list": d.object_id_list, "image_dir": d.image_dir, "bounding_box": d.bounding_box_dictionary})
