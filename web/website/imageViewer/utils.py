@@ -311,7 +311,7 @@ class Data():
             print(s)
             client=MongoClient(self.ip)[s[0]][s[1]]
             m=MongoDB(s[0],s[1],ip=self.ip)
-            image_info=search_single_image_by_view(client,timestamp=float(s[3]),view_id=s[2])
+            image_info=search_single_image_by_view(client,timestamp=float(s[2]),view_id=s[3])
             print("result images:",image_info)
             download_agent=gridfs.GridFSBucket(
             MongoClient(self.ip)[s[0]], s[1])

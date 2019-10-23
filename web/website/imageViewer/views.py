@@ -162,7 +162,7 @@ def start_search(request):
             pool.join()
 
         # Do object cutting
-        if d.flag_split_bounding_box is not True:
+        if d.flag_split_bounding_box is not True and d.flag_bounding_box is True and d.search_pattern=="entity_search":
             d.crop_with_all_bounding_box()
         elif d.flag_bounding_box is True and d.search_pattern=="entity_search":
             d.generate_bounding_box()
