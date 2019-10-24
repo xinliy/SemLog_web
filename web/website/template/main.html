@@ -97,7 +97,7 @@
                                 <label>Until:<input class="time" type="text" name="time_until" value="100"
                                 placeholder="until"></label>
                             </div> -->
-                            
+
                             <div class="title">
                                 <i class="dropdown icon"></i>
                                 2.Target pattern:
@@ -148,7 +148,7 @@
                             <div class="content">
                                 <input type="text" name="percentage" placeholder="least percentage">
                             </div> -->
-                            
+
 <!--                             <div class="title">
                                 <i class="dropdown icon"></i>
                                 3.Return image limit:
@@ -190,21 +190,36 @@
                                     <label>Ignore duplicate objects in results</label>
                                 </div>
                             </div>
-                            
+
                             <div class="title" id="enable_bounding_box">
                                 <i class="dropdown icon"></i>
-                                4.Enable bounding box:
+                                4.Dataset preparation:
                             </div>
                             <div class="content">
                                 <div class="ui grid">
-                                    <div class="sixteen wide column">
-                                        <div class="ui toggle checkbox">
-                                            <input type="checkbox" id="checkbox_bounding_box" name="checkbox_bounding_box">
-                                            <label><font size="4"><b>Add bounding box views for objects</b></font></label>
-                                        </div>
-                                        <i class="question circle icon" id="helper_bounding_box"
-                                        data-content="Create a new UI for each object searched."></i>
-                                    </div>
+<!--                                    <div class="sixteen wide column">-->
+<!--                                        <div class="ui toggle checkbox">-->
+<!--                                            <input type="checkbox" id="checkbox_bounding_box" name="checkbox_bounding_box">-->
+<!--                                            <label><font size="4"><b>Add bounding box views for objects</b></font></label>-->
+<!--                                        </div>-->
+<!--                                        <i class="question circle icon" id="helper_bounding_box"-->
+<!--                                        data-content="Create a new UI for each object searched."></i>-->
+<!--                                    </div>-->
+                         <div class="inline fields">
+                            <label>Choose type of dataset:</label>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="checkbox_dataset_pattern" value="detection" >
+                                    <label>Object detection</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type='radio' name="checkbox_dataset_pattern" value="classifier">
+                                    <label>Multiclass Classifier</label>
+                                </div>
+                            </div>
+                        </div>
                                     <div class="sixteen wide column">
                                         <div class="ui toggle checkbox">
                                             <input type="checkbox" id="checkbox_split_bounding_box" name="checkbox_split_bounding_box">
@@ -213,31 +228,31 @@
                                         <i class="question circle icon" id="helper_bounding_box"
                                         data-content="If not selected, all objects share the same bounding box in the same image."></i>
                                     </div>
-                                    <div class="sixteen wide column">
-                                        <div class="ui toggle checkbox">
-                                            <input type="checkbox" name="checkbox_add_bounding_box_to_origin">
-                                            <label>Add bounding box to origin images</label>
-                                        </div>
-                                        <i class="question circle icon"
-                                        data-content="Mark all searched objects in the origin images."></i>
-                                    </div>
-                                    <div class="sixteen wide column">
-                                        <div class="ui toggle checkbox">
-                                            <input type="checkbox" name="checkbox_remove_background">
-                                            <label>Remove backgrounds behind objects</label>
-                                        </div>
-                                        <i class="question circle icon" data-content="Replace background with pure black."></i>
-                                    </div>
+<!--                                    <div class="sixteen wide column">-->
+<!--                                        <div class="ui toggle checkbox">-->
+<!--                                            <input type="checkbox" name="checkbox_add_bounding_box_to_origin">-->
+<!--                                            <label>Add bounding box to origin images</label>-->
+<!--                                        </div>-->
+<!--                                        <i class="question circle icon"-->
+<!--                                        data-content="Mark all searched objects in the origin images."></i>-->
+<!--                                    </div>-->
+<!--                                    <div class="sixteen wide column">-->
+<!--                                        <div class="ui toggle checkbox">-->
+<!--                                            <input type="checkbox" name="checkbox_remove_background">-->
+<!--                                            <label>Remove backgrounds behind objects</label>-->
+<!--                                        </div>-->
+<!--                                        <i class="question circle icon" data-content="Replace background with pure black."></i>-->
+<!--                                    </div>-->
                                 </div>
-                                <h5 class="ui header">Resize bounding box:</h5>
-                                <input type="text" name="bounding_box_width" placeholder="bounding_box_width">
-                                <input type="text" name="bounding_box_height" placeholder="bounding_box_height">
-                                <div class="ui toggle checkbox">
-                                    <input type="checkbox" name="checkbox_stretch_background">
-                                    <label>Stretch background for defined resolution</label>
-                                </div>
-                                <i class="question circle icon"
-                                data-content="Available only if both width and heigth are specified."></i>
+<!--                                <h5 class="ui header">Resize bounding box:</h5>-->
+<!--                                <input type="text" name="bounding_box_width" placeholder="bounding_box_width">-->
+<!--                                <input type="text" name="bounding_box_height" placeholder="bounding_box_height">-->
+<!--                                <div class="ui toggle checkbox">-->
+<!--                                    <input type="checkbox" name="checkbox_stretch_background">-->
+<!--                                    <label>Stretch background for defined resolution</label>-->
+<!--                                </div>-->
+<!--                                <i class="question circle icon"-->
+<!--                                data-content="Available only if both width and heigth are specified."></i>-->
                             </div>
                         </div>
                         <!-- Start of event search div -->

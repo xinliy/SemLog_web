@@ -29,7 +29,6 @@ urlpatterns = [
     path(r'update_database_info/', image_views.update_database_info),
     path(r'show_one_image/',image_views.show_one_image),
     path(r'download/',image_views.download),
-    path(r'download_label/',image_views.download_label),
     path(r'training/',image_views.training),
     path(r'start_training/',image_views.start_training)
 ]
