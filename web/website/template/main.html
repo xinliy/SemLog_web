@@ -58,17 +58,7 @@
                 <div class="ui styled accordion eight wide column">
                     <form method="get" class="ui form" action="/start_search/" id='main_form' hidden>
                         <div class="database"></div>
-                        <div class="active title">
-                            <i class="dropdown icon"></i>
-                            Choose collections:
-                        </div>
-                        <div class="active content">
-                            <select name="collections" id="collection_selector" multiple=""
-                                class="ui fluid search dropdown">
-                                <option value="" disabled selected hidden>All databases & collections are selected by default.</option>
-                            </select>
-                            <div class="db_input" hidden></div>
-                        </div>
+
                         <div class="inline fields">
                             <label>Choose a search pattern</label>
                             <div class="field">
@@ -86,6 +76,17 @@
                         </div>
                         <div id="div_entity_search">
                             <h3>Entity Search:</h3>
+                        <div class="active title">
+                            <i class="dropdown icon"></i>
+                            1. Choose collections:
+                        </div>
+                        <div class="active content">
+                            <select name="collections" id="collection_selector" multiple=""
+                                class="ui fluid search dropdown">
+                                <option value="" disabled selected hidden>All databases & collections are selected by default.</option>
+                            </select>
+                            <div class="db_input" hidden></div>
+                        </div>
                             <!-- <div class="title">
                                 <i class="dropdown icon"></i>
                                 1.Time interval:
@@ -99,7 +100,7 @@
                             
                             <div class="title">
                                 <i class="dropdown icon"></i>
-                                1.Target pattern:
+                                2.Target pattern:
                             </div>
                             <div class="content">
                                 <div class="inline fields">
@@ -118,7 +119,7 @@
                                     </div>
                                 </div>
                                 <div class="grouped fields">
-                                    <label>Choose search logic:</label>
+                                    <label>1. Choose search logic:</label>
                                     <div class="field">
                                         <div class="ui slider checkbox">
                                             <input type="radio" name="checkbox_object_logic" value="and">
@@ -140,24 +141,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="title">
+<!--                             <div class="title">
                                 <i class="dropdown icon"></i>
                                 2.Minimum percentage size:
                             </div>
                             <div class="content">
                                 <input type="text" name="percentage" placeholder="least percentage">
-                            </div>
+                            </div> -->
                             
-                            <div class="title">
+<!--                             <div class="title">
                                 <i class="dropdown icon"></i>
                                 3.Return image limit:
                             </div>
                             <div class="content">
                                 <input type="number" name="image_limit" placeholder="Maximum image returned" value=2000>
-                            </div>
+                            </div> -->
                             <div class="title">
                                 <i class="dropdown icon"></i>
-                                4.Filtering functions:
+                                3.Filtering functions:
                             </div>
                             <div class="content">
                                 <h3 class="ui header">Per image filtering</h3>
