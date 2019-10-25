@@ -295,42 +295,42 @@ def download_bounding_box(df, object_rgb_dict, image_root, folder_header):
         folder_header: Root folder name.
 
     """
+    def download_bounding_box_by_object(object_id, rgb):
+        """Support function for downloading bounding box.
+
+        Args:
+            df: Information Data Frame.
+            object_id: Target object.
+            rgb: Mask color of targe object.
+            image_root: Root path for images.
+            folder_header: Root folder name.
+
+        """
+        image_dir, image_type_list, class_name = get_image_path_for_bounding_box(df, object_id, image_root, folder_header)
+        print("<------------------------------->")
+        print("Object id: %s, rgb_color: %s" % (object_id, rgb))
+        print("<------------------------------->")
+
+        for t in image_type_list:
+            if t != "Color":
+                continue
+            folder_name = object_id + "$" + t + "$" + 'boundingBox'
+            rgb_img_list = sorted(image_dir[t])
+            mask_img_list = sorted(image_dir['Mask'])
+            saving_folder = os.path.join(image_root, folder_header, folder_name)
+            print("****length of rgb_img_list****:", len(rgb_img_list))
+            if not os.path.isdir(saving_folder):
+                os.makedirs(saving_folder)
+            # Create and save cut images
+            for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
+                img_saving_path = os.path.join(
+                    saving_folder, os.path.basename(rgb_img[:-4]) + "_" + class_name + '.png')
+                cut_object(rgb_img, mask_img, rgb, saving_path=img_saving_path)
+
     for object_id, rgb in object_rgb_dict.items():
         rgb = object_rgb_dict[object_id]
-        download_bounding_box_by_object(df, object_id, rgb, image_root, folder_header)
+        download_bounding_box_by_object(object_id, rgb)
 
-
-def download_bounding_box_by_object(df, object_id, rgb, image_root, folder_header):
-    """Support function for downloading bounding box.
-
-    Args:
-        df: Information Data Frame.
-        object_id: Target object.
-        rgb: Mask color of targe object.
-        image_root: Root path for images.
-        folder_header: Root folder name.
-
-    """
-    image_dir, image_type_list, class_name = get_image_path_for_bounding_box(df, object_id, image_root, folder_header)
-    print("<------------------------------->")
-    print("Object id: %s, rgb_color: %s" % (object_id, rgb))
-    print("<------------------------------->")
-
-    for t in image_type_list:
-        if t != "Color":
-            continue
-        folder_name = object_id + "$" + t + "$" + 'boundingBox'
-        rgb_img_list = sorted(image_dir[t])
-        mask_img_list = sorted(image_dir['Mask'])
-        saving_folder = os.path.join(image_root, folder_header, folder_name)
-        print("****length of rgb_img_list****:", len(rgb_img_list))
-        if not os.path.isdir(saving_folder):
-            os.makedirs(saving_folder)
-        # Create and save cut images
-        for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
-            img_saving_path = os.path.join(
-                saving_folder, os.path.basename(rgb_img[:-4]) + "_" + class_name + '.png')
-            cut_object(rgb_img, mask_img, rgb, saving_path=img_saving_path)
 
 
 def calculate_bounding_box(df, object_rgb_dict, image_root, folder_header):
@@ -343,6 +343,81 @@ def calculate_bounding_box(df, object_rgb_dict, image_root, folder_header):
         folder_header: Root folder name.
 
     """
+
+    def calculate_bounding_box_by_object(object_id, rgb):
+        """Support function for calculating bounding box.
+
+        Args:
+            df: Information Data Frame.
+            object_id: Target object.
+            rgb: Mask color of targe object.
+            image_root: Root path for images.
+            folder_header: Root folder name.
+            bounding_box_columns: columns for storing coordinates of bounding boxes.
+
+        """
+        image_dir, image_type_list, class_name = get_image_path_for_bounding_box(df, object_id, image_root, folder_header)
+        print("<------------------------------->")
+        print("Object id: %s, rgb_color: %s" % (object_id, rgb))
+        print("<------------------------------->")
+
+        # Create dict and folder
+        for t in image_type_list:
+            if t != "Mask":
+                continue
+            folder_name = object_id + "$" + t + "$" + 'boundingBox'
+            rgb_img_list = sorted(image_dir[t])
+            mask_img_list = sorted(image_dir['Mask'])
+            saving_folder = os.path.join(image_root, folder_header, folder_name)
+            print("****length of rgb_img_list****:", len(rgb_img_list))
+
+            # Read resolution of origin image and add to info collection
+            if len(rgb_img_list) == 0:
+                origin_width = origin_height = 0
+            else:
+                sample_img = cv2.imread(rgb_img_list[0])
+                origin_width, origin_height = sample_img.shape[
+                                                  1], sample_img.shape[0]
+            print("width", origin_width)
+            print('height', origin_height)
+            count = 0
+
+            # Create and save cut images
+            for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
+
+                # Cut object and update location to the collection
+                wmin, wmax, hmin, hmax = cut_object(rgb_img, mask_img, rgb)
+                if wmin == -1:
+                    print("ignore this bounding box!")
+                    continue
+                wmin = 1 if wmin == 0 else wmin
+                wmax = 1 if wmax == 0 else wmax
+                hmin = 1 if hmin == 0 else hmin
+                hmax = 1 if hmax == 0 else hmax
+
+                wmin = int(hmin)
+                wmax = int(hmax)
+                hmin = int(wmin)
+                hmax = int(wmax)
+                x_center = ((wmax + wmin) / 2) / origin_width
+                y_center = ((hmax + hmin) / 2) / origin_height
+                width = (wmax - wmin) / origin_width
+                height = (hmax - hmin) / origin_height
+                update_values = [wmin, wmax, hmin, hmax, x_center, y_center, width, height]
+                file_id = os.path.basename(rgb_img)[:-4]
+
+                if df.loc[(df.object == object_id) & (df.file_id == file_id), bounding_box_columns]['wmin'].values == "":
+                    df.loc[(df.object == object_id) & (df.file_id == file_id), bounding_box_columns] = update_values
+
+                count = count + 1
+
+            print("object:", object_id)
+            print('update time:', count)
+
+        print("object cutting finished")
+        return df
+
+
     bounding_box_columns = ['wmin', 'wmax', 'hmin', 'hmax', 'x_center', 'y_center', 'width', 'height']
     for col in bounding_box_columns:
         df[col] = ""
@@ -351,79 +426,6 @@ def calculate_bounding_box(df, object_rgb_dict, image_root, folder_header):
         df = calculate_bounding_box_by_object(df, object_id, rgb, image_root, folder_header, bounding_box_columns)
     return df
 
-
-def calculate_bounding_box_by_object(df, object_id, rgb, image_root, folder_header, bounding_box_columns):
-    """Support function for calculating bounding box.
-
-    Args:
-        df: Information Data Frame.
-        object_id: Target object.
-        rgb: Mask color of targe object.
-        image_root: Root path for images.
-        folder_header: Root folder name.
-        bounding_box_columns: columns for storing coordinates of bounding boxes.
-
-    """
-    image_dir, image_type_list, class_name = get_image_path_for_bounding_box(df, object_id, image_root, folder_header)
-    print("<------------------------------->")
-    print("Object id: %s, rgb_color: %s" % (object_id, rgb))
-    print("<------------------------------->")
-
-    # Create dict and folder
-    for t in image_type_list:
-        if t != "Mask":
-            continue
-        folder_name = object_id + "$" + t + "$" + 'boundingBox'
-        rgb_img_list = sorted(image_dir[t])
-        mask_img_list = sorted(image_dir['Mask'])
-        saving_folder = os.path.join(image_root, folder_header, folder_name)
-        print("****length of rgb_img_list****:", len(rgb_img_list))
-
-        # Read resolution of origin image and add to info collection
-        if len(rgb_img_list) == 0:
-            origin_width = origin_height = 0
-        else:
-            sample_img = cv2.imread(rgb_img_list[0])
-            origin_width, origin_height = sample_img.shape[
-                                              1], sample_img.shape[0]
-        print("width", origin_width)
-        print('height', origin_height)
-        count = 0
-
-        # Create and save cut images
-        for rgb_img, mask_img in zip(rgb_img_list, mask_img_list):
-
-            # Cut object and update location to the collection
-            wmin, wmax, hmin, hmax = cut_object(rgb_img, mask_img, rgb)
-            if wmin == -1:
-                print("ignore this bounding box!")
-                continue
-            wmin = 1 if wmin == 0 else wmin
-            wmax = 1 if wmax == 0 else wmax
-            hmin = 1 if hmin == 0 else hmin
-            hmax = 1 if hmax == 0 else hmax
-
-            wmin = int(hmin)
-            wmax = int(hmax)
-            hmin = int(wmin)
-            hmax = int(wmax)
-            x_center = ((wmax + wmin) / 2) / origin_width
-            y_center = ((hmax + hmin) / 2) / origin_height
-            width = (wmax - wmin) / origin_width
-            height = (hmax - hmin) / origin_height
-            update_values = [wmin, wmax, hmin, hmax, x_center, y_center, width, height]
-            file_id = os.path.basename(rgb_img)[:-4]
-
-            if df.loc[(df.object == object_id) & (df.file_id == file_id), bounding_box_columns]['wmin'].values == "":
-                df.loc[(df.object == object_id) & (df.file_id == file_id), bounding_box_columns] = update_values
-
-            count = count + 1
-
-        print("object:", object_id)
-        print('update time:', count)
-
-    print("object cutting finished")
-    return df
 
 
 def resize_images(image_dir, width, height, resize_type):
