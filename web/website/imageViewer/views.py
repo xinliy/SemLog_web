@@ -7,6 +7,9 @@ from multiprocessing.dummy import Pool
 
 from web.website.imageViewer.utils import *
 from web.website.settings import IMAGE_ROOT
+from web.image_path.image_path import *
+from web.semlog_vis.semlog_vis.bounding_box import *
+from web.semlog_vis.semlog_vis.image import *
 
 # Global variable
 OBJECT_LOGIC = 'and'
@@ -107,7 +110,7 @@ def start_search(request):
 
     # Read the input from teh user.
     form_dict = request.GET.dict()
-    d = Data(form_dict, request.session['ip'])
+    d = WebsiteData(form_dict, request.session['ip'])
     request.session['user_id'] = d.user_id
 
     mongoManager = MongoDB(d.database_collection_list, d.ip)
@@ -130,15 +133,15 @@ def start_search(request):
         print("EVENT SEARCH")
         df = event_search(ip=d.ip, view_list=d.view_list)
 
-    download_images_by_df(ip=d.ip, image_root=IMAGE_ROOT, folder_header=d.user_id, df=df)
-    image_dir = scan_images(image_root=IMAGE_ROOT, folder_header=d.user_id, image_type_list=d.image_type_list)
+    download_images_by_df(ip=d.ip, root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, df=df)
+    image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list)
 
     if d.flag_split_bounding_box is not True and d.search_pattern == "entity_search":
         crop_with_all_bounding_box(d.object_rgb_dict, image_dir)
 
     if d.dataset_pattern == 'detection' and d.search_pattern == "entity_search":
         print("----------------Prepare dataset for object detection---------------------")
-        resize_images(image_dir, d.width, d.height, d.flag_resize_type)
+        resize_all_images(image_dir, d.width, d.height, d.flag_resize_type)
         df = calculate_bounding_box(df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
         bounding_box_dict = {}
         # df=Convert_to_labels(df)
@@ -152,7 +155,7 @@ def start_search(request):
         for (key, value) in bounding_box_dict.items():
             images = list(itertools.chain(*value.values()))
             bounding_box_dir[key] = images
-        resize_images(bounding_box_dir, d.width, d.height, d.flag_resize_type)
+        resize_all_images(bounding_box_dir, d.width, d.height, d.flag_resize_type)
     else:
         bounding_box_dict = {}
 

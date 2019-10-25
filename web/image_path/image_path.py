@@ -1,0 +1,85 @@
+import os
+import pandas as pd
+
+
+def scan_images(root_folder_path, root_folder_name, image_type_list):
+    """Scan images from image_root (except bounding box).
+
+    Args:
+        root_folder_path: Root path for images.
+        root_folder_name: Root folder name.
+        image_type_list: A list of image types.
+
+    Returns:
+        A dict with all images separated by image types.
+
+    """
+    # Create dict to frontend
+    image_dir = {i: [] for i in image_type_list}
+    root_folder = os.path.join(
+        root_folder_path, root_folder_name)
+    for image_type in image_type_list:
+        image_type_folder = os.path.join(root_folder, image_type)
+        # if os.path.isdir(folder_path) is False:
+        #     os.mkdir(folder_path)
+        image_list = os.listdir(image_type_folder)
+        image_dir[image_type] = [os.path.join(
+            image_type_folder, i) for i in image_list]
+    return image_dir
+
+
+def scan_bounding_box_images(root_folder_path, root_folder_name):
+    """Scan local bounding box images.
+
+    Args:
+        root_folder_path: Root path for images.
+        root_folder_name: Root folder name.
+
+    Returns:
+        A nested dict separated by object_id and then image types.
+
+    """
+    all_folders = os.listdir(os.path.join(root_folder_path, root_folder_name))
+    box_folders = [i for i in all_folders if 'boundingBox' in i]
+    bounding_box_dict = {}
+    for each_folder in box_folders:
+        image_paths = os.listdir(os.path.join(root_folder_path, root_folder_name, each_folder))
+        image_abs_paths = [os.path.join(root_folder_path, root_folder_name, each_folder, i) for i in image_paths]
+        name_list = each_folder.split("$")
+        print(name_list)
+        object_id = name_list[0]
+        image_type = name_list[1]
+        if object_id not in bounding_box_dict.keys():
+            bounding_box_dict[object_id] = {}
+        bounding_box_dict[object_id][image_type] = image_abs_paths
+    return bounding_box_dict
+
+
+def get_image_path_for_bounding_box(df, object_id, root_folder_path, root_folder_name):
+    """Get image paths where the object exists.
+
+    Args:
+        df: Information Data frame.
+        object_id: Target object.
+        root_folder_path: Root path for images.
+        root_folder_name: Root folder name.
+
+    Returns:
+        image_dir: A dict contains qualified image paths.
+        image_type_list: A list of image types.
+        class_name: The class of this object.
+
+    """
+    image_type_list = list(pd.unique(df['type']))
+    r = df[df['object'] == object_id][['file_id', 'type', 'class']].to_dict('records')
+    print("length of bounding box:", len(r))
+    # Type to be cut
+    image_dir = {i: [] for i in image_type_list}
+    class_name = df[df.object == object_id]['class'][:1].values[0]
+    if len(r) == 0:
+        return df
+    for image_info in r:
+        image_dir[image_info["type"]].append(
+            os.path.join(root_folder_path, root_folder_name, image_info["type"],
+                         str(image_info["file_id"]) + ".png"))
+    return image_dir, image_type_list, class_name

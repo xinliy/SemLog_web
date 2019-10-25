@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from semlog_vis.semlog_vis.PointCloudGenerator import PointCloudGenerator
+from semlog_vis.semlog_vis.point_cloud import PointCloudGenerator
 import os
 from website.settings import IMAGE_ROOT
 from pymongo import MongoClient
