@@ -1,8 +1,9 @@
 import os
 import pandas as pd
+from itertools import chain
 
 
-def scan_images(root_folder_path, root_folder_name, image_type_list):
+def scan_images(root_folder_path, root_folder_name, image_type_list,unnest=False):
     """Scan images from image_root (except bounding box).
 
     Args:
@@ -25,10 +26,15 @@ def scan_images(root_folder_path, root_folder_name, image_type_list):
         image_list = os.listdir(image_type_folder)
         image_dir[image_type] = [os.path.join(
             image_type_folder, i) for i in image_list]
+    if unnest is True:
+        result=[]
+        for path_list in image_dir.values():
+            result.extend(path_list)
+        return result
     return image_dir
 
 
-def scan_bounding_box_images(root_folder_path, root_folder_name):
+def scan_bounding_box_images(root_folder_path, root_folder_name,unnest=False):
     """Scan local bounding box images.
 
     Args:
@@ -46,12 +52,19 @@ def scan_bounding_box_images(root_folder_path, root_folder_name):
         image_paths = os.listdir(os.path.join(root_folder_path, root_folder_name, each_folder))
         image_abs_paths = [os.path.join(root_folder_path, root_folder_name, each_folder, i) for i in image_paths]
         name_list = each_folder.split("$")
-        print(name_list)
         object_id = name_list[0]
         image_type = name_list[1]
         if object_id not in bounding_box_dict.keys():
             bounding_box_dict[object_id] = {}
         bounding_box_dict[object_id][image_type] = image_abs_paths
+    
+    if unnest is True:
+        result=[]
+        for type_path_list in bounding_box_dict.values():
+            result.extend(type_path_list.values())
+        result=list(chain(*result))
+        return result
+
     return bounding_box_dict
 
 
@@ -72,7 +85,6 @@ def get_image_path_for_bounding_box(df, object_id, root_folder_path, root_folder
     """
     image_type_list = list(pd.unique(df['type']))
     r = df[df['object'] == object_id][['file_id', 'type', 'class']].to_dict('records')
-    print("length of bounding box:", len(r))
     # Type to be cut
     image_dir = {i: [] for i in image_type_list}
     class_name = df[df.object == object_id]['class'][:1].values[0]

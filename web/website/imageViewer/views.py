@@ -133,7 +133,7 @@ def start_search(request):
         print("EVENT SEARCH")
         df = event_search(ip=d.ip, view_list=d.view_list)
 
-    download_images_by_df(ip=d.ip, root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, df=df)
+    download_images(ip=d.ip, root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, df=df)
     image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list)
 
     if d.flag_split_bounding_box is not True and d.search_pattern == "entity_search":
