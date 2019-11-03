@@ -8,13 +8,13 @@ from multiprocessing.dummy import Pool
 try:
     from web.semlog_mongo.semlog_mongo.mongo import *
     from web.semlog_mongo.semlog_mongo.utils import *
-    from web.semlog_vis.semlog_vis.image import cut_object, resize_image
+    from web.semlog_vis.semlog_vis.image import *
 except Exception as e:
     os.system("git submodule init")
     os.system("git submodule update")
     from web.semlog_mongo.semlog_mongo.mongo import *
     from web.semlog_mongo.semlog_mongo.utils import *
-    from web.semlog_vis.semlog_vis.image import cut_object, resize_image
+    from web.semlog_vis.semlog_vis.image import *
 
 
 class WebsiteData():
@@ -42,6 +42,8 @@ class WebsiteData():
         flag_class_ignore_duplicate_image = False
         flag_class_apply_filtering = False
         flag_split_bounding_box = False
+        padding_constant_color=None
+        padding_type=None
 
         checkbox_object_pattern = form_dict['checkbox_object_pattern']
         flag_resize_type = form_dict['checkbox_resize_type']
@@ -70,6 +72,10 @@ class WebsiteData():
                 search_pattern = value
             if key.startswith('checkbox_dataset_pattern'):
                 dataset_pattern = value
+            if key.startswith('padding_constant_color'):
+                padding_constant_color=[int(i) for i in value.split(",")]
+            if key.startswith("padding_type"):
+                padding_type=value
             if key.startswith("view_object_id") and value != '':
                 v = value.split('-')
                 if len(v) != 4:
@@ -152,7 +158,33 @@ class WebsiteData():
         self.flag_resize_type = flag_resize_type
         self.width = width
         self.height = height
+        self.padding_constant_color=padding_constant_color
+        self.padding_type=padding_type
         self.database_collection_list = database_collection_list
         self.user_id = user_id
         self.ip = ip
         self.view_list = view_list
+
+    def customize_image_resolution(self,image_dir):
+        """Wrapper for three different resize functions for all images."""
+        print(image_dir)
+        if self.flag_resize_type=='pad':
+            self.padding_type=convert_padding_type(self.padding_type)
+            pad_all_images(image_dir,self.width,self.height,self.padding_type,self.padding_constant_color)
+        else:
+            resize_all_images(image_dir, self.width, self.height, self.flag_resize_type)
+
+def convert_padding_type(padding_type):
+    """Convert text input to cv2 padding type."""
+    padding_type=padding_type.casefold()
+    if 'constant' in padding_type:
+        padding_type= cv2.BORDER_CONSTANT
+    elif 'reflect' in padding_type:
+        padding_type=cv2.BORDER_REFLECT
+    elif 'reflect_101' in padding_type:
+        padding_type=cv2.BORDER_REFLECT_101
+    elif 'replicate' in padding_type:
+        padding_type=cv2.BORDER_REPLICATE
+    else:
+        padding_type=cv2.BORDER_REFLECT
+    return padding_type

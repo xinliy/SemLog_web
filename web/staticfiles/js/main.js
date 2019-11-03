@@ -73,6 +73,20 @@ $(document).ready(function () {
         $('.view_object_list').children().last().remove()
     })
 
+    $(".ui.radio.pad").checkbox({
+        onChecked:function(){
+            $(".input_pad").remove();
+            $("#div_resize").append('<input type="text" name="padding_constant_color" class="input_pad" placeholder="constant color for padding">');
+            $("#div_resize").append('<input type="text" name="padding_type" class="input_pad" placeholder="type for padding">');
+        },
+    })
+
+    $(".ui.radio.resize").checkbox({
+        onChecked:function(){
+            $(".input_pad").remove();
+        },
+    })
+
 
 
     $("#button_ip").click(function () {

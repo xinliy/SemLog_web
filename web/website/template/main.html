@@ -87,17 +87,6 @@
                             </select>
                             <div class="db_input" hidden></div>
                         </div>
-                            <!-- <div class="title">
-                                <i class="dropdown icon"></i>
-                                1.Time interval:
-                            </div>
-                            <div class="content">
-                                <label>Time from/at:<input class="time" type="text" name="time_from" value="0"
-                                placeholder="from/at"></label>
-                                <label>Until:<input class="time" type="text" name="time_until" value="100"
-                                placeholder="until"></label>
-                            </div> -->
-
                             <div class="title">
                                 <i class="dropdown icon"></i>
                                 2.Target pattern:
@@ -141,21 +130,6 @@
                                     </div>
                                 </div>
                             </div>
-<!--                             <div class="title">
-                                <i class="dropdown icon"></i>
-                                2.Minimum percentage size:
-                            </div>
-                            <div class="content">
-                                <input type="text" name="percentage" placeholder="least percentage">
-                            </div> -->
-
-<!--                             <div class="title">
-                                <i class="dropdown icon"></i>
-                                3.Return image limit:
-                            </div>
-                            <div class="content">
-                                <input type="number" name="image_limit" placeholder="Maximum image returned" value=2000>
-                            </div> -->
                             <div class="title">
                                 <i class="dropdown icon"></i>
                                 3.Filtering functions:
@@ -196,7 +170,7 @@
                                 4.Dataset preparation:
                             </div>
                             <div class="content">
-                                <div class="ui grid">
+                                <!-- <div class="ui grid"> -->
 <!--                                    <div class="sixteen wide column">-->
 <!--                                        <div class="ui toggle checkbox">-->
 <!--                                            <input type="checkbox" id="checkbox_bounding_box" name="checkbox_bounding_box">-->
@@ -287,27 +261,27 @@
                             <i class="dropdown icon"></i>
                             1.Resize image
                         </div>
-                        <div class="content">
+                        <div class="content" id='div_resize'>
                             <div class="inline fields">
                                 <label>Choose one way:</label>
                                 <div class="field">
-                                    <div class="ui radio checkbox">
+                                    <div class="ui radio resize checkbox">
                                         <input type="radio" name="checkbox_resize_type" value="cut" checked="checked">
                                         <label>Stretch</label>
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <div class="ui radio checkbox">
+                                    <div class="ui radio resize checkbox">
                                         <input type="radio" name="checkbox_resize_type" value="zoom">
                                         <label>Scale</label>
                                     </div>
                                 </div>
-<!--                                 <div class="field">
-                                    <div class="ui radio checkbox">
-                                        <input type="radio" name="checkbox_resize_type" value="pad">
-                                        <label>Scale</label>
+                                 <div class="field">
+                                    <div class="ui radio pad checkbox">
+                                        <input type="radio" name="checkbox_resize_type" id="input_pad" value="pad">
+                                        <label>Padding</label>
                                     </div>
-                                </div> -->
+                                </div> 
                             </div>
                             <input type="text" name="width" placeholder="width">
                             <input type="text" name="height" placeholder="height">

@@ -134,30 +134,33 @@ def start_search(request):
         df = event_search(ip=d.ip, view_list=d.view_list)
 
     download_images(ip=d.ip, root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, df=df)
-    image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list)
+    image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list,unnest=True)
 
     if d.flag_split_bounding_box is not True and d.search_pattern == "entity_search":
         crop_with_all_bounding_box(d.object_rgb_dict, image_dir)
 
     if d.dataset_pattern == 'detection' and d.search_pattern == "entity_search":
         print("----------------Prepare dataset for object detection---------------------")
-        resize_all_images(image_dir, d.width, d.height, d.flag_resize_type)
+        image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list,unnest=True)
+        d.customize_image_resolution(image_dir)
         df = calculate_bounding_box(df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
         bounding_box_dict = {}
-        # df=Convert_to_labels(df)
         df.to_csv(os.path.join(IMAGE_ROOT, d.user_id, 'info.csv'), index=False)
     elif d.dataset_pattern == 'classifier' and d.search_pattern == "entity_search":
         print("----------------Prepare dataset for classifier---------------------------")
         download_bounding_box(df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
         bounding_box_dict = scan_bounding_box_images(IMAGE_ROOT, d.user_id)
         print(bounding_box_dict.values())
-        bounding_box_dir = {}
-        for (key, value) in bounding_box_dict.items():
-            images = list(itertools.chain(*value.values()))
-            bounding_box_dir[key] = images
-        resize_all_images(bounding_box_dir, d.width, d.height, d.flag_resize_type)
+        # bounding_box_dir = {}
+        # for (key, value) in bounding_box_dict.items():
+            # images = list(itertools.chain(*value.values()))
+            # bounding_box_dir[key] = images
+        bounding_box_dict=scan_bounding_box_images(IMAGE_ROOT,d.user_id,unnest=True)
+        d.customize_image_resolution(bounding_box_dict)
     else:
         bounding_box_dict = {}
+    image_dir=scan_images(IMAGE_ROOT,d.user_id,d.image_type_list)
+    bounding_box_dict=scan_bounding_box_images(IMAGE_ROOT,d.user_id)
 
     return render(request, 'gallery.html',
                   {"object_id_list": d.object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
