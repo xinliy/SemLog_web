@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from itertools import chain
+import platform
 
 
 def scan_images(root_folder_path, root_folder_name, image_type_list,unnest=False):
@@ -19,13 +20,20 @@ def scan_images(root_folder_path, root_folder_name, image_type_list,unnest=False
     image_dir = {i: [] for i in image_type_list}
     root_folder = os.path.join(
         root_folder_path, root_folder_name)
+    
     for image_type in image_type_list:
         image_type_folder = os.path.join(root_folder, image_type)
         # if os.path.isdir(folder_path) is False:
         #     os.mkdir(folder_path)
         image_list = os.listdir(image_type_folder)
-        image_dir[image_type] = [os.path.join(
-            image_type_folder, i) for i in image_list]
+
+        # Change to reletive img paths in Linux system.
+        if platform.system()=="Linux" and unnest is False:
+            image_dir[image_type] = [os.path.join(
+                root_folder_name,image_type, i) for i in image_list]
+        else:
+            image_dir[image_type] = [os.path.join(
+                image_type_folder, i) for i in image_list]
     if unnest is True:
         result=[]
         for path_list in image_dir.values():
@@ -50,12 +58,17 @@ def scan_bounding_box_images(root_folder_path, root_folder_name,unnest=False):
     bounding_box_dict = {}
     for each_folder in box_folders:
         image_paths = os.listdir(os.path.join(root_folder_path, root_folder_name, each_folder))
-        image_abs_paths = [os.path.join(root_folder_path, root_folder_name, each_folder, i) for i in image_paths]
+
+        if platform.system()=="Linux" and unnest is False:
+            image_abs_paths = [os.path.join( root_folder_name, each_folder, i) for i in image_paths]
+        else:
+            image_abs_paths = [os.path.join(root_folder_path, root_folder_name, each_folder, i) for i in image_paths]
         name_list = each_folder.split("$")
         object_id = name_list[0]
         image_type = name_list[1]
         if object_id not in bounding_box_dict.keys():
             bounding_box_dict[object_id] = {}
+
         bounding_box_dict[object_id][image_type] = image_abs_paths
     
     if unnest is True:
