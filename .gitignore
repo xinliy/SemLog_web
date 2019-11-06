@@ -9,6 +9,16 @@ web/staticfiles/*.json
 __pycache__/
 .vscode/
 saved_images/
+*.log
 
+*.pot
+
+*.pyc
+
+*/*/*/__pycache__/
+
+*/*/__pycache__/
+
+*/__pycache__/
 
 *.json
