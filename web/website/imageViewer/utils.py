@@ -2,6 +2,7 @@ import uuid
 import cv2
 import itertools
 import os
+import pprint
 
 from multiprocessing.dummy import Pool
 
@@ -29,7 +30,7 @@ class WebsiteData():
     def __init__(self, form_dict, ip):
         """Clean all inputs from form_dict."""
 
-        print(form_dict)
+        pprint.pprint(form_dict)
         user_id = str(uuid.uuid4())
         object_id_list = []
         image_type_list = []

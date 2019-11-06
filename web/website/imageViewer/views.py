@@ -17,21 +17,21 @@ NUM_OBJECT = 1
 
 
 def convert_none(v):
-    """Blank input cannot be recognized in pymongo. Convert to None."""
-    return None if v == '' else v
+    """blank input cannot be recognized in pymongo. convert to none."""
+    return none if v == '' else v
 
 
 def clean_folder(x):
-    """Delete old folders."""
+    """delete old folders."""
 
     t1 = time.time()
     try:
         shutil.rmtree(x)
-    except Exception as e:
+    except exception as e:
         print(e)
     print(os.listdir(x))
-    print("Remove", x)
-    print("Delete folder for:", time.time() - t1)
+    print("remove", x)
+    print("delete folder for:", time.time() - t1)
     return x
 
 
@@ -135,7 +135,7 @@ def start_search(request):
 
     download_images(ip=d.ip, root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, df=df)
 
-    if d.flag_split_bounding_box is not True and d.search_pattern == "entity_search":
+    if d.flag_split_bounding_box is True and d.search_pattern == "entity_search":
 
         image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list)
         crop_with_all_bounding_box(d.object_rgb_dict, image_dir)
@@ -153,10 +153,6 @@ def start_search(request):
         download_bounding_box(df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
         bounding_box_dict = scan_bounding_box_images(IMAGE_ROOT, d.user_id)
         print(bounding_box_dict.values())
-        # bounding_box_dir = {}
-        # for (key, value) in bounding_box_dict.items():
-            # images = list(itertools.chain(*value.values()))
-            # bounding_box_dir[key] = images
         bounding_box_dict=scan_bounding_box_images(IMAGE_ROOT,d.user_id,unnest=True)
         d.customize_image_resolution(bounding_box_dict)
     else:
@@ -182,17 +178,16 @@ def download(request):
         shutil.make_archive(name, format, archive_from, archive_to)
         shutil.move('%s.%s' % (name, format), destination)
 
-    img_type = request.GET['img_type']
     user_id = request.session['user_id']
     image_root = IMAGE_ROOT
-    zip_target = os.path.join(image_root, user_id, img_type)
+    zip_target = os.path.join(image_root, user_id)
     zip_path = os.path.join(image_root, user_id, "Color_images.zip")
     make_archive(zip_target, zip_path)
     print("finish zip.")
     zip_file = open(zip_path, '+rb')
     response = HttpResponse(zip_file, content_type='application/zip')
     response[
-        'Content-Disposition'] = 'attachment; filename=%s' % img_type + "_images.zip"
+        'Content-Disposition'] = 'attachment; filename=%s' % "dataset.zip"
     response['Content-Length'] = os.path.getsize(zip_path)
     zip_file.close()
 

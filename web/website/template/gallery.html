@@ -27,14 +27,10 @@
 <body>
 {% load static %}
 
-{% for img_type in image_dir %}
-<a href="/download/?img_type={{img_type}}" target="_blank">
-    <button class="ui button" type="button">Download {{img_type}} images</button>
+<a href="/download/" target="_blank">
+    <button class="ui button" type="button">Download the dataset</button>
 </a>
-{% endfor %}
-<a href="/download_label/" target="_blank">
-    <button class="ui inverted orange button" type="button">Download label file</button>
-</a>
+
 <!-- <a href="/training/" target="_blank"> -->
 <!-- <button class="ui right labeled icon button" >
     <i class="right arrow icon"></i>

@@ -21,18 +21,9 @@
         $('.question')
         .popup();
         $("#enable_bounding_box").click(function () {
-        $("#checkbox_bounding_box").prop("checked", true)
-        $("#checkbox_split_bounding_box").prop("checked", true)
-        // if ($("#checkbox_bounding_box").is(":checked")) {
-        //     $("#checkbox_bounding_box").prop("checked", false)
-        // }
-        // else {
-        //     $("#checkbox_bounding_box").prop("checked", true)
-        // }
+        // $("#checkbox_bounding_box").prop("checked", true)
+        // $("#checkbox_split_bounding_box").prop("checked", true)
         })
-        // $("#test").click(function(){
-        //     $("#checkbox_bounding_box").prop("checked",false)
-        // })
         });
         </script>
         <script src="{% static 'js/main.js' %}"></script>
@@ -96,13 +87,13 @@
                                     <label>Choose one way:</label>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="checkbox_object_pattern" value="id" checked="checked">
+                                            <input type="radio" name="checkbox_object_pattern" value="id" >
                                             <label>Search by id</label>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="checkbox_object_pattern" value="class">
+                                            <input type="radio" name="checkbox_object_pattern" value="class" checked="checked">
                                             <label>Search by class</label>
                                         </div>
                                     </div>
@@ -197,10 +188,10 @@
                                     <div class="sixteen wide column">
                                         <div class="ui toggle checkbox">
                                             <input type="checkbox" id="checkbox_split_bounding_box" name="checkbox_split_bounding_box">
-                                            <label>Split bounding boxes for each object</label>
+                                            <label>Crop images with all bounding boxes</label>
                                         </div>
                                         <i class="question circle icon" id="helper_bounding_box"
-                                        data-content="If not selected, all objects share the same bounding box in the same image."></i>
+                                        data-content="If selected, images are resized depending on the max boundaries of all bounding boxes."></i>
                                     </div>
 <!--                                    <div class="sixteen wide column">-->
 <!--                                        <div class="ui toggle checkbox">-->
