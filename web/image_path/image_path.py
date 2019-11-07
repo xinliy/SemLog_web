@@ -53,16 +53,16 @@ def scan_bounding_box_images(root_folder_path, root_folder_name,unnest=False):
         A nested dict separated by object_id and then image types.
 
     """
-    all_folders = os.listdir(os.path.join(root_folder_path, root_folder_name))
-    box_folders = [i for i in all_folders if 'boundingBox' in i]
+    box_root=os.path.join(root_folder_path, root_folder_name,"BoundingBoxes")
+    box_folders = os.listdir(box_root)
     bounding_box_dict = {}
     for each_folder in box_folders:
-        image_paths = os.listdir(os.path.join(root_folder_path, root_folder_name, each_folder))
+        image_paths = os.listdir(os.path.join(box_root,each_folder))
 
         if platform.system()=="Linux" and unnest is False:
-            image_abs_paths = [os.path.join( root_folder_name, each_folder, i) for i in image_paths]
+            image_abs_paths = [os.path.join( root_folder_name,"BoundingBoxes", each_folder, i) for i in image_paths]
         else:
-            image_abs_paths = [os.path.join(root_folder_path, root_folder_name, each_folder, i) for i in image_paths]
+            image_abs_paths = [os.path.join(box_root, each_folder, i) for i in image_paths]
         name_list = each_folder.split("$")
         object_id = name_list[0]
         image_type = name_list[1]

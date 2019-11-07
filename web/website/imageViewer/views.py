@@ -10,6 +10,7 @@ from web.website.settings import IMAGE_ROOT
 from web.image_path.image_path import *
 from web.semlog_vis.semlog_vis.bounding_box import *
 from web.semlog_vis.semlog_vis.image import *
+from web.models.classifier.train import train as train_classifier
 
 # Global variable
 OBJECT_LOGIC = 'and'
@@ -51,7 +52,6 @@ def search(request):
         pool.join()
     except Exception as e:
         print(e)
-        print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
         pass
     try:
         shutil.rmtree(IMAGE_ROOT)
@@ -66,7 +66,18 @@ def search(request):
 
 
 def training(request):
-    return render(request, 'training_setting.html')
+    dataset_pattern = request.session['dataset_pattern']
+    user_id = request.session['user_id']
+    class_list = request.session['class_id_list']
+    if dataset_pattern == "classifier":
+        classifier_train(
+            dataset_path=os.path.join(IMAGE_ROOT, user_id, "BoundingBoxes"),
+            class_list=class_list,
+            model_saving_path=os.path.join(IMAGE_ROOT, user_id)
+        )
+    return HttpResponse("Model starts training. Progress can be seen in port 8097.")
+
+    # return render(request, 'training_setting.html')
 
 
 def start_training(request):
@@ -112,6 +123,8 @@ def start_search(request):
     form_dict = request.GET.dict()
     d = WebsiteData(form_dict, request.session['ip'])
     request.session['user_id'] = d.user_id
+    request.session['dataset_pattern'] = d.dataset_pattern
+    request.session['class_id_list'] = d.class_id_list
 
     mongoManager = MongoDB(d.database_collection_list, d.ip)
 
@@ -120,7 +133,8 @@ def start_search(request):
 
     if d.flag_apply_filtering is True or d.flag_class_apply_filtering is True:
         print('---------------------------APPLY FILTERING---------------------------')
-        mongoManager.apply_similar_filtering(d.flag_apply_filtering, d.class_id_list, d.similar_dict)
+        mongoManager.apply_similar_filtering(
+            d.flag_apply_filtering, d.class_id_list, d.similar_dict)
     if d.search_pattern == "entity_search":
         print("ENTITY SEARCH")
         df = mongoManager.entity_search(
@@ -133,19 +147,24 @@ def start_search(request):
         print("EVENT SEARCH")
         df = event_search(ip=d.ip, view_list=d.view_list)
 
-    download_images(ip=d.ip, root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, df=df)
+    download_images(ip=d.ip, root_folder_path=IMAGE_ROOT,
+                    root_folder_name=d.user_id, df=df)
 
     if d.flag_split_bounding_box is True and d.search_pattern == "entity_search":
 
-        image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list)
+        image_dir = scan_images(root_folder_path=IMAGE_ROOT,
+                                root_folder_name=d.user_id, image_type_list=d.image_type_list)
         crop_with_all_bounding_box(d.object_rgb_dict, image_dir)
 
-    image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list,unnest=True)
+    image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id,
+                            image_type_list=d.image_type_list, unnest=True)
     if d.dataset_pattern == 'detection' and d.search_pattern == "entity_search":
         print("----------------Prepare dataset for object detection---------------------")
-        image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id, image_type_list=d.image_type_list,unnest=True)
+        image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id,
+                                image_type_list=d.image_type_list, unnest=True)
         d.customize_image_resolution(image_dir)
-        df = calculate_bounding_box(df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
+        df = calculate_bounding_box(
+            df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
         bounding_box_dict = {}
         df.to_csv(os.path.join(IMAGE_ROOT, d.user_id, 'info.csv'), index=False)
     elif d.dataset_pattern == 'classifier' and d.search_pattern == "entity_search":
@@ -153,12 +172,13 @@ def start_search(request):
         download_bounding_box(df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
         bounding_box_dict = scan_bounding_box_images(IMAGE_ROOT, d.user_id)
         print(bounding_box_dict.values())
-        bounding_box_dict=scan_bounding_box_images(IMAGE_ROOT,d.user_id,unnest=True)
+        bounding_box_dict = scan_bounding_box_images(
+            IMAGE_ROOT, d.user_id, unnest=True)
         d.customize_image_resolution(bounding_box_dict)
     else:
         bounding_box_dict = {}
-    image_dir=scan_images(IMAGE_ROOT,d.user_id,d.image_type_list)
-    bounding_box_dict=scan_bounding_box_images(IMAGE_ROOT,d.user_id)
+    image_dir = scan_images(IMAGE_ROOT, d.user_id, d.image_type_list)
+    bounding_box_dict = scan_bounding_box_images(IMAGE_ROOT, d.user_id)
 
     return render(request, 'gallery.html',
                   {"object_id_list": d.object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
