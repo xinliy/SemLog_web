@@ -10,7 +10,7 @@ from web.website.settings import IMAGE_ROOT
 from web.image_path.image_path import *
 from web.semlog_vis.semlog_vis.bounding_box import *
 from web.semlog_vis.semlog_vis.image import *
-from web.models.classifier.train import train as train_classifier
+import web.models.classifier.train as classifier_train
 
 # Global variable
 OBJECT_LOGIC = 'and'
@@ -70,7 +70,7 @@ def training(request):
     user_id = request.session['user_id']
     class_list = request.session['class_id_list']
     if dataset_pattern == "classifier":
-        classifier_train(
+        classifier_train.train(
             dataset_path=os.path.join(IMAGE_ROOT, user_id, "BoundingBoxes"),
             class_list=class_list,
             model_saving_path=os.path.join(IMAGE_ROOT, user_id)
@@ -171,7 +171,6 @@ def start_search(request):
         print("----------------Prepare dataset for classifier---------------------------")
         download_bounding_box(df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
         bounding_box_dict = scan_bounding_box_images(IMAGE_ROOT, d.user_id)
-        print(bounding_box_dict.values())
         bounding_box_dict = scan_bounding_box_images(
             IMAGE_ROOT, d.user_id, unnest=True)
         d.customize_image_resolution(bounding_box_dict)

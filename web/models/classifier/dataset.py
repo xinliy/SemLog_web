@@ -1,7 +1,7 @@
 from web.image_path.utils import absoluteFilePaths
 from torchvision import transforms
 from torch.utils.data import Dataset
-from skimage import io, transform
+from PIL import Image
 
 
 class ClassifierDataset(Dataset):
@@ -11,7 +11,6 @@ class ClassifierDataset(Dataset):
         self.label_list = []
         self.transform = transforms.Compose([
             transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
         ])
         for p in self.image_path_list:
             for class_name in class_list:
@@ -23,6 +22,7 @@ class ClassifierDataset(Dataset):
         return len(self.image_path_list)
 
     def __getitem__(self, idx):
-        image = io.imread(self.image_path_list[idx])
+        image = Image.open(self.image_path_list[idx])
         image = self.transform(image)
         label = self.label_list[idx]
+        return image,label
