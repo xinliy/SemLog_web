@@ -4,7 +4,7 @@ $(document).ready(function () {
         data: { csrfmiddlewaretoken: token },
     });
     $('#formadd').submit(function () {
-        var ip_address = $("#ip_address").val();
+        var ip_address = '127.0.0.1';
 
         $.ajax({
             type: "POST",
@@ -18,26 +18,26 @@ $(document).ready(function () {
                 k=k.filter(function(e){return e !=="semlog_web"})
 
                 // Add DB$ALL options
-                for (i=0;i<k.length;i++){
-                        var option = document.createElement("option");
-                        option.text = k[i] + "$" + "ALL";
-                        c = k[i] + "$" + "ALL";
-                        var v = "<input type='text' name=" + "database_collection" + i.toString() + "ALL" + " value=" + c + " hidden>";
-                        $("#collection_selector").append(option)                   
-                }
+                // for (i=0;i<k.length;i++){
+                //         var option = document.createElement("option");
+                //         option.text = k[i] + "$" + "ALL";
+                //         c = k[i] + "$" + "ALL";
+                //         var v = "<input type='text' name=" + "database_collection" + i.toString() + "ALL" + " value=" + c + " hidden>";
+                //         $("#collection_selector").append(option)                   
+                // }
 
-                // Add every options
-                for (i = 0; i < k.length; i++) {
-                    var collection_list = result[k[i]].sort();
-                    for (j = 0; j < collection_list.length; j++) {
-                        var option = document.createElement("option");
-                        option.text = k[i] + "$" + collection_list[j];
-                        c = k[i] + "$" + collection_list[j];
-                        var v = "<input type='text' name=" + "database_collection" + i.toString() + j.toString() + " value=" + c + " hidden>";
+                // // Add every options
+                // for (i = 0; i < k.length; i++) {
+                //     var collection_list = result[k[i]].sort();
+                //     for (j = 0; j < collection_list.length; j++) {
+                //         var option = document.createElement("option");
+                //         option.text = k[i] + "$" + collection_list[j];
+                //         c = k[i] + "$" + collection_list[j];
+                //         var v = "<input type='text' name=" + "database_collection" + i.toString() + j.toString() + " value=" + c + " hidden>";
 
-                        $("#collection_selector").append(option)
-                    }
-                }
+                //         $("#collection_selector").append(option)
+                //     }
+                // }
             },
             error: function (xhr, status, error) {
                 alert(xhr.responseText);
@@ -109,6 +109,37 @@ $(document).ready(function () {
         $('.object_list').children().last().remove()
     })
 
+
+    var id = 0;
+    $("#add_db").click(function () {
+        var flag_add=1;
+        $('.class_db').each(function(){
+            var input_db=$(this).val();
+            if(input_db=="*.*"){
+                flag_add=0;
+                alert("You have selected all collections!")
+            }
+        })
+        if(flag_add==1){
+        var field = document.createElement("input");
+        field.name = "db_id" + id;
+        field.type = "text";
+        field.className="class_db";
+        field.placeholder = "db id";
+        $(".db_list").append(field);
+        id += 1;
+        }
+
+
+    });
+    $("#remove_db").click(function () {
+        $('.db_list').children().last().remove()
+    })
+
+    $("#add_db").click(function(){
+
+    })
+
     $("#search").click(function () {
         var r=""
         $("a.ui.label.transition.visible").each(function(){
@@ -123,6 +154,17 @@ $(document).ready(function () {
         i.value=r
         $(".db_input").append(i)
     })
+
+    // $('#main_form').submit(function(e){
+
+    //     $('.class_db').each(function(){
+    //         var input_db=$(this).val();
+    //         if(input_db=="kkk"){
+    //             alert("You have selected all collections!")
+    //             e.preventDefault();
+    //         }
+    //     })
+    // })
 
 
 

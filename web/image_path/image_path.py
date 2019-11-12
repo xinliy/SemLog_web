@@ -54,6 +54,8 @@ def scan_bounding_box_images(root_folder_path, root_folder_name,unnest=False):
 
     """
     box_root=os.path.join(root_folder_path, root_folder_name,"BoundingBoxes")
+    if not os.path.isdir(box_root):
+        return {}
     box_folders = os.listdir(box_root)
     bounding_box_dict = {}
     for each_folder in box_folders:

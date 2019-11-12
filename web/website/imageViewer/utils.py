@@ -10,12 +10,14 @@ try:
     from web.semlog_mongo.semlog_mongo.mongo import *
     from web.semlog_mongo.semlog_mongo.utils import *
     from web.semlog_vis.semlog_vis.image import *
+    from web.website.settings import CONFIG_PATH
 except Exception as e:
     os.system("git submodule init")
     os.system("git submodule update")
     from web.semlog_mongo.semlog_mongo.mongo import *
     from web.semlog_mongo.semlog_mongo.utils import *
     from web.semlog_vis.semlog_vis.image import *
+    from web.website.settings import CONFIG_PATH
 
 
 class WebsiteData():
@@ -31,7 +33,9 @@ class WebsiteData():
         """Clean all inputs from form_dict."""
 
         pprint.pprint(form_dict)
+        username,password=load_mongo_account(CONFIG_PATH)
         user_id = str(uuid.uuid4())
+        database_collection_list = []
         object_id_list = []
         image_type_list = []
         view_list = []
@@ -83,34 +87,27 @@ class WebsiteData():
                     raise ValueError("The input search gramma is wrong.")
                 else:
                     view_list.append(v)
-            if key.startswith('database_collection_list'):
-                m = MongoClient(ip, 27017)
-                if value == '':
+            if key.startswith('db_id'):
+
+                value=value.replace(" ","")
+                m = MongoClient(ip, 27017,username=username,password=password)
+                if value == '*.*':
                     # Append all available collections 
-                    database_collection_list = []
-                    neglect_list = ['admin', 'config', 'local', 'semlog_web']
+                    neglect_list = ['admin', 'config', 'local']
                     db_list = m.list_database_names()
                     db_list = [i for i in db_list if i not in neglect_list]
                     for db in db_list:
                         for c in m[db].list_collection_names():
                             if '.' not in c:
-                                database_collection_list.append([db, c])
-                else:
+                                database_collection_list.append(db+"."+ c)
+                elif '.' in value:
                     # Convert all to available collections
-                    database_collection_list = value.split("@")
-                    database_collection_list = [
-                        i for i in database_collection_list if i != ""]
-                    new_list = []
-                    for database_collection in database_collection_list:
-                        dc = database_collection.split("$")
-                        if dc[1] == "ALL":
-                            extend_list = [dc[0] + "$" + i for i in m[dc[0]].list_collection_names() if '.' not in i]
-                            new_list.extend(extend_list)
-                        else:
-                            new_list.append(database_collection)
-                    database_collection_list = sorted(list(set(new_list)))
-                    database_collection_list = [i.split("$") for i in database_collection_list]
-                    print("new db-col lists:", database_collection_list)
+                    dc = value.split(".")
+                    if dc[1] == "*":
+                        extend_list = [dc[0]+"."+i  for i in m[dc[0]].list_collection_names() if '.' not in i]
+                        database_collection_list.extend(extend_list)
+                    else:
+                        database_collection_list.append(value)
 
             # Get multiply objects/classes from input fields
             if key.startswith('object_id') and value != '':
@@ -130,10 +127,16 @@ class WebsiteData():
                 if value != 'and':
                     object_logic = 'or'
 
-        m = MongoDB(database_collection_list, ip)
+        # Remove duplicate collecitons
+        database_collection_list=list(set(database_collection_list))
+        database_collection_list=[i.split(".") for i in database_collection_list]       
+        print(database_collection_list)
+        m = MongoDB(database_collection_list, ip,config_path=CONFIG_PATH)
         if checkbox_object_pattern == 'class':
             self.class_id_list=object_id_list.copy()
+            print(object_id_list,checkbox_object_pattern)
             self.object_rgb_dict = m.get_object_rgb_dict(object_id_list, checkbox_object_pattern)
+            print(self.object_rgb_dict)
             self.object_id_list = list(self.object_rgb_dict.keys())
         else:
             self.object_rgb_dict = m.get_object_rgb_dict(object_id_list, checkbox_object_pattern)
@@ -189,3 +192,5 @@ def convert_padding_type(padding_type):
     else:
         padding_type=cv2.BORDER_REFLECT
     return padding_type
+
+

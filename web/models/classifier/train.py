@@ -10,7 +10,7 @@ from random import randrange
 from web.models.classifier.dataset import ClassifierDataset
 from web.models.classifier.model import Multiclass_classifier
 
-vis = visdom.Visdom()
+
 
 
 def create_vis_figures():
@@ -39,6 +39,7 @@ batch_size = 5
 
 def train(dataset_path, class_list, num_epoch=10, test_split=0.2, model_saving_path=None, lr=0.00001):
 
+    vis = visdom.Visdom()
     accuracy_figure,train_loss_figure=create_vis_figures()
     model = Multiclass_classifier(n_classes=len(class_list))
     model = model.to(device)

@@ -35,19 +35,19 @@
                 <form method="post" class="ui form eight wide column" id="formadd">
                     <h1>Connect to database:</h1>
                     {% csrf_token %}
-                    <div class="field">
+<!--                     <div class="field">
                         <div class="ui pointing below label">
                             Please enter the MongoDB address
                         </div>
                         <input type="text" id="ip_address" placeholder="localhost" value="localhost" />
-                    </div>
+                    </div> -->
                     <button type="submit" class="ui fluid secondary button" id="button_ip">Connect</button>
                 </form>
             </div>
             <div class="row">
                 <div class="four wide column"></div>
                 <div class="ui styled accordion eight wide column">
-                    <form method="get" class="ui form" action="/start_search/" id='main_form' hidden>
+                    <form  method="get" class="ui form" action="/start_search/" id='main_form' hidden>
                         <div class="database"></div>
 
                         <div class="inline fields">
@@ -72,12 +72,20 @@
                             1. Choose collections:
                         </div>
                         <div class="active content">
-                            <select name="collections" id="collection_selector" multiple=""
+
+                            <div class="db_container" >
+                                <button class="ui primary button" type="button" id="add_db">Add scope</button>
+                                <button class="ui button" type="button" id="remove_db">Remove scope</button>
+                                <div class="db_list">
+                                    <input type="text" name="db_id001" class="class_db" placeholder="db id" value='*.*'>
+                                </div>
+                            </div>
+<!--                             <select name="collections" id="collection_selector" multiple=""
                                 class="ui fluid search dropdown">
                                 <option value="" disabled selected hidden>All databases & collections are selected by default.</option>
                             </select>
                             <div class="db_input" hidden></div>
-                        </div>
+ -->                        </div>
                             <div class="title">
                                 <i class="dropdown icon"></i>
                                 2.Target pattern:
@@ -103,13 +111,13 @@
                                     <div class="field">
                                         <div class="ui slider checkbox">
                                             <input type="radio" name="checkbox_object_logic" value="and">
-                                            <label>and</label>
+                                            <label>all</label>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui slider checkbox">
                                             <input type="radio" name="checkbox_object_logic" value='or' checked="checked">
-                                            <label>or</label>
+                                            <label>at least one</label>
                                         </div>
                                     </div>
                                 </div>

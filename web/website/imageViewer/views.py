@@ -6,7 +6,7 @@ import time
 from multiprocessing.dummy import Pool
 
 from web.website.imageViewer.utils import *
-from web.website.settings import IMAGE_ROOT
+from web.website.settings import IMAGE_ROOT,CONFIG_PATH
 from web.image_path.image_path import *
 from web.semlog_vis.semlog_vis.bounding_box import *
 from web.semlog_vis.semlog_vis.image import *
@@ -95,7 +95,8 @@ def update_database_info(request):
         print(request.POST.dict())
         target_ip = request.POST['ip_address']
         request.session['ip'] = request.POST['ip_address']
-        m = MongoClient(target_ip, 27017)
+        username,password=load_mongo_account(CONFIG_PATH)
+        m = MongoClient(target_ip, 27017,username=username,password=password)
         db_list = m.list_database_names()
         db_list = [i for i in db_list if i not in neglect_list]
         for db in db_list:
@@ -126,7 +127,7 @@ def start_search(request):
     request.session['dataset_pattern'] = d.dataset_pattern
     request.session['class_id_list'] = d.class_id_list
 
-    mongoManager = MongoDB(d.database_collection_list, d.ip)
+    mongoManager = MongoDB(d.database_collection_list, d.ip,config_path=CONFIG_PATH)
 
     if d.object_id_list == [] and d.search_pattern == "entity_search":
         return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
@@ -148,7 +149,7 @@ def start_search(request):
         df = event_search(ip=d.ip, view_list=d.view_list)
 
     download_images(ip=d.ip, root_folder_path=IMAGE_ROOT,
-                    root_folder_name=d.user_id, df=df)
+                    root_folder_name=d.user_id, df=df,config_path=CONFIG_PATH)
 
     if d.flag_split_bounding_box is True and d.search_pattern == "entity_search":
 
