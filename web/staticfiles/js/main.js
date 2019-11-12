@@ -1,3 +1,8 @@
+
+
+
+var r;
+
 $(document).ready(function () {
 
     $.ajaxSetup({
@@ -13,9 +18,9 @@ $(document).ready(function () {
             cache: false,
             dataType: "json",
             success: function (result, statues, xml) {
-                $("#collection_selector").empty();
-                var k = Object.keys(result);
-                k=k.filter(function(e){return e !=="semlog_web"})
+                r=result;
+                // $("#collection_selector").empty();
+
 
                 // Add DB$ALL options
                 // for (i=0;i<k.length;i++){
@@ -38,13 +43,77 @@ $(document).ready(function () {
                 //         $("#collection_selector").append(option)
                 //     }
                 // }
+
+    //         $(document).ready(function () {
+    //             var db_list = Object.keys(result);
+    //         $('#main_form').submit(function(e){
+    //             var stop_submit=0;
+    //             $(".error").remove();
+    //             $('.class_db').each(function(){
+
+
+    //             // Get each input
+    //             var input_db=$(this).val();
+
+    //             // if *.*, continue
+    //             if(input_db=="*.*"){
+    //                 return true
+    //             }
+
+    //             // Remove whitespaces
+    //             input_db=input_db.trim();
+
+    //             // Split with dot
+    //             input_array=input_db.split('.');
+
+    //             if (input_array.length!=2){
+    //                 alert("Please use 'db.collection' to add scope.");
+    //                 $(this).wrap("<div class='field error'></div>");
+    //                 stop_submit=1;
+    //             }
+
+    //             db=input_array[0];
+    //             coll=input_array[1];
+
+    //             // check if "*.collection1" appears
+    //             if (db=="*" & coll!="*"){
+    //                 $(this).wrap("<div class='field error'></div>");
+    //                 stop_submit=1;
+    //             }
+    //             // check if db exists
+    //             else if (!db_list.includes(db)){
+    //                 console.log(db_list);
+    //                 alert("Available databases: "+db_list);
+    //                 $(this).wrap("<div class='field error'></div>");
+    //                 stop_submit=1;
+    //             }
+    //             // check if collection exists
+    //             else{
+    //                 var collection_list = result[db].sort();
+    //                 if(!collection_list.includes(coll)){
+    //                     console.log(collection_list);
+    //                     alert("Current db: "+db+" Available collections: "+collection_list);
+    //                     $(this).wrap("<div class='field error'></div>");
+    //                     stop_submit=1;
+    //                 }
+    //             }
+
+
+
+    //             if(stop_submit==1){
+    //                 e.preventDefault();
+    //         }
+    //     })
+    // })})
             },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
+            async:false
+            // error: function (xhr, status, error) {
+            //     alert(xhr.responseText);
+            // }
         });
         return false;
     });
+
 
 
 
@@ -136,39 +205,75 @@ $(document).ready(function () {
         $('.db_list').children().last().remove()
     })
 
-    $("#add_db").click(function(){
 
-    })
+$('#main_form').submit(function(e){
+    console.log("search clicked!")
+    console.log(r)
+    var db_list = Object.keys(r);
+    var stop_submit=0;
+    $('.class_db').each(function(){
 
-    $("#search").click(function () {
-        var r=""
-        $("a.ui.label.transition.visible").each(function(){
-            console.log($(this)[0].outerText)
-            // alert($(this)[0].outerText)
-            r=r+$(this)[0].outerText+"@"
-        })
-        console.log(r)
-        var i=document.createElement("input")
-        i.type="hidden"
-        i.name="database_collection_list"
-        i.value=r
-        $(".db_input").append(i)
-    })
+    // Remove old error div
+    if ($(this).parent().hasClass("error")){
+        console.log('has error div!')
+        $(this).unwrap()
+    }
 
-    // $('#main_form').submit(function(e){
+    // Get each input
+    var input_db=$(this).val();
 
-    //     $('.class_db').each(function(){
-    //         var input_db=$(this).val();
-    //         if(input_db=="kkk"){
-    //             alert("You have selected all collections!")
-    //             e.preventDefault();
-    //         }
-    //     })
-    // })
+    // if *.*, continue
+    if(input_db=="*.*"){
+        return true
+    }
+
+    // Remove whitespaces
+    input_array=input_db.replace(/\s/g, "");
+    input_array=input_array.split('.');
+
+    db=input_array[0];
+    coll=input_array[1];
+    if (input_array.length!=2){
+        alert("Please use 'db.collection' to add scope.");
+        $(this).wrap("<div class='field error'></div>");
+        stop_submit=1;
+    }
+    // check if "*.collection1" appears
+    else if (db=="*" & coll!="*"){
+        $(this).wrap("<div class='field error'></div>");
+        stop_submit=1;
+    }
+    // check if db exists
+    else if (!db_list.includes(db)){
+        console.log(db_list);
+        alert("Available databases: "+db_list);
+        $(this).wrap("<div class='field error'></div>");
+        stop_submit=1;
+    }
+    // check if collection exists
+    else if (coll!="*"){
+        var collection_list = r[db].sort();
+        console.log(collection_list)
+        if(!collection_list.includes(coll)){
+            console.log(collection_list);
+            alert("Current db: "+db+" Available collections: "+collection_list);
+            $(this).wrap("<div class='field error'></div>");
+            stop_submit=1;
+        }
+    }
 
 
+
+    if(stop_submit==1){
+        e.preventDefault();
+    }
+})
+})
 
 })
+
+
+
 
 
 
