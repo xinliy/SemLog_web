@@ -19,92 +19,6 @@ $(document).ready(function () {
             dataType: "json",
             success: function (result, statues, xml) {
                 r=result;
-                // $("#collection_selector").empty();
-
-
-                // Add DB$ALL options
-                // for (i=0;i<k.length;i++){
-                //         var option = document.createElement("option");
-                //         option.text = k[i] + "$" + "ALL";
-                //         c = k[i] + "$" + "ALL";
-                //         var v = "<input type='text' name=" + "database_collection" + i.toString() + "ALL" + " value=" + c + " hidden>";
-                //         $("#collection_selector").append(option)                   
-                // }
-
-                // // Add every options
-                // for (i = 0; i < k.length; i++) {
-                //     var collection_list = result[k[i]].sort();
-                //     for (j = 0; j < collection_list.length; j++) {
-                //         var option = document.createElement("option");
-                //         option.text = k[i] + "$" + collection_list[j];
-                //         c = k[i] + "$" + collection_list[j];
-                //         var v = "<input type='text' name=" + "database_collection" + i.toString() + j.toString() + " value=" + c + " hidden>";
-
-                //         $("#collection_selector").append(option)
-                //     }
-                // }
-
-    //         $(document).ready(function () {
-    //             var db_list = Object.keys(result);
-    //         $('#main_form').submit(function(e){
-    //             var stop_submit=0;
-    //             $(".error").remove();
-    //             $('.class_db').each(function(){
-
-
-    //             // Get each input
-    //             var input_db=$(this).val();
-
-    //             // if *.*, continue
-    //             if(input_db=="*.*"){
-    //                 return true
-    //             }
-
-    //             // Remove whitespaces
-    //             input_db=input_db.trim();
-
-    //             // Split with dot
-    //             input_array=input_db.split('.');
-
-    //             if (input_array.length!=2){
-    //                 alert("Please use 'db.collection' to add scope.");
-    //                 $(this).wrap("<div class='field error'></div>");
-    //                 stop_submit=1;
-    //             }
-
-    //             db=input_array[0];
-    //             coll=input_array[1];
-
-    //             // check if "*.collection1" appears
-    //             if (db=="*" & coll!="*"){
-    //                 $(this).wrap("<div class='field error'></div>");
-    //                 stop_submit=1;
-    //             }
-    //             // check if db exists
-    //             else if (!db_list.includes(db)){
-    //                 console.log(db_list);
-    //                 alert("Available databases: "+db_list);
-    //                 $(this).wrap("<div class='field error'></div>");
-    //                 stop_submit=1;
-    //             }
-    //             // check if collection exists
-    //             else{
-    //                 var collection_list = result[db].sort();
-    //                 if(!collection_list.includes(coll)){
-    //                     console.log(collection_list);
-    //                     alert("Current db: "+db+" Available collections: "+collection_list);
-    //                     $(this).wrap("<div class='field error'></div>");
-    //                     stop_submit=1;
-    //                 }
-    //             }
-
-
-
-    //             if(stop_submit==1){
-    //                 e.preventDefault();
-    //         }
-    //     })
-    // })})
             },
             async:false
             // error: function (xhr, status, error) {
@@ -142,17 +56,31 @@ $(document).ready(function () {
         $('.view_object_list').children().last().remove()
     })
 
+    var padding_div='<div class="padding grouped fields" ><div class="field"><div class="ui radio checkbox">'+
+    '<input type="radio" name="padding_type" checked="checked" value="constant">'+
+    '<label>Constant</label></div></div>'+
+    '<div class="field"><div class="ui radio checkbox">'+
+    '<input type="radio" name="padding_type" value="reflect">'+
+    '<label>Reflect</label></div></div>'+
+    '<div class="field"><div class="ui radio checkbox">'+
+    '<input type="radio" name="padding_type" value="reflect_101">'+
+    '<label>Reflect_101</label></div></div>'+
+    '<div class="field"><div class="ui radio checkbox">'+
+    '<input type="radio" name="padding_type" value="replicate">'+
+    '<label>Replicate</label></div></div></div>'
+
     $(".ui.radio.pad").checkbox({
         onChecked:function(){
-            $(".input_pad").remove();
-            $("#div_resize").append('<input type="text" name="padding_constant_color" class="input_pad" placeholder="constant color for padding">');
-            $("#div_resize").append('<input type="text" name="padding_type" class="input_pad" placeholder="type for padding">');
+            // $(".input_pad").remove();
+            // $("#div_resize").append('<input type="text" name="padding_constant_color" class="input_pad" placeholder="constant color for padding">');
+            // $("#div_resize").append('<input type="text" name="padding_type" class="input_pad" placeholder="type for padding">');
+            $("#div_resize").append(padding_div)
         },
     })
 
     $(".ui.radio.resize").checkbox({
         onChecked:function(){
-            $(".input_pad").remove();
+            $(".padding.grouped.fields").remove();
         },
     })
 
@@ -180,49 +108,75 @@ $(document).ready(function () {
 
 
     var id = 0;
-    $("#add_db").click(function () {
-        var flag_add=1;
-        $('.class_db').each(function(){
-            var input_db=$(this).val();
-            if(input_db=="*.*"){
-                flag_add=0;
-                alert("You have selected all collections!")
-            }
-        })
-        if(flag_add==1){
-        var field = document.createElement("input");
-        field.name = "db_id" + id;
-        field.type = "text";
-        field.className="class_db";
-        field.placeholder = "db id";
-        $(".db_list").append(field);
-        id += 1;
-        }
+    // $("#add_db").click(function () {
+    //     var flag_add=1;
+    //     $('.class_db').each(function(){
+    //         var input_db=$(this).val();
+    //         if(input_db=="*.*"){
+    //             flag_add=0;
+    //         }
+    //     })
+    //     if(flag_add==1){
+    //     var field = document.createElement("input");
+    //     field.name = "db_id" + id;
+    //     field.type = "text";
+    //     field.className="class_db";
+    //     field.placeholder = "db id";
+    //     $(".db_list").append(field);
+    //     id += 1;
+    //     }
+    //     $(".class_db").focus();
 
 
-    });
-    $("#remove_db").click(function () {
-        $('.db_list').children().last().remove()
+
+    // });
+    // $("#remove_db").click(function () {
+    //     $('.db_list').children().last().remove()
+    //     $(".class_db").focus();
+    // })
+
+$('#main_form').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    e.preventDefault();
+    return false;
+  }
+});
+
+    $("#search").click(function () {
+        var r=""
+        $("a.ui.label.transition.visible").each(function(){
+            // console.log($(this)[0].outerText)
+            // alert($(this)[0].outerText)
+            r=r+$(this)[0].outerText+"@"
+            })
+            // console.log(r)
+            var i=document.createElement("input")
+            i.type="hidden"
+            i.name="database_collection_list"
+            i.value=r
+            $(".db_input").append(i)
+        // $(".ui.label.transition.visible").addClass('red');
     })
 
-
 $('#main_form').submit(function(e){
-    console.log("search clicked!")
-    console.log(r)
     var db_list = Object.keys(r);
+    console.log(db_list)
     var stop_submit=0;
-    $('.class_db').each(function(){
+    $('a.ui.label.transition.visible').each(function(){
+
+        var input_db=$(this)[0].outerText;
 
     // Remove old error div
-    if ($(this).parent().hasClass("error")){
-        console.log('has error div!')
-        $(this).unwrap()
-    }
+    // if ($(this).parent().hasClass("error")){
+    //     console.log('has error div!')
+    //     $(this).unwrap()
+    // }
 
     // Get each input
-    var input_db=$(this).val();
+//     var input_db=$(this).val();
 
-    // if *.*, continue
+//     // if *.*, continue
     if(input_db=="*.*"){
         return true
     }
@@ -234,21 +188,18 @@ $('#main_form').submit(function(e){
     db=input_array[0];
     coll=input_array[1];
     if (input_array.length!=2){
-        alert("Please use 'db.collection' to add scope.");
-        $(this).wrap("<div class='field error'></div>");
+
+        $(this).addClass('red');
         stop_submit=1;
     }
-    // check if "*.collection1" appears
     else if (db=="*" & coll!="*"){
-        alert("Please use 'db.collection' to add scope.");
-        $(this).wrap("<div class='field error'></div>");
+
+        $(this).addClass('red');
         stop_submit=1;
     }
     // check if db exists
     else if (!db_list.includes(db)){
-        console.log(db_list);
-        alert("Available databases: "+db_list);
-        $(this).wrap("<div class='field error'></div>");
+        $(this).addClass('red');
         stop_submit=1;
     }
     // check if collection exists
@@ -256,9 +207,7 @@ $('#main_form').submit(function(e){
         var collection_list = r[db].sort();
         console.log(collection_list)
         if(!collection_list.includes(coll)){
-            console.log(collection_list);
-            alert("Current db: "+db+" Available collections: "+collection_list);
-            $(this).wrap("<div class='field error'></div>");
+        $(this).addClass('red');
             stop_submit=1;
         }
     }
@@ -270,6 +219,8 @@ $('#main_form').submit(function(e){
     }
 })
 })
+    // Remove the arrow in the selection input field of choosing collections
+    $(".dropdown.icon").remove()
 
 })
 

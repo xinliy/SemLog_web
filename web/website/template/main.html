@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"
         integrity="sha256-QVBN0oT74UhpCtEo4Ko+k3sNo+ykJFBBtGduw13V9vw=" crossorigin="anonymous" />
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet">
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"
         integrity="sha256-qs5p0BFSqSvrstBxPvex+zdyrzcyGdHNeNmAirO2zc0=" crossorigin="anonymous"></script>
         <script>
+
         // assign django global variable for js
         var token = '{{csrf_token}}'
         $(document).ready(function () {
@@ -27,6 +29,8 @@
         });
         </script>
         <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'tagsinput/bootstrap-tokenfield.js' %}"></script>
+
     </head>
     <body>
         <div class="ui column stackable center page grid">
@@ -73,59 +77,66 @@
                         </div>
                         <div class="active content">
 
-                            <div class="db_container" >
+<!--                             <div class="db_container" >
                                 <button class="ui primary button" type="button" id="add_db">Add scope</button>
                                 <button class="ui button" type="button" id="remove_db">Remove scope</button>
-                                <div class="db_list">
-                                    <input type="text" name="db_id001" class="class_db" placeholder="db id" value='*.*'>
+                                <div class="ui icon input">
+                                  <input type="text" placeholder="Search...">
+                                      <i class="window close icon" ></i>
                                 </div>
-                            </div>
-<!--                             <select name="collections" id="collection_selector" multiple=""
+                                <div class="db_list">
+                                    <input autofocus type="text" name="db_id001" class="class_db" placeholder="db id" value='*.*' onfocus="var temp_value=this.value; this.value=''; this.value=temp_value">
+
+                                </div>
+                            </div> -->
+                            <select name="collections" id="collection_selector" multiple=""
                                 class="ui fluid search dropdown">
                                 <option value="" disabled selected hidden>All databases & collections are selected by default.</option>
                             </select>
                             <div class="db_input" hidden></div>
- -->                        </div>
+                        </div>
                             <div class="title">
                                 <i class="dropdown icon"></i>
-                                2.Target pattern:
+                                2.Add objects:
                             </div>
                             <div class="content">
                                 <div class="inline fields">
-                                    <label>Choose one way:</label>
+                                    <!-- <label>Choose one way:</label> -->
                                     <div class="field">
                                         <div class="ui radio checkbox">
                                             <input type="radio" name="checkbox_object_pattern" value="id" >
-                                            <label>Search by id</label>
+                                            <label>id</label>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
                                             <input type="radio" name="checkbox_object_pattern" value="class" checked="checked">
-                                            <label>Search by class</label>
+                                            <label>class</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="grouped fields">
-                                    <label>1. Choose search logic:</label>
+                                    <label>Contains:</label>
+                                    <div class="inline fields">
                                     <div class="field">
-                                        <div class="ui slider checkbox">
+                                        <div class="ui radio checkbox">
                                             <input type="radio" name="checkbox_object_logic" value="and">
                                             <label>all</label>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <div class="ui slider checkbox">
+                                        <div class="ui radio checkbox">
                                             <input type="radio" name="checkbox_object_logic" value='or' checked="checked">
                                             <label>at least one</label>
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                                 <div class="object_container" hidden>
                                     <button class="ui primary button" type="button" id="add">Add object</button>
                                     <button class="ui button" type="button" id="remove">Remove object</button>
                                     <div class="object_list">
-                                        <input type="text" name="object_id001" placeholder="Object id">
+                                        <input autofocus type="text" name="object_id001" placeholder="Object id">
                                     </div>
                                 </div>
                             </div>
@@ -261,6 +272,15 @@
                             1.Resize image
                         </div>
                         <div class="content" id='div_resize'>
+                            <div class="ui grid">
+
+                            <div class="eight wide column">
+                            <input autofocus type="text" name="width" placeholder="width">
+                            </div>
+                            <div class="eight wide column">
+                            <input type="text" name="height" placeholder="height">
+                        </div>
+                        </div>
                             <div class="inline fields">
                                 <label>Choose one way:</label>
                                 <div class="field">
@@ -269,12 +289,7 @@
                                         <label>Stretch</label>
                                     </div>
                                 </div>
-                                <div class="field">
-                                    <div class="ui radio resize checkbox">
-                                        <input type="radio" name="checkbox_resize_type" value="zoom">
-                                        <label>Scale</label>
-                                    </div>
-                                </div>
+
                                  <div class="field">
                                     <div class="ui radio pad checkbox">
                                         <input type="radio" name="checkbox_resize_type" id="input_pad" value="pad">
@@ -282,8 +297,33 @@
                                     </div>
                                 </div> 
                             </div>
-                            <input type="text" name="width" placeholder="width">
-                            <input type="text" name="height" placeholder="height">
+<!--                               <div class="padding grouped fields" >
+                                <div class="field">
+                                  <div class="ui radio checkbox">
+                                    <input type="radio" name="padding_type" checked="checked" value="constant">
+                                    <label>Constant</label>
+                                  </div>
+                                </div>
+                                <div class="field">
+                                  <div class="ui radio checkbox">
+                                    <input type="radio" name="padding_type" value="reflect">
+                                    <label>Reflect</label>
+                                  </div>
+                                </div>
+                                <div class="field">
+                                  <div class="ui radio checkbox">
+                                    <input type="radio" name="padding_type" value="reflect_101">
+                                    <label>Reflect_101</label>
+                                  </div>
+                                </div>
+                                <div class="field">
+                                  <div class="ui radio checkbox">
+                                    <input type="radio" name="padding_type" value="replicate">
+                                    <label>Replicate</label>
+                                  </div>
+                                </div>
+                              </div> -->
+
                             <!-- <input type="text" name="constant_color" placeholder="constant color for padding"> -->
                         </div>
                         <div class="title">

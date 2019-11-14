@@ -87,28 +87,35 @@ class WebsiteData():
                     raise ValueError("The input search gramma is wrong.")
                 else:
                     view_list.append(v)
-            if key.startswith('db_id'):
 
-                value=value.replace(" ","")
+            if key.startswith('database_collection_list'):
                 m = MongoClient(ip, 27017,username=username,password=password)
-                if value == '*.*':
+                if value == '':
                     # Append all available collections 
+                    database_collection_list = []
                     neglect_list = ['admin', 'config', 'local']
                     db_list = m.list_database_names()
                     db_list = [i for i in db_list if i not in neglect_list]
                     for db in db_list:
                         for c in m[db].list_collection_names():
                             if '.' not in c:
-                                database_collection_list.append(db+"."+ c)
-                elif '.' in value:
+                                database_collection_list.append([db, c])
+                else:
                     # Convert all to available collections
-                    dc = value.split(".")
-                    if dc[1] == "*":
-                        extend_list = [dc[0]+"."+i  for i in m[dc[0]].list_collection_names() if '.' not in i]
-                        database_collection_list.extend(extend_list)
-                    else:
-                        database_collection_list.append(value)
-
+                    database_collection_list = value.split("@")
+                    database_collection_list = [
+                        i for i in database_collection_list if i != ""]
+                    new_list = []
+                    for database_collection in database_collection_list:
+                        dc = database_collection.split(".")
+                        if dc[1] == "*":
+                            extend_list = [dc[0] + "." + i for i in m[dc[0]].list_collection_names() if '.' not in i]
+                            new_list.extend(extend_list)
+                        else:
+                            new_list.append(database_collection)
+                    database_collection_list = sorted(list(set(new_list)))
+                    database_collection_list = [i.split(".") for i in database_collection_list]
+                    print("new db-col lists:", database_collection_list)
             # Get multiply objects/classes from input fields
             if key.startswith('object_id') and value != '':
                 object_id_list.append(value)
@@ -127,10 +134,6 @@ class WebsiteData():
                 if value != 'and':
                     object_logic = 'or'
 
-        # Remove duplicate collecitons
-        database_collection_list=list(set(database_collection_list))
-        database_collection_list=[i.split(".") for i in database_collection_list]       
-        print(database_collection_list)
         m = MongoDB(database_collection_list, ip,config_path=CONFIG_PATH)
         if object_id_list==[]:
             self.object_id_list=None
@@ -146,6 +149,7 @@ class WebsiteData():
             self.object_id_list = object_id_list
             self.class_id_list = None
 
+        self.database_collection_list=database_collection_list
         self.image_type_list = image_type_list
         self.bounding_box_dict = bounding_box_dict
         self.object_logic = object_logic
