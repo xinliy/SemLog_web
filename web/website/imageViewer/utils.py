@@ -132,7 +132,10 @@ class WebsiteData():
         database_collection_list=[i.split(".") for i in database_collection_list]       
         print(database_collection_list)
         m = MongoDB(database_collection_list, ip,config_path=CONFIG_PATH)
-        if checkbox_object_pattern == 'class':
+        if object_id_list==[]:
+            self.object_id_list=None
+            self.class_id_list=None
+        elif checkbox_object_pattern == 'class':
             self.class_id_list=object_id_list.copy()
             print(object_id_list,checkbox_object_pattern)
             self.object_rgb_dict = m.get_object_rgb_dict(object_id_list, checkbox_object_pattern)

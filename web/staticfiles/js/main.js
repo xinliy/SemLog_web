@@ -240,6 +240,7 @@ $('#main_form').submit(function(e){
     }
     // check if "*.collection1" appears
     else if (db=="*" & coll!="*"){
+        alert("Please use 'db.collection' to add scope.");
         $(this).wrap("<div class='field error'></div>");
         stop_submit=1;
     }

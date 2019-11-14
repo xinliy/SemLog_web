@@ -129,7 +129,7 @@ def start_search(request):
 
     mongoManager = MongoDB(d.database_collection_list, d.ip,config_path=CONFIG_PATH)
 
-    if d.object_id_list == [] and d.search_pattern == "entity_search":
+    if d.object_id_list is None and d.search_pattern == "entity_search":
         return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
 
     if d.flag_apply_filtering is True or d.flag_class_apply_filtering is True:
