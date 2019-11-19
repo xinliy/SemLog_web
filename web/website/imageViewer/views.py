@@ -144,12 +144,14 @@ def start_search(request):
             object_logic=d.object_logic,
             image_type_list=d.image_type_list, flag_ignore_similar_image=d.flag_ignore_duplicate_image,
             flag_class_ignore_similar_image=d.flag_class_ignore_duplicate_image)
+        print("Search Done.")
     else:
         print("EVENT SEARCH")
         df = event_search(ip=d.ip, view_list=d.view_list)
 
     download_images(ip=d.ip, root_folder_path=IMAGE_ROOT,
                     root_folder_name=d.user_id, df=df,config_path=CONFIG_PATH)
+    print("Download Done.")
 
     if d.flag_split_bounding_box is True and d.search_pattern == "entity_search":
 

@@ -89,6 +89,7 @@ class WebsiteData():
                     view_list.append(v)
 
             if key.startswith('database_collection_list'):
+                value=value.replace(" ","")
                 m = MongoClient(ip, 27017,username=username,password=password)
                 if value == '':
                     # Append all available collections 
@@ -138,6 +139,10 @@ class WebsiteData():
         if object_id_list==[]:
             self.object_id_list=None
             self.class_id_list=None
+        elif object_id_list==["*"]:
+            self.object_id_list=object_id_list
+            self.class_id_list=None
+            self.object_rgb_dict=None
         elif checkbox_object_pattern == 'class':
             self.class_id_list=object_id_list.copy()
             print(object_id_list,checkbox_object_pattern)
