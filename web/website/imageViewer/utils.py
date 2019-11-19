@@ -55,11 +55,11 @@ class WebsiteData():
         width = int(form_dict['width']) if form_dict['width'] != "" else ""
         height = int(form_dict['height']
                      ) if form_dict['height'] != "" else ""
-        linear_distance_tolerance = float(form_dict['linear_distance_tolerance'])
-        angular_distance_tolerance = float(form_dict['angular_distance_tolerance'])
-        class_linear_distance_tolerance = float(form_dict['class_linear_distance_tolerance'])
-        class_angular_distance_tolerance = float(form_dict['class_angular_distance_tolerance'])
-        class_num_pixels_tolerance = int(form_dict['class_num_pixels_tolerance'])
+        # linear_distance_tolerance = float(form_dict['linear_distance_tolerance'])
+        # angular_distance_tolerance = float(form_dict['angular_distance_tolerance'])
+        # class_linear_distance_tolerance = float(form_dict['class_linear_distance_tolerance'])
+        # class_angular_distance_tolerance = float(form_dict['class_angular_distance_tolerance'])
+        # class_num_pixels_tolerance = int(form_dict['class_num_pixels_tolerance'])
 
         object_logic = form_dict['checkbox_object_logic']
         for (key, value) in form_dict.items():
@@ -163,11 +163,11 @@ class WebsiteData():
         self.flag_class_ignore_duplicate_image = flag_class_ignore_duplicate_image
         self.flag_class_apply_filtering = flag_class_apply_filtering
         self.flag_split_bounding_box = flag_split_bounding_box
-        self.similar_dict = {"linear_distance_tolerance": linear_distance_tolerance,
-                             "angular_distance_tolerance": angular_distance_tolerance,
-                             "class_linear_distance_tolerance": class_linear_distance_tolerance,
-                             "class_angular_distance_tolerance": class_angular_distance_tolerance,
-                             "class_num_pixels_tolerance": class_num_pixels_tolerance}
+        # self.similar_dict = {"linear_distance_tolerance": linear_distance_tolerance,
+        #                      "angular_distance_tolerance": angular_distance_tolerance,
+        #                      "class_linear_distance_tolerance": class_linear_distance_tolerance,
+        #                      "class_angular_distance_tolerance": class_angular_distance_tolerance,
+        #                      "class_num_pixels_tolerance": class_num_pixels_tolerance}
         self.search_pattern = search_pattern
         self.dataset_pattern = dataset_pattern
         self.checkbox_object_pattern = checkbox_object_pattern

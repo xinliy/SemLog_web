@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 import json
 import time
+import pickle
 from multiprocessing.dummy import Pool
 
 from web.website.imageViewer.utils import *
@@ -12,14 +13,6 @@ from web.semlog_vis.semlog_vis.bounding_box import *
 from web.semlog_vis.semlog_vis.image import *
 import web.models.classifier.train as classifier_train
 
-# Global variable
-OBJECT_LOGIC = 'and'
-NUM_OBJECT = 1
-
-
-def convert_none(v):
-    """blank input cannot be recognized in pymongo. convert to none."""
-    return none if v == '' else v
 
 
 def clean_folder(x):
@@ -182,9 +175,26 @@ def start_search(request):
     image_dir = scan_images(IMAGE_ROOT, d.user_id, d.image_type_list)
     bounding_box_dict = scan_bounding_box_images(IMAGE_ROOT, d.user_id)
 
-    return render(request, 'gallery.html',
-                  {"object_id_list": d.object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
+    info={'image_type_list':d.image_type_list,'object_id_list':d.object_id_list}
+    with open(os.path.join(IMAGE_ROOT,d.user_id,'info.json'),'w') as f:
+        json.dump(info,f)
 
+    return render(request,'make_your_choice.html')
+    # return render(request, 'gallery.html',
+    #               {"object_id_list": d.object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
+
+def view_images(request):
+    user_id=request.session['user_id']
+    with open(os.path.join(IMAGE_ROOT,user_id,'info.json')) as f:
+        info=json.load(f)
+    object_id_list=info['object_id_list']
+    image_type_list=info['image_type_list']
+    image_dir=scan_images(IMAGE_ROOT,user_id,image_type_list)
+    bounding_box_dict=scan_bounding_box_images(IMAGE_ROOT,user_id)
+
+
+    return render(request, 'gallery.html',
+                  {"object_id_list": object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
 def download(request):
     """Download images as .zip file. """

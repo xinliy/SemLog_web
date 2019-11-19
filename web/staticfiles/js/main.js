@@ -35,12 +35,18 @@ $(document).ready(function () {
     $("#entity_search").click(function(){
         $("#div_entity_search").show();
         $("#div_event_search").hide();
+        $("#div_scan_search").hide();
     });
     $("#event_search").click(function(){
         $("#div_event_search").show();
         $("#div_entity_search").hide();
+        $("#div_scan_search").hide();
     });
-
+    $("#scan_search").click(function(){
+        $("#div_scan_search").show();
+        $("#div_entity_search").hide();
+        $("#div_event_search").hide();
+    });
     var id = 0;
     $("#view_add").click(function () {
         var field = document.createElement("input");
@@ -108,32 +114,20 @@ $(document).ready(function () {
 
 
     var id = 0;
-    // $("#add_db").click(function () {
-    //     var flag_add=1;
-    //     $('.class_db').each(function(){
-    //         var input_db=$(this).val();
-    //         if(input_db=="*.*"){
-    //             flag_add=0;
-    //         }
-    //     })
-    //     if(flag_add==1){
-    //     var field = document.createElement("input");
-    //     field.name = "db_id" + id;
-    //     field.type = "text";
-    //     field.className="class_db";
-    //     field.placeholder = "db id";
-    //     $(".db_list").append(field);
-    //     id += 1;
-    //     }
-    //     $(".class_db").focus();
+
+    $("#add_class").click(function () {
+        var field = document.createElement("input");
+        field.name = "class_id" + id;
+        field.type = "text";
+        field.placeholder = "Class name";
+        $(".class_list").append(field);
+        id += 1;
 
 
-
-    // });
-    // $("#remove_db").click(function () {
-    //     $('.db_list').children().last().remove()
-    //     $(".class_db").focus();
-    // })
+    });
+    $("#remove_class").click(function () {
+        $('.class_list').children().last().remove()
+    })
 
 $('#main_form').on('keyup keypress', function(e) {
   var keyCode = e.keyCode || e.which;
