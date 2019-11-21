@@ -3,154 +3,130 @@
 
 <head>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"
-          integrity="sha256-QVBN0oT74UhpCtEo4Ko+k3sNo+ykJFBBtGduw13V9vw=" crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"
-            integrity="sha256-qs5p0BFSqSvrstBxPvex+zdyrzcyGdHNeNmAirO2zc0=" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css" integrity="sha256-QVBN0oT74UhpCtEo4Ko+k3sNo+ykJFBBtGduw13V9vw=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js" integrity="sha256-qs5p0BFSqSvrstBxPvex+zdyrzcyGdHNeNmAirO2zc0=" crossorigin="anonymous"></script>
+    
     <script>
-        $(document).ready(function () {
-            $('.tabular.menu .item').tab({
-                history: false
-            });
-            $('.menu .item')
-                .tab();
+    $(document).ready(function() {
+        $('.tabular.menu .item').tab({
+            history: false
         });
+        $('.menu .item')
+            .tab();
+    });
 
-        $('.paths.example .menu .item')
-            .tab({
-                context: '.paths.example'
-            })
-        ;
+    $('.paths.example .menu .item')
+        .tab({
+            context: '.paths.example'
+        });
     </script>
 </head>
+
 <body>
-{% load static %}
-
-<!-- <a href="/download/" target="_blank">
-    <button class="ui button" type="button">Download the dataset</button>
-</a>
-
-<a href="/training/" target="_blank">
-<button class="ui right labeled icon button" >
-    <i class="right arrow icon"></i>
-    Go training!
-</button>
-</a>
- -->
-<div class="ui pointing secondary menu">
-    <a class="active item" data-tab="first">Origin</a>
-    <a class="item" data-tab="second">Bounding box</a>
-</div>
-<div class="ui active tab segment" data-tab="first">
-    <div class="ui top attached tabular menu">
-        <a class="active item" data-tab="1">Color</a>
-        <a class="item" data-tab="2">Depth</a>
-        <a class="item" data-tab="3">Mask</a>
-        <a class="item" data-tab="4">Normal</a>
+    <div id='like_button_container'></div>
+    {% load static %}
+    <div class="ui pointing secondary menu">
+        <a class="active item" data-tab="first">Origin</a>
+        <a class="item" data-tab="second">Bounding box</a>
     </div>
-    {% for img_type,img_list in image_dir.items %}
-        {% if forloop.first %}
-            <div class="ui bottom attached active tab segment" data-tab="{{ forloop.counter }}">
-        {% else %}
-            <div class="ui bottom attached tab segment" data-tab="{{ forloop.counter }}">
-        {% endif %}
-    <div class="ui grid">
-        {% for img_path in img_list %}
-            <div class="three wide column">
-                <div class="ui medium rounded image">
-                    <a class="ui left corner label" target="_blank"
-                       href="/show_one_image/?img_path={{ img_path }}">
-                        <i class="zoom-in icon"></i>
-                    </a>
-                    <a href="/create_pc/?img_path={{ img_path }}" target="_blank">
-                        <img src="{% static img_path %}">
-                    </a>
-                </div>
-            </div>
-
-
-        {% endfor %}
-        {% if forloop.first %}
-            </div>
-        {% else %}
-            </div>
-        {% endif %}
-    </div>
-    {% endfor %}
-
-</div>
-<div class="ui tab segment" data-tab="second">
-    <div class="ui top attached tabular menu">
-        <div class="ui grid">
-
-        {% comment %} create tab label for each object_id {% endcomment %}
-        {% for image_object_id, image_package in bounding_box.items %}
-            {% if forloop.first %}
-                <div class="four wide column">
-                <a class="active item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
-                </div>
-            {% else %}
-                <div class="four wide column">
-                <a class="item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
-                </div>
-            {% endif %}
-        {% endfor %}
+    <div class="ui active tab segment" data-tab="first">
+        <div class="ui top attached tabular menu">
+            <a class="active item" data-tab="1">Color</a>
+            <a class="item" data-tab="2">Depth</a>
+            <a class="item" data-tab="3">Mask</a>
+            <a class="item" data-tab="4">Normal</a>
         </div>
-    </div>
-
-    {% comment %} create content for every object id {% endcomment %}
-    {% for image_object_id,image_package in bounding_box.items %}
+        {% for img_type,img_list in image_dir.items %}
         {% if forloop.first %}
-            <div class="ui bottom attached active tab segment" data-tab="{{ image_object_id }}">
-        {% else %}
-            <div class="ui bottom attached tab segment" data-tab="{{ image_object_id }}">
-        {% endif %}
-
-    <div class="ui top attached tabular menu">
-        {% for cut_type,image_path_list in image_package.items %}
-            {% if forloop.first %}
-                <a class="active item" data-tab="{{ image_object_id }}{{ cut_type }}">{{ cut_type }}</a>
+        <div class="ui bottom attached active tab segment" data-tab="{{ forloop.counter }}">
             {% else %}
-                <a class="item" data-tab="{{ image_object_id }}{{ cut_type }}">{{ cut_type }}</a>
+            <div class="ui bottom attached tab segment" data-tab="{{ forloop.counter }}">
+                {% endif %}
+                <div class="ui grid">
+                    {% for img_path in img_list %}
+                    <div class="three wide column">
+                        <div class="ui medium rounded image">
+                            <a class="ui left corner label" target="_blank" href="/show_one_image/?img_path={{ img_path }}">
+                                <i class="zoom-in icon"></i>
+                            </a>
+                            <a href="/create_pc/?img_path={{ img_path }}" target="_blank">
+                                <img src="{% static img_path %}">
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% if forloop.first %}
+                </div>
+                {% else %}
+            </div>
             {% endif %}
+        </div>
         {% endfor %}
     </div>
-
-    {% for cut_type,image_path_list in image_package.items %}
+    <div class="ui tab segment" data-tab="second">
+        <div class="ui top attached tabular menu">
+            <div class="ui grid">
+                {% comment %} create tab label for each object_id {% endcomment %}
+                {% for image_object_id, image_package in bounding_box.items %}
+                {% if forloop.first %}
+                <div class="four wide column">
+                    <a class="active item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
+                </div>
+                {% else %}
+                <div class="four wide column">
+                    <a class="item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% comment %} create content for every object id {% endcomment %}
+        {% for image_object_id,image_package in bounding_box.items %}
         {% if forloop.first %}
-            <div class="ui bottom attached active tab segment" data-tab="{{ image_object_id }}{{ cut_type }}">
-        {% else %}
-            <div class="ui bottom attached tab segment" data-tab="{{ image_object_id }}{{ cut_type }}">
-        {% endif %}
-    {% comment %} loop image path {% endcomment %}
-    <div class="ui grid">
-        {% for img_path in image_path_list %}
-            <div class="three wide column">
-                <div class="ui medium rounded image">
-                    <!-- <a class="ui left corner label" target="_blank"
+        <div class="ui bottom attached active tab segment" data-tab="{{ image_object_id }}">
+            {% else %}
+            <div class="ui bottom attached tab segment" data-tab="{{ image_object_id }}">
+                {% endif %}
+                <div class="ui top attached tabular menu">
+                    {% for cut_type,image_path_list in image_package.items %}
+                    {% if forloop.first %}
+                    <a class="active item" data-tab="{{ image_object_id }}{{ cut_type }}">{{ cut_type }}</a>
+                    {% else %}
+                    <a class="item" data-tab="{{ image_object_id }}{{ cut_type }}">{{ cut_type }}</a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% for cut_type,image_path_list in image_package.items %}
+                {% if forloop.first %}
+                <div class="ui bottom attached active tab segment" data-tab="{{ image_object_id }}{{ cut_type }}">
+                    {% else %}
+                    <div class="ui bottom attached tab segment" data-tab="{{ image_object_id }}{{ cut_type }}">
+                        {% endif %}
+                        {% comment %} loop image path {% endcomment %}
+                        <div class="ui grid">
+                            {% for img_path in image_path_list %}
+                            <div class="three wide column">
+                                <div class="ui medium rounded image">
+                                    <!-- <a class="ui left corner label" target="_blank"
                        href="/show_one_image/?img_path={{ img_path }}">
                         <i class="zoom-in icon"></i>
                     </a> -->
-                    <a href="/create_pc/?img_path={{ img_path }}" target="_blank">
-                        <img src="{% static img_path %}">
-                    </a>
+                                    <a href="/create_pc/?img_path={{ img_path }}" target="_blank">
+                                        <img src="{% static img_path %}">
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% if forloop.first %}
                 </div>
+                {% else %}
             </div>
-        {% endfor %}
-    </div>
-    </div>
-    {% endfor %}
-    {% if forloop.first %}
+            {% endif %}
+            {% endfor %}
         </div>
-    {% else %}
-        </div>
-    {% endif %}
-    {% endfor %}
-    </div>
-
-
-
 </body>
 
 </html>

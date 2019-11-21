@@ -10,6 +10,9 @@
     <link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js" integrity="sha256-qs5p0BFSqSvrstBxPvex+zdyrzcyGdHNeNmAirO2zc0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
     <script>
         // assign django global variable for js
         var token = '{{csrf_token}}'
@@ -36,12 +39,6 @@
             <form method="post" class="ui form eight wide column" id="formadd">
                 <h1>Connect to database:</h1>
                 {% csrf_token %}
-                <!--                     <div class="field">
-                        <div class="ui pointing below label">
-                            Please enter the MongoDB address
-                        </div>
-                        <input type="text" id="ip_address" placeholder="localhost" value="localhost" />
-                    </div> -->
                 <button type="submit" class="ui fluid secondary button" id="button_ip">Connect</button>
             </form>
         </div>
@@ -196,8 +193,8 @@
                             <i class="dropdown icon"></i>
                             1. Choose collections:
                         </div>
-                        <div class="active content">
-                            <input type="text" name="scan_collection">
+                        <div class="active content scan_collection">
+                            <input autofocus type="text" name="scan_collection">
                         </div>
                         <div class="title">
                             <i class="dropdown icon"></i>
@@ -338,6 +335,8 @@
             </div>
         </div>
     </div>
+
+    <script type="text/jsx" src="{% static 'js/main_react.js' %}"></script>
 </body>
 
 </html>

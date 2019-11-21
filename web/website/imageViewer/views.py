@@ -122,14 +122,12 @@ def start_search(request):
 
     mongoManager = MongoDB(d.database_collection_list, d.ip,config_path=CONFIG_PATH)
 
-    if d.object_id_list is None and d.search_pattern == "entity_search":
-        return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
+    if d.search_pattern=="scan_search":
+        df=scan_search(ip=d.ip,db_collection=d.scan_collection,scan_class_list=d.scan_class_list,image_type_list=d.image_type_list,config_path=CONFIG_PATH)
 
-    if d.flag_apply_filtering is True or d.flag_class_apply_filtering is True:
-        print('---------------------------APPLY FILTERING---------------------------')
-        mongoManager.apply_similar_filtering(
-            d.flag_apply_filtering, d.class_id_list, d.similar_dict)
-    if d.search_pattern == "entity_search":
+    elif d.object_id_list is None and d.search_pattern == "entity_search":
+        return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
+    elif d.search_pattern == "entity_search":
         print("ENTITY SEARCH")
         df = mongoManager.entity_search(
             object_id_list=d.object_id_list,
@@ -140,7 +138,7 @@ def start_search(request):
         print("Search Done.")
     else:
         print("EVENT SEARCH")
-        df = event_search(ip=d.ip, view_list=d.view_list)
+        df = event_search(ip=d.ip, view_list=d.view_list,config_path=CONFIG_PATH)
 
     download_images(ip=d.ip, root_folder_path=IMAGE_ROOT,
                     root_folder_name=d.user_id, df=df,config_path=CONFIG_PATH)

@@ -39,6 +39,7 @@ class WebsiteData():
         object_id_list = []
         image_type_list = []
         view_list = []
+        scan_class_list=[]
         bounding_box_dict = {}
         search_pattern = 'entity_search'
         dataset_pattern = None
@@ -51,6 +52,7 @@ class WebsiteData():
         padding_type=None
 
         checkbox_object_pattern = form_dict['checkbox_object_pattern']
+        scan_collection=form_dict['scan_collection']
         flag_resize_type = form_dict['checkbox_resize_type']
         width = int(form_dict['width']) if form_dict['width'] != "" else ""
         height = int(form_dict['height']
@@ -120,6 +122,8 @@ class WebsiteData():
             # Get multiply objects/classes from input fields
             if key.startswith('object_id') and value != '':
                 object_id_list.append(value)
+            if key.startswith('class_id') and value!='':
+                scan_class_list.append(value)
             # Get selected image type checkbox
             if key.startswith('rgb'):
                 image_type_list.append('Color')
@@ -154,6 +158,8 @@ class WebsiteData():
             self.object_id_list = object_id_list
             self.class_id_list = None
 
+        self.scan_collection=scan_collection
+        self.scan_class_list=scan_class_list
         self.database_collection_list=database_collection_list
         self.image_type_list = image_type_list
         self.bounding_box_dict = bounding_box_dict
