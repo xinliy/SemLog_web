@@ -50,7 +50,12 @@ And check all important features in the framework.
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Open your browser and visit the website via the address "**localhost:8000**" to deploy it locally, or use
+
+```
+python manage.py runserver TARGET_IP
+```
+To deploy the website in local network
 
 ## Built With
 * [Django](https://www.djangoproject.com/) - The web framework used
