@@ -120,13 +120,18 @@ def start_search(request):
     request.session['dataset_pattern'] = d.dataset_pattern
     request.session['class_id_list'] = d.class_id_list
 
+    # Create MongoDB instance
     mongoManager = MongoDB(d.database_collection_list, d.ip,config_path=CONFIG_PATH)
 
+    # Search scan images
     if d.search_pattern=="scan_search":
         df=scan_search(ip=d.ip,db_collection=d.scan_collection,scan_class_list=d.scan_class_list,image_type_list=d.image_type_list,config_path=CONFIG_PATH)
 
+    # Return error if no result for entity_search
     elif d.object_id_list is None and d.search_pattern == "entity_search":
         return HttpResponse("<h1 class='ui header'>No result is found in the given scope!</h1>")
+
+    # Search entities
     elif d.search_pattern == "entity_search":
         print("ENTITY SEARCH")
         df = mongoManager.entity_search(
@@ -140,46 +145,52 @@ def start_search(request):
         print("EVENT SEARCH")
         df = event_search(ip=d.ip, view_list=d.view_list,config_path=CONFIG_PATH)
 
+    # Download images
     download_images(ip=d.ip, root_folder_path=IMAGE_ROOT,
                     root_folder_name=d.user_id, df=df,config_path=CONFIG_PATH)
     print("Download Done.")
 
+
+
+    # Perform origin image crop if selected.
     if d.flag_split_bounding_box is True and d.search_pattern == "entity_search":
 
         image_dir = scan_images(root_folder_path=IMAGE_ROOT,
                                 root_folder_name=d.user_id, image_type_list=d.image_type_list)
         crop_with_all_bounding_box(d.object_rgb_dict, image_dir)
 
+    # Retrieve local image paths
     image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id,
                             image_type_list=d.image_type_list, unnest=True)
-    if d.dataset_pattern == 'detection' and d.search_pattern == "entity_search":
+
+    # Move scan images to the right folders
+    if d.search_pattern=="scan_search":
+        d.customize_image_resolution(image_dir)
+        arrange_scan_by_class(df,IMAGE_ROOT,d.user_id)
+    # Prepare dataset
+    elif d.dataset_pattern == 'detection' and d.search_pattern == "entity_search":
         print("----------------Prepare dataset for object detection---------------------")
-        image_dir = scan_images(root_folder_path=IMAGE_ROOT, root_folder_name=d.user_id,
-                                image_type_list=d.image_type_list, unnest=True)
+
         d.customize_image_resolution(image_dir)
         df = calculate_bounding_box(
             df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
-        bounding_box_dict = {}
         df.to_csv(os.path.join(IMAGE_ROOT, d.user_id, 'info.csv'), index=False)
+
     elif d.dataset_pattern == 'classifier' and d.search_pattern == "entity_search":
         print("----------------Prepare dataset for classifier---------------------------")
+
         download_bounding_box(df, d.object_rgb_dict, IMAGE_ROOT, d.user_id)
-        bounding_box_dict = scan_bounding_box_images(IMAGE_ROOT, d.user_id)
-        bounding_box_dict = scan_bounding_box_images(
+        bounding_box_dict = scan_bb_images(
             IMAGE_ROOT, d.user_id, unnest=True)
         d.customize_image_resolution(bounding_box_dict)
-    else:
-        bounding_box_dict = {}
-    image_dir = scan_images(IMAGE_ROOT, d.user_id, d.image_type_list)
-    bounding_box_dict = scan_bounding_box_images(IMAGE_ROOT, d.user_id)
 
-    info={'image_type_list':d.image_type_list,'object_id_list':d.object_id_list}
+
+    # Store static info in local json file
+    info={'image_type_list':d.image_type_list,'object_id_list':d.object_id_list,'search_pattern':d.search_pattern}
     with open(os.path.join(IMAGE_ROOT,d.user_id,'info.json'),'w') as f:
         json.dump(info,f)
 
     return render(request,'make_your_choice.html')
-    # return render(request, 'gallery.html',
-    #               {"object_id_list": d.object_id_list, "image_dir": image_dir, "bounding_box": bounding_box_dict})
 
 def view_images(request):
     user_id=request.session['user_id']
@@ -187,8 +198,12 @@ def view_images(request):
         info=json.load(f)
     object_id_list=info['object_id_list']
     image_type_list=info['image_type_list']
+    search_pattern=info['search_pattern']
     image_dir=scan_images(IMAGE_ROOT,user_id,image_type_list)
-    bounding_box_dict=scan_bounding_box_images(IMAGE_ROOT,user_id)
+    if search_pattern=="scan_search":
+        bounding_box_dict=scan_bb_images(IMAGE_ROOT,user_id,folder_name="scans")
+    else:
+        bounding_box_dict=scan_bb_images(IMAGE_ROOT,user_id)
 
 
     return render(request, 'gallery.html',

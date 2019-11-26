@@ -2,6 +2,8 @@ import os
 import pandas as pd
 from itertools import chain
 import platform
+import shutil
+from web.image_path.utils import *
 
 
 def scan_images(root_folder_path, root_folder_name, image_type_list,unnest=False):
@@ -41,8 +43,19 @@ def scan_images(root_folder_path, root_folder_name, image_type_list,unnest=False
         return result
     return image_dir
 
+# def scan_scan_images(root_folder_path,root_folder_name):
+#     scan_root=os.path.join(root_folder_path, root_folder_name,"scans")
+#     if not os.path.isdir(scan_root):
+#         return {}
+#     scan_folders = os.listdir(scan_root)
+#     bounding_box_dict = {}
+#     for each_class_folder in scan_folders:
+#         type_folder_paths=os.listdir(os.path.join(scan_root,each_class_folder))
 
-def scan_bounding_box_images(root_folder_path, root_folder_name,unnest=False):
+        # if platform.system()=="Linux":
+
+
+def scan_bb_images(root_folder_path, root_folder_name,unnest=False,folder_name="BoundingBoxes"):
     """Scan local bounding box images.
 
     Args:
@@ -53,7 +66,7 @@ def scan_bounding_box_images(root_folder_path, root_folder_name,unnest=False):
         A nested dict separated by object_id and then image types.
 
     """
-    box_root=os.path.join(root_folder_path, root_folder_name,"BoundingBoxes")
+    box_root=os.path.join(root_folder_path, root_folder_name,folder_name)
     if not os.path.isdir(box_root):
         return {}
     box_folders = os.listdir(box_root)
@@ -62,7 +75,7 @@ def scan_bounding_box_images(root_folder_path, root_folder_name,unnest=False):
         image_paths = os.listdir(os.path.join(box_root,each_folder))
 
         if platform.system()=="Linux" and unnest is False:
-            image_abs_paths = [os.path.join( root_folder_name,"BoundingBoxes", each_folder, i) for i in image_paths]
+            image_abs_paths = [os.path.join( root_folder_name,folder_name, each_folder, i) for i in image_paths]
         else:
             image_abs_paths = [os.path.join(box_root, each_folder, i) for i in image_paths]
         name_list = each_folder.split("$")
@@ -110,3 +123,36 @@ def get_image_path_for_bounding_box(df, object_id, root_folder_path, root_folder
             os.path.join(root_folder_path, root_folder_name, image_info["type"],
                          str(image_info["file_id"]) + ".png"))
     return image_dir, image_type_list, class_name
+
+def arrange_scan_by_class(scan_df,root_folder_path,root_folder_name):
+
+    scan_root_folder=os.path.join(root_folder_path,root_folder_name,'scans')
+
+    # Create scan folder
+    create_a_folder(scan_root_folder)
+
+    # Create sub folders by class name
+    class_list=list(scan_df['class'].unique())
+    class_path_list=[os.path.join(scan_root_folder,i) for i in class_list]
+    map(create_a_folder,class_path_list)
+
+    # Retrieve image type list via local folder name
+    image_type_list=[i for i in
+                     os.listdir(os.path.join(root_folder_path,root_folder_name))
+                     if i in ['Color','Depth','Normal','Mask','Unlit']]
+
+    # Iterate rows in scan_df and move images to the right folder
+    for _,row in scan_df.iterrows():
+
+        # Create the target folder
+        new_image_folder=os.path.join(scan_root_folder,row['class']+"$"+row['type']+"$"+"scans")
+        create_a_folder(new_image_folder)
+
+        old_image_path=os.path.join(root_folder_path,root_folder_name,row['type'],str(row['file_id'])+'.png')
+        new_image_path=os.path.join(new_image_folder,str(row['file_id'])+'.png')
+
+        shutil.move(old_image_path,new_image_path)
+
+
+
+

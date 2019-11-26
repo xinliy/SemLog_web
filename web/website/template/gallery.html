@@ -27,7 +27,7 @@
     {% load static %}
     <div class="ui pointing secondary menu">
         <a class="active item" data-tab="first">Origin</a>
-        <a class="item" data-tab="second">Bounding box</a>
+        <a class="item" data-tab="second">Bounding box/Scans</a>
     </div>
     <div class="ui active tab segment" data-tab="first">
         <div class="ui top attached tabular menu">
@@ -69,11 +69,11 @@
                 {% comment %} create tab label for each object_id {% endcomment %}
                 {% for image_object_id, image_package in bounding_box.items %}
                 {% if forloop.first %}
-                <div class="four wide column">
+                <div class="eight wide column">
                     <a class="active item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
                 </div>
                 {% else %}
-                <div class="four wide column">
+                <div class="eight wide column">
                     <a class="item" data-tab="{{ image_object_id }}">{{ image_object_id }}</a>
                 </div>
                 {% endif %}
