@@ -13,7 +13,7 @@ from web.models.classifier.model import Multiclass_classifier
 
 
 
-def create_vis_figures():
+def create_vis_figures(vis):
     accuracy_figure = vis.line(
         X=np.array([0]),
         Y=np.array([0]),
@@ -40,7 +40,7 @@ batch_size = 5
 def train(dataset_path, class_list, num_epoch=10, test_split=0.2, model_saving_path=None, lr=0.00001):
 
     vis = visdom.Visdom()
-    accuracy_figure,train_loss_figure=create_vis_figures()
+    accuracy_figure,train_loss_figure=create_vis_figures(vis)
     model = Multiclass_classifier(n_classes=len(class_list))
     model = model.to(device)
     optimizer = optim.Adam(model.parameters(), lr=lr)
@@ -81,7 +81,7 @@ def train(dataset_path, class_list, num_epoch=10, test_split=0.2, model_saving_p
             pred = torch.max(log_ps, dim=1)[1]
             acc.extend(list(torch.eq(pred, labels)))
             if n==1:
-                show_predictions_on_images(images,pred,labels)
+                show_predictions_on_images(vis,images,pred,labels)
 
         # Plot accuracy in visdom
         accuracy = acc.count(1) / len(acc)
@@ -121,7 +121,7 @@ def train(dataset_path, class_list, num_epoch=10, test_split=0.2, model_saving_p
         print("running_loss:", running_loss)
         print('accuracy', acc.count(1) / len(acc))
 
-def show_predictions_on_images(images,pred,labels):
+def show_predictions_on_images(vis,images,pred,labels):
     pred_list=','.join(str(i) for i in pred.tolist())
     label_list=','.join(str(i) for i in labels.tolist())
     vis.images(images,opts={"title":"Predict:"+pred_list+os.linesep
