@@ -13,7 +13,9 @@
 import os
 import sys
 import sphinx_glpi_theme
-sys.path.insert(0, os.path.abspath('..'))
+doc_dir = os.path.dirname(os.path.abspath(__file__))
+project_dir = os.path.dirname(doc_dir)
+sys.path.insert(0, doc_dir)
 
 
 # -- Project information -----------------------------------------------------
