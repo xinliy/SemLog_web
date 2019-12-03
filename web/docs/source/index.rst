@@ -15,12 +15,14 @@ It is designed to be distributed and efficient with the following advantages:
 - Support of parallel and GPU learning.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    Installation Guide <Installation-Guide>
    Quick Start <Quick-Start>
    Demo <Demo>
+   FAQ <FAQ>
+   Development Guide <Development-Guide>
 
 
 
