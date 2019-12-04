@@ -93,9 +93,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Demo.html">Demo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structure-design">Structure Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classes-and-code-structure">Classes and Code Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#important-classes">important Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-structure">Code Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#questions">Questions</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -168,7 +178,89 @@
             
   <div class="section" id="development-guide">
 <h1>Development Guide<a class="headerlink" href="#development-guide" title="Permalink to this headline">¶</a></h1>
-<p>This is a summary page.</p>
+<div class="section" id="structure-design">
+<h2>Structure Design<a class="headerlink" href="#structure-design" title="Permalink to this headline">¶</a></h2>
+<p>Refer to <a class="reference external" href="./Features.html">Features</a> for understanding of important structure designs in LightGBM.</p>
+</div>
+<div class="section" id="classes-and-code-structure">
+<h2>Classes and Code Structure<a class="headerlink" href="#classes-and-code-structure" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="important-classes">
+<h3>important Classes<a class="headerlink" href="#important-classes" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Class</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WebsiteData</span></code></p></td>
+<td><p>Compile form data received from the website input. Clean and restructure</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MongoDB</span></code></p></td>
+<td><p>Data structure used for querying multiple collections, downloading images</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PointCloudGenerator</span></code></p></td>
+<td><p>Generate point cloud matrix from RGB and depth image pairs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Config</span></code></p></td>
+<td><p>Stores parameters and configurations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="code-structure">
+<h3>Code Structure<a class="headerlink" href="#code-structure" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Path</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>./web/image_path</p></td>
+<td><p>Functions for retrieving local image files</p></td>
+</tr>
+<tr class="row-odd"><td><p>./web/models</p></td>
+<td><p>Implementations of vision algorithms</p></td>
+</tr>
+<tr class="row-even"><td><p>./web/semlog_mongo</p></td>
+<td><p>Implementations of python interface to MongoDB</p></td>
+</tr>
+<tr class="row-odd"><td><p>./web/semlog_vis</p></td>
+<td><p>Implementations of image manipulations</p></td>
+</tr>
+<tr class="row-even"><td><p>./web/staticfiles</p></td>
+<td><p>JS and CSS used in the website</p></td>
+</tr>
+<tr class="row-odd"><td><p>./web/website/imageViewer</p></td>
+<td><p>Django application for connecting the website with all another functions</p></td>
+</tr>
+<tr class="row-even"><td><p>./web/website/pointCloudViewer</p></td>
+<td><p>Implementations of dynamic calculation and visualization of point clouds</p></td>
+</tr>
+<tr class="row-odd"><td><p>./web/website/static</p></td>
+<td><p>Root folder for saving images in the server side</p></td>
+</tr>
+<tr class="row-even"><td><p>./web/website/template</p></td>
+<td><p>html files with Django template language</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h2>
+<p>Refer to <a class="reference external" href="./FAQ.html">FAQ</a>.</p>
+<p>Also feel free to open <a class="reference external" href="https://github.com/robcog-iai/semlog_web/issues">issues</a> if you met problems.</p>
+</div>
 </div>
 
 

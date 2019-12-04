@@ -30,7 +30,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
-    'website.point_cloud_viewer',
+    'website.pointCloudViewer',
     'website.imageViewer',
     'django.contrib.admin',
     'django.contrib.auth',

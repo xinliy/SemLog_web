@@ -20,6 +20,7 @@ It is designed to be distributed and efficient with the following advantages:
 
    Installation Guide <Installation-Guide>
    Quick Start <Quick-Start>
+   Features <Features>
    Demo <Demo>
    FAQ <FAQ>
    Development Guide <Development-Guide>

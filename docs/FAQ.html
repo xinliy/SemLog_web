@@ -94,8 +94,12 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Demo.html">Demo</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#critical-issues">Critical Issues</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">Development Guide</a></li>
 </ul>
 
@@ -171,7 +175,25 @@
             
   <div class="section" id="faq">
 <h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
-<p>This is a summary page.</p>
+<div class="section" id="critical-issues">
+<h2>Critical Issues<a class="headerlink" href="#critical-issues" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>critical issue</strong> could be a <em>crash</em>, <em>prediction error</em>, <em>nonsense output</em>, or something else requiring immediate attention.</p>
+<p>Please post such an issue in the <a class="reference external" href="https://github.com/robcog-iai/semlog_web/issues">robcog-iai/semlog_web repository</a>.</p>
+<p>You may also ping a member of the core team according to the relevant area of expertise by mentioning them with the arabase (&#64;) symbol:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/xinliy">&#64;xinliy</a> <strong>Xiaoyue Zhang</strong> (Python code / Django / Pytorch)</p></li>
+<li><p><a class="reference external" href="https://github.com/andreihaidu">&#64;andreihaidu</a> <strong>Andrei Haidu</strong> (MongoDB database / Management)</p></li>
+</ul>
+<p>Please include as much of the following information as possible when submitting a critical issue:</p>
+<ul class="simple">
+<li><p>Is it reproducible on CLI (command line interface), Python or MongoDB?</p></li>
+<li><p>Is it specific to a programming language? (Python or JavaScript?)</p></li>
+<li><p>Is it specific to the compiler? (Miniconda version? MongoDB version?)</p></li>
+<li><p>Is it specific to your Operating System? (Windows? Linux? macOS?)</p></li>
+<li><p>Are you able to reproduce this issue with a simple case?</p></li>
+<li><p>Does the issue persist after removing all additional codes and compiling Django in debug mode?</p></li>
+</ul>
+</div>
 </div>
 
 

@@ -20,7 +20,7 @@ import sys
 
 sys.path.append("..")
 from .imageViewer import views as image_views
-from .point_cloud_viewer import views as pc_views
+from .pointCloudViewer import views as pc_views
 
 urlpatterns = [
     path(r'', image_views.search),
