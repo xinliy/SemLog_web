@@ -34,6 +34,7 @@ Open a new terminal to ``D:\semlog_web\web\example``, run
    .. code::
 
      jupyter notebook
+
 Then you should be able to view a short demo in your browser.
 
 Try to run cells one by one to go through these important functions. You can view generated images in local directory after the download API is called

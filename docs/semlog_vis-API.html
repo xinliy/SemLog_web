@@ -1,0 +1,583 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>semlog_vis API &mdash; SemlogWeb 2.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/jquery.fancybox.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/glpi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="SemlogWeb 2.0.0 documentation" href="index.html"/>
+        <link rel="next" title="FAQ" href="FAQ.html"/>
+        <link rel="prev" title="semlog_mongo API" href="semlog_mongo-API.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> SemlogWeb
+          
+
+          
+          </a>
+
+          
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Demo.html">Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="semlog_mongo-API.html">semlog_mongo API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">semlog_vis API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-image">semlog_vis.image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-point_cloud">semlog_vis.point_cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-create_annotation">semlog_vis.create_annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-bounding_box">semlog_vis.bounding_box</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">Development Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SemlogWeb</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>semlog_vis API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/semlog_vis-API.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="FAQ.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="semlog_mongo-API.html" class="btn btn-neutral" title="semlog_mongo API" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="semlog-vis-api">
+<h1>semlog_vis API<a class="headerlink" href="#semlog-vis-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-image">
+<span id="semlog-vis-image"></span><h2>semlog_vis.image<a class="headerlink" href="#module-image" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="image.cut_object">
+<code class="sig-prename descclassname">image.</code><code class="sig-name descname">cut_object</code><span class="sig-paren">(</span><em class="sig-param">rgb_image_path</em>, <em class="sig-param">mask_image_path</em>, <em class="sig-param">object_color</em>, <em class="sig-param">saving_path=None</em>, <em class="sig-param">flag_remove_background=False</em>, <em class="sig-param">new_background_color=(255</em>, <em class="sig-param">255</em>, <em class="sig-param">255)</em><span class="sig-paren">)</span><a class="headerlink" href="#image.cut_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to cut a specific object from the pair RGB/mask image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rgb_image_path</strong> – Path to a RGB image.</p></li>
+<li><p><strong>mask_image_path</strong> – Path to a mask image.</p></li>
+<li><p><strong>object_color</strong> – Mask color for the target object</p></li>
+<li><p><strong>saving_path</strong> – Path to save the cropped image.</p></li>
+<li><p><strong>flag_remove_background</strong> – A boolean whether to remvoe the background of the cropped image.</p></li>
+<li><p><strong>new_background_color</strong> – If remove the background, use this color to fill the background.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Coordinates of the object in the image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="image.load_img_and_mask">
+<code class="sig-prename descclassname">image.</code><code class="sig-name descname">load_img_and_mask</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">mask</em><span class="sig-paren">)</span><a class="headerlink" href="#image.load_img_and_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a pair of image and its mask, convert BGR to RGB of the mask image.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="image.pad_image">
+<code class="sig-prename descclassname">image.</code><code class="sig-name descname">pad_image</code><span class="sig-paren">(</span><em class="sig-param">img_path</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em>, <em class="sig-param">pad_type</em>, <em class="sig-param">value=(0</em>, <em class="sig-param">0</em>, <em class="sig-param">0)</em><span class="sig-paren">)</span><a class="headerlink" href="#image.pad_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pad the give image with different size and padding type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_path</strong> – Path of the source image.</p></li>
+<li><p><strong>width</strong> – The target width.</p></li>
+<li><p><strong>height</strong> – The target height.</p></li>
+<li><p><strong>pad_type</strong> – The padding type in cv2.copyMakeBorder.</p></li>
+<li><p><strong>value</strong> – If pad_type=”cv2.Border_CONSTANT”, this value is used as the padding constant color.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The processed image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="image.remove_image_background">
+<code class="sig-prename descclassname">image.</code><code class="sig-name descname">remove_image_background</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">mask</em>, <em class="sig-param">mask_color</em>, <em class="sig-param">background_color=(255</em>, <em class="sig-param">255</em>, <em class="sig-param">255)</em><span class="sig-paren">)</span><a class="headerlink" href="#image.remove_image_background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace the image background with a single color.
+:param img: The source image.
+:param mask: The source mask.
+:param mask_color: Mask color of the object.
+:param background_color: New background color to be replaced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The new image as ndarray.s</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="image.replace_single_color">
+<code class="sig-prename descclassname">image.</code><code class="sig-name descname">replace_single_color</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">color</em>, <em class="sig-param">new_color</em><span class="sig-paren">)</span><a class="headerlink" href="#image.replace_single_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace one color in an image to another color.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – The source image.</p></li>
+<li><p><strong>color</strong> – The color in the image that you want to replace.</p></li>
+<li><p><strong>new_color</strong> – New color to replace.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>New image as ndarray.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="image.resize_all_images">
+<code class="sig-prename descclassname">image.</code><code class="sig-name descname">resize_all_images</code><span class="sig-paren">(</span><em class="sig-param">image_dir</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em>, <em class="sig-param">resize_type</em><span class="sig-paren">)</span><a class="headerlink" href="#image.resize_all_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiprocessing function for resize images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_dir</strong> – A dict of images to be resized.</p></li>
+<li><p><strong>width</strong> – Target width.</p></li>
+<li><p><strong>height</strong> – Target height.</p></li>
+<li><p><strong>resize_type</strong> – Stretch or sclae depending on the input.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="image.resize_image">
+<code class="sig-prename descclassname">image.</code><code class="sig-name descname">resize_image</code><span class="sig-paren">(</span><em class="sig-param">img_path</em>, <em class="sig-param">width=''</em>, <em class="sig-param">height=''</em>, <em class="sig-param">type='cut'</em><span class="sig-paren">)</span><a class="headerlink" href="#image.resize_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resize one image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_path</strong> – Path of the image</p></li>
+<li><p><strong>width</strong> – Target width.</p></li>
+<li><p><strong>height</strong> – Target height.</p></li>
+<li><p><strong>type</strong> – ‘cut’ -&gt; Stretch the image absolutely, otherwise scale the image by width or height.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="image.scale_image">
+<code class="sig-prename descclassname">image.</code><code class="sig-name descname">scale_image</code><span class="sig-paren">(</span><em class="sig-param">img_path</em>, <em class="sig-param">ratio</em><span class="sig-paren">)</span><a class="headerlink" href="#image.scale_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scale an image with a given ratio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_path</strong> – Path to the image.</p></li>
+<li><p><strong>ratio</strong> – ratio to scale the image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-point_cloud">
+<span id="semlog-vis-point-cloud"></span><h2>semlog_vis.point_cloud<a class="headerlink" href="#module-point_cloud" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="point_cloud.PointCloudGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">point_cloud.</code><code class="sig-name descname">PointCloudGenerator</code><span class="sig-paren">(</span><em class="sig-param">rgb_file</em>, <em class="sig-param">depth_file</em>, <em class="sig-param">focal_length</em>, <em class="sig-param">scalingfactor</em><span class="sig-paren">)</span><a class="headerlink" href="#point_cloud.PointCloudGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for generate point cloud from RGB and depth image pair.</p>
+<dl class="method">
+<dt id="point_cloud.PointCloudGenerator.calculate">
+<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param">flag_depth_conversion=False</em><span class="sig-paren">)</span><a class="headerlink" href="#point_cloud.PointCloudGenerator.calculate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the 3D position according to the depth data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="point_cloud.PointCloudGenerator.depthConversion">
+<code class="sig-name descname">depthConversion</code><span class="sig-paren">(</span><em class="sig-param">PointDepth</em><span class="sig-paren">)</span><a class="headerlink" href="#point_cloud.PointCloudGenerator.depthConversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjust the relative depth in UE4.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="point_cloud.PointCloudGenerator.save_npy">
+<code class="sig-name descname">save_npy</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">alpha=False</em><span class="sig-paren">)</span><a class="headerlink" href="#point_cloud.PointCloudGenerator.save_npy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the .npy file of the point cloud.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="point_cloud.PointCloudGenerator.show_point_cloud">
+<code class="sig-name descname">show_point_cloud</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#point_cloud.PointCloudGenerator.show_point_cloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the point cloud directly with open3d.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="point_cloud.PointCloudGenerator.write_ply">
+<code class="sig-name descname">write_ply</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#point_cloud.PointCloudGenerator.write_ply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the point cloud as a .ply file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">point_cloud.</code><code class="sig-name descname">PointCloudGenerator</code><span class="sig-paren">(</span><em class="sig-param">rgb_file</em>, <em class="sig-param">depth_file</em>, <em class="sig-param">focal_length</em>, <em class="sig-param">scalingfactor</em><span class="sig-paren">)</span></dt>
+<dd><p>Class for generate point cloud from RGB and depth image pair.</p>
+<dl class="method">
+<dt>
+<code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param">flag_depth_conversion=False</em><span class="sig-paren">)</span></dt>
+<dd><p>Calculate the 3D position according to the depth data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">depthConversion</code><span class="sig-paren">(</span><em class="sig-param">PointDepth</em><span class="sig-paren">)</span></dt>
+<dd><p>Adjust the relative depth in UE4.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">save_npy</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">alpha=False</em><span class="sig-paren">)</span></dt>
+<dd><p>Save the .npy file of the point cloud.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">show_point_cloud</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Show the point cloud directly with open3d.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">write_ply</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span></dt>
+<dd><p>Save the point cloud as a .ply file.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-create_annotation">
+<span id="semlog-vis-create-annotation"></span><h2>semlog_vis.create_annotation<a class="headerlink" href="#module-create_annotation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="create_annotation.clean_df_for_annotation">
+<code class="sig-prename descclassname">create_annotation.</code><code class="sig-name descname">clean_df_for_annotation</code><span class="sig-paren">(</span><em class="sig-param">df</em><span class="sig-paren">)</span><a class="headerlink" href="#create_annotation.clean_df_for_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove unused columns and create number mapping to classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> – Result df from calculate bounding box.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cleaned df.
+class_mapping_dict: Map class name to number.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>df</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="create_annotation.convert_df_to_annotation">
+<code class="sig-prename descclassname">create_annotation.</code><code class="sig-name descname">convert_df_to_annotation</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">bb_path</em>, <em class="sig-param">mapping_path</em><span class="sig-paren">)</span><a class="headerlink" href="#create_annotation.convert_df_to_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a result df to annotation and store data as txt file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – Result df from calcualte bounding box.</p></li>
+<li><p><strong>bb_path</strong> – path to save bounding box data.</p></li>
+<li><p><strong>mapping_path</strong> – path to save class mapping dict.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="create_annotation.write_bb_to_txt">
+<code class="sig-prename descclassname">create_annotation.</code><code class="sig-name descname">write_bb_to_txt</code><span class="sig-paren">(</span><em class="sig-param">result</em>, <em class="sig-param">txt_path</em><span class="sig-paren">)</span><a class="headerlink" href="#create_annotation.write_bb_to_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrtie bounding boxes to txt file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> – A result df contains bb information.</p></li>
+<li><p><strong>txt_path</strong> – Path to save the data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="create_annotation.write_mapping_to_txt">
+<code class="sig-prename descclassname">create_annotation.</code><code class="sig-name descname">write_mapping_to_txt</code><span class="sig-paren">(</span><em class="sig-param">class_mapping_dict</em>, <em class="sig-param">mapping_path</em><span class="sig-paren">)</span><a class="headerlink" href="#create_annotation.write_mapping_to_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write mapping dict to txt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>class_mapping_dict</strong> – A dict maps class to number.</p></li>
+<li><p><strong>mapping_path</strong> – Path to save the txt file.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-bounding_box">
+<span id="semlog-vis-bounding-box"></span><h2>semlog_vis.bounding_box<a class="headerlink" href="#module-bounding_box" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="bounding_box.calculate_bounding_box">
+<code class="sig-prename descclassname">bounding_box.</code><code class="sig-name descname">calculate_bounding_box</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">object_rgb_dict</em>, <em class="sig-param">root_folder_path</em>, <em class="sig-param">root_folder_name</em><span class="sig-paren">)</span><a class="headerlink" href="#bounding_box.calculate_bounding_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function for calculate bounding boxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – Information Data Frame.</p></li>
+<li><p><strong>object_rgb_dict</strong> – A dict maps object id to mask colors.</p></li>
+<li><p><strong>root_folder_path</strong> – Root path for images.</p></li>
+<li><p><strong>root_folder_name</strong> – Root folder name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bounding_box.crop_with_all_bounding_box">
+<code class="sig-prename descclassname">bounding_box.</code><code class="sig-name descname">crop_with_all_bounding_box</code><span class="sig-paren">(</span><em class="sig-param">object_rgb_dict</em>, <em class="sig-param">image_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#bounding_box.crop_with_all_bounding_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crop full images with max boundary of all objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_rgb_dict</strong> – A dict contains objects and their mask colors.</p></li>
+<li><p><strong>image_dir</strong> – A dict contains all target images</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bounding_box.download_bounding_box">
+<code class="sig-prename descclassname">bounding_box.</code><code class="sig-name descname">download_bounding_box</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">object_rgb_dict</em>, <em class="sig-param">root_folder_path</em>, <em class="sig-param">root_folder_name</em><span class="sig-paren">)</span><a class="headerlink" href="#bounding_box.download_bounding_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function for download bounding boxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – Information Data Frame.</p></li>
+<li><p><strong>object_rgb_dict</strong> – A dict maps object id to mask colors.</p></li>
+<li><p><strong>root_folder_path</strong> – Root path for images.</p></li>
+<li><p><strong>root_folder_name</strong> – Root folder name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FAQ.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="semlog_mongo-API.html" class="btn btn-neutral" title="semlog_mongo API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Xiaoyue Zhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/jquery.fancybox.min.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+  <script type="text/javascript">
+    $(function(){
+      $('.image-reference').fancybox();
+    })
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,731 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>semlog_mongo API &mdash; SemlogWeb 2.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/jquery.fancybox.min.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/glpi.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="SemlogWeb 2.0.0 documentation" href="index.html"/>
+        <link rel="next" title="semlog_vis API" href="semlog_vis-API.html"/>
+        <link rel="prev" title="Demo" href="Demo.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> SemlogWeb
+          
+
+          
+          </a>
+
+          
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation-Guide.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick-Start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Demo.html">Demo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">semlog_mongo API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#semlog-mongo-mongo">semlog_mongo.mongo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#semlog-mongo-utils">semlog_mongo.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#semlog-mongo-analysis">semlog_mongo.analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="semlog_vis-API.html">semlog_vis API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development-Guide.html">Development Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SemlogWeb</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>semlog_mongo API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/semlog_mongo-API.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="semlog_vis-API.html" class="btn btn-neutral float-right" title="semlog_vis API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Demo.html" class="btn btn-neutral" title="Demo" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="semlog-mongo-api">
+<h1>semlog_mongo API<a class="headerlink" href="#semlog-mongo-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="semlog-mongo-mongo">
+<h2>semlog_mongo.mongo<a class="headerlink" href="#semlog-mongo-mongo" title="Permalink to this headline">¶</a></h2>
+<p>In <code class="docutils literal notranslate"><span class="pre">mongo</span></code> is a class that manage for multi collectin queries. Can be initilized by an instance of class WebsiteData. Or mannually.</p>
+<span class="target" id="module-mongo"></span><dl class="class">
+<dt id="mongo.MongoDB">
+<em class="property">class </em><code class="sig-prename descclassname">mongo.</code><code class="sig-name descname">MongoDB</code><span class="sig-paren">(</span><em class="sig-param">database_collection_list</em>, <em class="sig-param">ip='127.0.0.1'</em>, <em class="sig-param">port=27017</em>, <em class="sig-param">config_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mongo.MongoDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for multi-collection query.</p>
+<dl class="method">
+<dt id="mongo.MongoDB.apply_similar_filtering">
+<code class="sig-name descname">apply_similar_filtering</code><span class="sig-paren">(</span><em class="sig-param">flag_class_apply_filtering</em>, <em class="sig-param">class_id_list</em>, <em class="sig-param">similar_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mongo.MongoDB.apply_similar_filtering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply two stage similarity filtering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag_class_apply_filtering</strong> – Whether apply class filtering or not.</p></li>
+<li><p><strong>class_id_list</strong> – A list of classes.</p></li>
+<li><p><strong>similar_dict</strong> – A dict contains parameters for filtering.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mongo.MongoDB.entity_search">
+<code class="sig-name descname">entity_search</code><span class="sig-paren">(</span><em class="sig-param">object_id_list=None</em>, <em class="sig-param">class_id_list=None</em>, <em class="sig-param">object_pattern='class'</em>, <em class="sig-param">object_logic='or'</em>, <em class="sig-param">image_type_list=None</em>, <em class="sig-param">flag_ignore_similar_image=False</em>, <em class="sig-param">flag_class_ignore_similar_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mongo.MongoDB.entity_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for searching MongoDB with entity conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_id_list</strong> – a list of object_ids</p></li>
+<li><p><strong>class_id_list</strong> – a list of classes</p></li>
+<li><p><strong>object_pattern</strong> (<em>'id'|'class'</em>) – Search with object ids or classes</p></li>
+<li><p><strong>object_logic</strong> (<em>'and'|'or'</em>) – Search with which logic</p></li>
+<li><p><strong>image_type_list</strong> (<em>[</em><em>'Color'</em><em>,</em><em>&quot;Depth&quot;</em><em>,</em><em>&quot;Mask&quot;</em><em>,</em><em>&quot;Normal&quot;</em><em>]</em>) – type of images</p></li>
+<li><p><strong>flag_ignore_similar_image</strong> (<em>True|False</em>) – </p></li>
+<li><p><strong>flag_class_ignore_similar_image</strong> (<em>True|False</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pandas Dataframe contains all qualified images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mongo.MongoDB.get_all_object_id">
+<code class="sig-name descname">get_all_object_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mongo.MongoDB.get_all_object_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all unique object id from all collections.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mongo.MongoDB.get_object_rgb_dict">
+<code class="sig-name descname">get_object_rgb_dict</code><span class="sig-paren">(</span><em class="sig-param">id_list</em>, <em class="sig-param">search_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mongo.MongoDB.get_object_rgb_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a dict contains all class,object id and their colors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id_list</strong> – A list of classes or object ids</p></li>
+<li><p><strong>search_type</strong> – ‘class’ or ‘id’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary contains elements from id_list and their colors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">mongo.</code><code class="sig-name descname">MongoDB</code><span class="sig-paren">(</span><em class="sig-param">database_collection_list</em>, <em class="sig-param">ip='127.0.0.1'</em>, <em class="sig-param">port=27017</em>, <em class="sig-param">config_path=None</em><span class="sig-paren">)</span></dt>
+<dd><p>Class for multi-collection query.</p>
+<dl class="method">
+<dt>
+<code class="sig-name descname">apply_similar_filtering</code><span class="sig-paren">(</span><em class="sig-param">flag_class_apply_filtering</em>, <em class="sig-param">class_id_list</em>, <em class="sig-param">similar_dict</em><span class="sig-paren">)</span></dt>
+<dd><p>Apply two stage similarity filtering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag_class_apply_filtering</strong> – Whether apply class filtering or not.</p></li>
+<li><p><strong>class_id_list</strong> – A list of classes.</p></li>
+<li><p><strong>similar_dict</strong> – A dict contains parameters for filtering.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">entity_search</code><span class="sig-paren">(</span><em class="sig-param">object_id_list=None</em>, <em class="sig-param">class_id_list=None</em>, <em class="sig-param">object_pattern='class'</em>, <em class="sig-param">object_logic='or'</em>, <em class="sig-param">image_type_list=None</em>, <em class="sig-param">flag_ignore_similar_image=False</em>, <em class="sig-param">flag_class_ignore_similar_image=False</em><span class="sig-paren">)</span></dt>
+<dd><p>Function for searching MongoDB with entity conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_id_list</strong> – a list of object_ids</p></li>
+<li><p><strong>class_id_list</strong> – a list of classes</p></li>
+<li><p><strong>object_pattern</strong> (<em>'id'|'class'</em>) – Search with object ids or classes</p></li>
+<li><p><strong>object_logic</strong> (<em>'and'|'or'</em>) – Search with which logic</p></li>
+<li><p><strong>image_type_list</strong> (<em>[</em><em>'Color'</em><em>,</em><em>&quot;Depth&quot;</em><em>,</em><em>&quot;Mask&quot;</em><em>,</em><em>&quot;Normal&quot;</em><em>]</em>) – type of images</p></li>
+<li><p><strong>flag_ignore_similar_image</strong> (<em>True|False</em>) – </p></li>
+<li><p><strong>flag_class_ignore_similar_image</strong> (<em>True|False</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pandas Dataframe contains all qualified images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">get_all_object_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Get all unique object id from all collections.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">get_object_rgb_dict</code><span class="sig-paren">(</span><em class="sig-param">id_list</em>, <em class="sig-param">search_type</em><span class="sig-paren">)</span></dt>
+<dd><p>Get a dict contains all class,object id and their colors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id_list</strong> – A list of classes or object ids</p></li>
+<li><p><strong>search_type</strong> – ‘class’ or ‘id’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary contains elements from id_list and their colors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="semlog-mongo-utils">
+<h2>semlog_mongo.utils<a class="headerlink" href="#semlog-mongo-utils" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">utils</span></code> stores functions for one collection queries. They are the smallest components between Python and MongoDB. Many useful little functions are created here.</p>
+<span class="target" id="module-utils"></span><dl class="function">
+<dt id="utils.calculate_per_image_similar">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">calculate_per_image_similar</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">csv_saving_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.calculate_per_image_similar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the average parameters of similarity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – A pymongo.MongoClient() instance.</p></li>
+<li><p><strong>csv_saving_path</strong> – Directory to save the result.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.check_and_update_similar">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">check_and_update_similar</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">linear_distance_tolerance</em>, <em class="sig-param">angular_distance_tolerance</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.check_and_update_similar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update duplicate flage in the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – A MongoClient instance</p></li>
+<li><p><strong>linear_distance_tolerance</strong> – Threshold for total linear distance.</p></li>
+<li><p><strong>angular_distance_tolerance</strong> – Threshold for total angular distance.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.check_and_update_similar_per_class">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">check_and_update_similar_per_class</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">class_list</em>, <em class="sig-param">num_pixels_tolerance=150</em>, <em class="sig-param">linear_distance_tolerance=0.05</em>, <em class="sig-param">angular_distance_tolerance=0.005</em>, <em class="sig-param">flag_ignore_similar_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.check_and_update_similar_per_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function for filtering duplicate objects per class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – A MongoClient instance.</p></li>
+<li><p><strong>class_list</strong> – A list of classes.</p></li>
+<li><p><strong>num_pixels_tolerance</strong> – Threshold for num_pixels.</p></li>
+<li><p><strong>linear_distance_tolerance</strong> – Threshold for linear distance.</p></li>
+<li><p><strong>Angular_distance_tolerance</strong> – Threshold for angular distance.</p></li>
+<li><p><strong>flag_ignore_similar_image</strong> – Whether to ignore similar images or not.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.download_all_object_name">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">download_all_object_name</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">saving_path='all_objects.csv'</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.download_all_object_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all object infomation from meta collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – A MongoClient instance.</p></li>
+<li><p><strong>saving_path</strong> – Path to save the csv file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.download_images">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">download_images</code><span class="sig-paren">(</span><em class="sig-param">ip</em>, <em class="sig-param">root_folder_path</em>, <em class="sig-param">root_folder_name</em>, <em class="sig-param">df</em>, <em class="sig-param">config_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.download_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Donwload all images via a DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ip</strong> – The ip address to the MongoDB server.</p></li>
+<li><p><strong>root_folder_path</strong> – Path to save the root folder.</p></li>
+<li><p><strong>root_folder_name</strong> – Folder name of saving all images.</p></li>
+<li><p><strong>df</strong> – A result DataFrame from a search method.</p></li>
+<li><p><strong>config_path</strong> – Path of config file for pwd and user name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.download_one">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">download_one</code><span class="sig-paren">(</span><em class="sig-param">download_db</em>, <em class="sig-param">image</em>, <em class="sig-param">abs_path=''</em>, <em class="sig-param">header=''</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.download_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiprocessing version of download.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>download_db</strong> – A GridFS instance of the target collection. Example: download_db = gridfs.GridFSBucket(MongoClient(ip)[database], collection)</p></li>
+<li><p><strong>image</strong> – A list contains file_id and type.</p></li>
+<li><p><strong>abs_path</strong> – Path of root folder.</p></li>
+<li><p><strong>header</strong> – Name of root folder.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.event_search">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">event_search</code><span class="sig-paren">(</span><em class="sig-param">ip</em>, <em class="sig-param">view_list</em>, <em class="sig-param">config_path</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.event_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search with event sentences.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ip</strong> – Target ip address.</p></li>
+<li><p><strong>view_list</strong> – a lsit of event sentences contains db-collection-timestamp-camera_view_name</p></li>
+<li><p><strong>config_path</strong> – File records account information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A df contains qualified results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_all_object_from_meta">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">get_all_object_from_meta</code><span class="sig-paren">(</span><em class="sig-param">client</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_all_object_from_meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all object ids from the meta collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client</strong> – A MongoClient with meta collection.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of object ids.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_class_by_object_id">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">get_class_by_object_id</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">object_id</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_class_by_object_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get class name from a given object id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – A MongoClient instance</p></li>
+<li><p><strong>object_id</strong> – A string to search for its class.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_object_by_class">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">get_object_by_class</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">class_list</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_object_by_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all objects from a given class list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – A MongoClient instance.</p></li>
+<li><p><strong>class_list</strong> – List of class names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of object ids.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_object_list_by_class_list">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">get_object_list_by_class_list</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">class_list</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_object_list_by_class_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all objects from a given class list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – A MongoClient instance.</p></li>
+<li><p><strong>class_list</strong> – A list of classes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dict with keys as classes and values as objects.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_object_rgb">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">get_object_rgb</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">object_id</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_object_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the rgb of an object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_id</strong> (<em>str</em>) – Id for a specific object.</p></li>
+<li><p><strong>collection</strong> (<em>str</em>) – Name of the collection for access meta data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_scans_by_class">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">get_scans_by_class</code><span class="sig-paren">(</span><em class="sig-param">meta_client</em>, <em class="sig-param">class_name=None</em>, <em class="sig-param">image_type_list=None</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_scans_by_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get scan images by class name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meta_client</strong> – A MongoClient instance.</p></li>
+<li><p><strong>class_name</strong> – Name of the class in the meta collection.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.load_mongo_account">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">load_mongo_account</code><span class="sig-paren">(</span><em class="sig-param">config_path</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.load_mongo_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load account info from a local file.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.scan_search">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">scan_search</code><span class="sig-paren">(</span><em class="sig-param">ip</em>, <em class="sig-param">db_collection</em>, <em class="sig-param">scan_class_list</em>, <em class="sig-param">image_type_list</em>, <em class="sig-param">config_path</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.scan_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for scan images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ip</strong> – The ip address to the MongoDB server.</p></li>
+<li><p><strong>db_collection</strong> – A pair of database and collection.</p></li>
+<li><p><strong>scan_class_list</strong> – A list contains class names.</p></li>
+<li><p><strong>image_type_list</strong> – A list conatians image types.</p></li>
+<li><p><strong>config_path</strong> – Path to config file for user name and pwd.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A result DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.search">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">object_id_list=None</em>, <em class="sig-param">image_type_list=None</em>, <em class="sig-param">percentage=0.0001</em>, <em class="sig-param">image_limit=None</em>, <em class="sig-param">flag_ignore_similar_image=False</em>, <em class="sig-param">flag_ignore_similar_object=False</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input params to search for specific images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_id_list</strong> – A list of object ids.</p></li>
+<li><p><strong>image_type_list</strong> – type for images.</p></li>
+<li><p><strong>percentage</strong> – least percentage of objects in images.</p></li>
+<li><p><strong>image_limit</strong> – number of images to be download.</p></li>
+<li><p><strong>flag_ignore_similar_image</strong> – Whether to ignore similar images or not.</p></li>
+<li><p><strong>flag_ingore_similar_object</strong> – Whether to ignore similar objects or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Result list from the MongoDB.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.search_class_by_and">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">search_class_by_and</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">class_id_list=None</em>, <em class="sig-param">image_type_list=None</em>, <em class="sig-param">image_limit=None</em>, <em class="sig-param">flag_ignore_similar_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.search_class_by_and" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search with and logic and class list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – The MongoClient instance.</p></li>
+<li><p><strong>class_id_list</strong> – A list of classes.</p></li>
+<li><p><strong>image_type_list</strong> – A list of image types.</p></li>
+<li><p><strong>flag_ignore_similar_image</strong> – Whether ignore similar image or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of qualified results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.search_object_by_and">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">search_object_by_and</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">object_id_list=None</em>, <em class="sig-param">image_type_list=None</em>, <em class="sig-param">image_limit=None</em>, <em class="sig-param">flag_ignore_similar_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.search_object_by_and" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search with and logic and object id list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – The MongoClient instance.</p></li>
+<li><p><strong>object_id_list</strong> – A list of classes.</p></li>
+<li><p><strong>image_type_list</strong> – A list of image types.</p></li>
+<li><p><strong>flag_ignore_similar_image</strong> – Whether ignore similar image or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of qualified results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.search_single_image_by_view">
+<code class="sig-prename descclassname">utils.</code><code class="sig-name descname">search_single_image_by_view</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">timestamp</em>, <em class="sig-param">view_id</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.search_single_image_by_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search with the give camera name and timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – A MongoClient instance.</p></li>
+<li><p><strong>timestamp</strong> – Search for the first image closest to this timestamp.</p></li>
+<li><p><strong>view_id</strong> – Class name of camera_views</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of qualified results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="semlog-mongo-analysis">
+<h2>semlog_mongo.analysis<a class="headerlink" href="#semlog-mongo-analysis" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">analysis</span></code> is used for analyzing data from MongoDB database.</p>
+<span class="target" id="module-analysis"></span><dl class="function">
+<dt id="analysis.get_image_information">
+<code class="sig-prename descclassname">analysis.</code><code class="sig-name descname">get_image_information</code><span class="sig-paren">(</span><em class="sig-param">client</em><span class="sig-paren">)</span><a class="headerlink" href="#analysis.get_image_information" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used for data analysis.
+Retrieve image information (num_entities, average linear/angular distance and timestamp).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client</strong> – A MongoClient to search for.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of dicts contains average information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="semlog_vis-API.html" class="btn btn-neutral float-right" title="semlog_vis API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Demo.html" class="btn btn-neutral" title="Demo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Xiaoyue Zhang.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/jquery.fancybox.min.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+  <script type="text/javascript">
+    $(function(){
+      $('.image-reference').fancybox();
+    })
+  </script>
+
+</body>
+</html>
