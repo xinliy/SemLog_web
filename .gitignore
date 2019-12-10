@@ -10,7 +10,7 @@ __pycache__/
 .vscode/
 saved_images/
 *.log
-
+.vscode/*
 *.pot
 
 *.pyc
