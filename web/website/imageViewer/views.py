@@ -59,6 +59,7 @@ def search(request):
 
 
 def training(request):
+    """Entrance for training the multiclass classifier."""
     dataset_pattern = request.session['dataset_pattern']
     user_id = request.session['user_id']
     class_list = request.session['class_id_list']
@@ -69,14 +70,6 @@ def training(request):
             model_saving_path=os.path.join(IMAGE_ROOT, user_id)
         )
     return HttpResponse("Model starts training. Progress can be seen in port 8097.")
-
-    # return render(request, 'training_setting.html')
-
-
-def start_training(request):
-    training_dict = request.GET.dict()
-
-    return HttpResponse('ok')
 
 
 def update_database_info(request):
@@ -111,7 +104,8 @@ def show_one_image(request):
 
 
 def start_search(request):
-    """Read the form and search the db, download images to static folder."""
+    """The most important function of the website.
+        Read the form and search the db, download images to static folder."""
 
     # Read the input from teh user.
     form_dict = request.GET.dict()
@@ -193,6 +187,7 @@ def start_search(request):
     return render(request,'make_your_choice.html')
 
 def view_images(request):
+    """Entrance of viewing mode of the website."""
     user_id=request.session['user_id']
     with open(os.path.join(IMAGE_ROOT,user_id,'info.json')) as f:
         info=json.load(f)

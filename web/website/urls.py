@@ -31,5 +31,4 @@ urlpatterns = [
     path(r'download/',image_views.download),
     path(r'training/',image_views.training),
     path(r'view_images/',image_views.view_images),
-    # path(r'start_training/',image_views.start_training)
 ]
