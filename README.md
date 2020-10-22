@@ -2,6 +2,7 @@
 
 SemLog Web is an integrated framework written in Python with a concise web UI that bridges between knownledge-based virtual environment and numerous computer vision models.
 
+
 ## Getting Started
 
 Go to "**semlog_web/web/example**" and click "DEMO.ipynb" to directly get a picture of SemLog Web's main features.
@@ -57,11 +58,16 @@ python manage.py runserver TARGET_IP
 ```
 To deploy the website in local network
 
+## Documentation
+
+Full official documentation can be viewed at https://xinliy.github.io/SemLog_web/index.html
+
 ## Built With
 * [Django](https://www.djangoproject.com/) - The web framework used
 * [MongoDB](https://www.mongodb.com/) - The database used
 * [Pytorch](https://pytorch.org/) - The deep learning framework used to build the detection demo
-* [Three.js](https://threejs.org/) - The UI JavaScript framework used for dynamic point cloud generation. 
+* [Three.js](https://threejs.org/) - The UI JavaScript framework used for dynamic point cloud generation
+
 
 
 ## Authors
