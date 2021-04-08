@@ -3,7 +3,7 @@ pymongo==3.8.0
 open3d_python==0.7.0.0
 numpy==1.16.4
 pandas==0.24.1
-Django==2.2
+Django==2.2.20
 visdom==0.1.8.8
 torch==1.1.0
 opencv_python==4.1.0.25
