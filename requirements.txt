@@ -9,4 +9,4 @@ torch==1.1.0
 opencv_python==4.1.0.25
 torchvision==0.3.0
 open3d==0.8.0.0
-Pillow==6.2.1
+Pillow==8.2.0
