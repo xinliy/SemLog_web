@@ -6,7 +6,7 @@ pandas==0.24.1
 Django==2.2
 visdom==0.1.8.8
 torch==1.1.0
-opencv_python==4.1.0.25
+opencv_python==4.1.1.26
 torchvision==0.3.0
 open3d==0.8.0.0
 Pillow==6.2.1
